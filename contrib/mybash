@@ -1,0 +1,25 @@
+#!/bin/bash
+# 
+# This script concatenates files given as its 2 first arguments 
+# to create a bash script  and executes it with the remaining arguments.
+# (Unfortunately the --init-file or --rcfile options from bash
+#  work only with interactive shells)
+#
+#						José Paulo Leal
+#						zp@ncc.up.pt
+#						November 2005
+
+tmp="/usr/tmp/mybash_$$"
+trap "rm $tmp" SIGTERM SIGKILL SIGINT
+
+if [ -f $1 ]
+then 
+	cat $1 $2 > $tmp
+else
+	cat $2 > $tmp
+fi
+shift
+shift
+eval sh $tmp $*
+exit 0
+

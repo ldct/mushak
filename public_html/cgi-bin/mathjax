@@ -1,0 +1,26 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+package require http
+
+set prefix "http://cdn.mathjax.org/mathjax"
+
+#puts "Content-type: text/plain"
+#puts ""
+
+
+regexp  {/cgi-bin/mathjax(.*)} $env(REQUEST_URI) - suffix
+
+set url $prefix$suffix
+
+
+upvar #0 [::http::geturl $url ] state
+
+array set meta $state(meta)
+
+puts [ format "Content-type: %s" $meta(Content-Type) ]
+puts ""
+puts $state(body)

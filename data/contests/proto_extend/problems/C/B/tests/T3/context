@@ -1,0 +1,4 @@
+mkdir aa
+mkdir bb
+echo test > ff
+echo > gg

@@ -1,0 +1,19 @@
+set        Fatal {}
+set      Warning {}
+set         Name J
+set        Color Blue
+set        Title {Financial Risk}
+set   Difficulty {}
+set         Type {}
+set  Description risk.html
+set          PDF PDF.pdf
+set      Program risk.java
+set  Environment Environment
+set      Timeout 2
+set Static_corrector {}
+set Dynamic_corrector {}
+set Original_location {}
+set       images {}
+set        tests {}
+set        Start {}
+set         Stop {}

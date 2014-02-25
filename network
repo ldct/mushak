@@ -1,0 +1,71 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+#
+# Mooshak: managing programming contests on the web		April 2001
+# 
+#			Zé Paulo Leal 		
+#			zp@ncc.up.pt
+#
+#-----------------------------------------------------------------------------
+# file: network
+#
+## 
+## Walks trough the Mooshak's network, avoiding cycles, and returns a list
+## of nodes (servers). Each servers prints 4 lines in the output:
+##
+##   address	      user@host
+##   status	      { OK ERROR }
+##   authorized	      list of server addresses that replicate to this server
+##   replicated	      list of server addresses to which this server replicates
+##
+
+lappend auto_path packages
+
+source .config
+	
+package require ssh
+package require Server
+
+regexp  {^http://([^/]+)/~(.*)$} $URL_BASE - host user
+
+set omit $argv
+set me  $user@$host
+
+# This server was visited before - end here to avoid loops
+# This may happen if this host has different names and
+#  one was used for initial configuration and another for network setup
+if { [ lsearch $omit $me ] > -1 } return 
+
+puts [ set me ]					;# address: <user>@<host>
+puts OK						;# status:  OK (up and running)
+puts [ set authorized  [ ssh::key_ring      ] ] ;# authorized server addresses
+puts [ set replicated  [ Server::replicated ] ] ;# replicted server addresses
+
+puts ""
+
+
+lappend omit $me
+
+foreach rep $replicated {
+
+    if { [ lsearch $omit $rep ] > -1 } continue
+    if [ regexp {([^@]+)@(.+)} $rep - user host ] {
+	if [ catch { 
+	    set out [ exec ssh $host -l $user ./network $omit ]
+	} msg ] {
+	    # returns an error simulating the output of missing server
+	    regsub -all \n $msg { } msg
+	    puts [ format "%s\nERROR\n%s\n\n" $rep $msg ]
+	} else {
+	    puts $out
+	    # omits visited servers that are operational
+	    foreach {address status f t s} [ split $out \n ] { 
+		if [ regexp OK $status ] { lappend omit $address }
+	    }
+	}
+    }
+}

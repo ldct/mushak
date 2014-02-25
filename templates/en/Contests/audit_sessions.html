@@ -1,0 +1,121 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+
+<script language="Javascript">
+function flow(field,order) {
+   var form = document.forms[0];
+
+   form.field.value = field;
+   form.order.value = order;
+
+   form.submit();
+
+}
+</script>
+<style>
+  span.sort {
+  margin: 0;
+  color: blue;
+  cursor: pointer;
+  }
+
+  span.sorted {
+  color: red;
+  }
+</style>
+<title>Audit user sessions</title>
+</head>
+<body>
+<center>
+
+<h2>Audit user sessions (non guest)</h2>
+
+<form action="$Conf(controller)?operation+audit:sessions+$dir" method="post">
+<fieldset>
+<legend>Session selection critera</legend>
+
+  Date: $year_menu / $month_menu / $day_menu 
+
+  Profile : $profiles_menu
+
+  Status : $status_menu
+
+
+</fieldset>
+
+<input type="hidden" name="field" value="user">
+<input type="hidden" name="order" value="down">
+
+<table width="100%">
+<caption>$count sessions</caption>
+<tr class="Header">
+<th>User  &nbsp;
+<span class="sort $user_up"
+       onclick="flow('user','up')";>&uarr;</span>
+<span class="sort $user_down "
+       onclick="flow('user','down');">&darr;</span>
+</th>
+
+<th>Profile
+<span class="sort $profile_up"
+       onclick="flow('profile','up');">&uarr;</span>
+<span class="sort $profile_down"
+       onclick="flow('profile','down');">&darr;</span>
+
+</th> 
+<th>Start
+<span class="sort $login_up"
+       onclick="flow('login','up');">&uarr;</span>
+<span class="sort $login_down"
+       onclick="flow('login','down');">&darr;</span>
+</th>
+
+<th>Last
+<span class="sort $last_up"
+       onclick="flow('last','up');">&uarr;</span>
+<span class="sort $last_down"
+       onclick="flow('last','down');">&darr;</span>
+</th>
+
+<th>Status
+<span class="sort $status_up"
+       onclick="flow('status','up');">&uarr;</span>
+<span class="sort $status_down"
+       onclick="flow('status','down');">&darr;</span>
+</th>
+<th>Contest
+<span class="sort $contest_up"
+       onclick="flow('contest','up');">&uarr;</span>
+<span class="sort $contest_down"
+       onclick="flow('contest','down');">&darr;</span>
+</th> 
+</tr>
+
+</form>
+
+<!part ext="line">
+<tr>
+
+<tr bgcolor="$color"
+	onmouseover="javascript:style.backgroundColor='#CCCCFF'" 
+	onmouseout="javascript:style.backgroundColor='$color'">
+<td>$data(user,$session)</td>	
+<td>$data(profile,$session)</td>	
+<td>$data(login,$session)</td>	
+<td>$data(last,$session)</td>	
+<td>$data(status,$session)</td>	
+<td>$data(contest,$session)</td>	
+</tr>
+
+
+<!part ext="foot">
+</table>
+
+</body>
+</html>

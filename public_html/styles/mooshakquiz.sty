@@ -1,0 +1,49 @@
+\ProvidesPackage{mooshakquiz}
+
+\RequirePackage{amssymb}
+\RequirePackage{graphicx}
+
+% Usage: preparing latex question groups for import into Mooshak
+%
+%\begin{quizgroup}[number of question]
+%    Title of question group
+%    \begin{quizquestion}
+%            Question text
+%        \begin{quizchoice}{true|false}
+%			Answer text
+% 	 	 \end{quizchoice}	
+%     \end{quizquestion}
+%\end{quizgroup} 
+
+\newcounter{Zgroup} \setcounter{Zgroup}{0}
+\newcounter{Zquestion} \setcounter{Zquestion}{0}
+\newcounter{Zchoice} \setcounter{Zchoice}{0}
+\renewcommand{\theZchoice}{\alph{Zchoice}}
+
+\newenvironment{quizgroup}[1]
+  {	
+    \addtocounter{Zgroup}{1}
+    \setcounter{Zquestion}{0} 
+    {\bf \theZgroup. (#1 perguntas para escolher)}\\[3mm]
+  }
+  {}
+
+\newenvironment{quizquestion}
+  {
+    \addtocounter{Zquestion}{1}
+    \setcounter{Zchoice}{0} 
+    {\bf \theZgroup.\theZquestion}
+  }
+  {  
+ \linebreak\bigskip
+ \rule{14cm}{0.01in}
+    \bigskip
+ }
+
+\newenvironment{quizchoice}[1]
+  {
+    \addtocounter{Zchoice}{1} 
+    {\bf \theZchoice. } 
+  }
+  {}
+ 

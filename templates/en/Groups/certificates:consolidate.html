@@ -1,0 +1,44 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	type="text/css">
+</head>
+<body>
+
+	<ul>
+<!/part ext="head">
+
+
+<!part ext="team">
+		<li> $ranking - 
+		<a 	target="certificate" 
+			href="$Conf(controller)?message+$tfx+certificate">$team
+		</a> <br> $institution
+		<ul>
+<!/part ext="team">
+
+<!part ext="person">
+			<li> 
+				<a  target="certificate" 
+				    href="$Conf(controller)?message+$pfx+certificate">
+				$person
+				</a> 
+			</li>
+<!/part ext="person">
+
+<!part ext="end_team">
+		</ul>
+	</li>
+<!/part ext="end_team">
+
+<!part ext="foot">
+	</ul>
+</body>
+</html>
+<!part ext="foot">
+
+

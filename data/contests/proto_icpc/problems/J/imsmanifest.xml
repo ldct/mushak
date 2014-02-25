@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:mooshak="http://www.ncc.up.pt/mooshak/" xmlns:ims="http://www.imsglobal.org/xsd/imscp_v1p1" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2" xmlns:ejmd="http://www.edujudge.eu/ejmd_v1" xmlns:imsqti="http://www.imsglobal.org/xsd/imsqti_v2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="MANIFEST-00001" xsi:schemaLocation="     http://www.imsglobal.org/xsd/imscp_v1p1   imscp_v1p1.xsd      http://www.imsglobal.org/xsd/imsmd_v1p2   imsmd_v1p2p4.xsd      http://www.imsglobal.org/xsd/imsqti_v2p1  imsqti_v2p1.xsd      http://www.edujudge.eu/ejmd_v1            ejmd_v1.xsd">
+  <metadata>
+    <schema>IMS Content</schema>
+    <schemaversion>1.1</schemaversion>
+    <imsmd:lom>
+      <imsmd:general>
+        <imsmd:identifier>$id</imsmd:identifier>
+        <imsmd:title>
+          <imsmd:langstring xml:lang="en">Buddy Memory Allocator
+					</imsmd:langstring>
+        </imsmd:title>
+        <imsmd:language>pt</imsmd:language>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">A programming problem
+					</imsmd:langstring>
+        </imsmd:description>
+        <imsmd:keyword>
+          <imsmd:langstring xml:lang="en">memory allocation
+						process</imsmd:langstring>
+        </imsmd:keyword>
+      </imsmd:general>
+      <imsmd:lifecycle>
+        <imsmd:version>
+          <imsmd:langstring xml:lang="en">1.0</imsmd:langstring>
+        </imsmd:version>
+        <imsmd:status>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="en">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="en">final
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:status>
+        <imsmd:contribute>
+          <imsmd:role>
+            <imsmd:source>
+              <imsmd:langstring xml:lang="en">LOMv1.0
+							</imsmd:langstring>
+            </imsmd:source>
+            <imsmd:value>
+              <imsmd:langstring xml:lang="en">Author
+							</imsmd:langstring>
+            </imsmd:value>
+          </imsmd:role>
+          <imsmd:centity>
+            <imsmd:vcard>
+							BEGIN:VCARD FN:
+							Mooshak distribution
+							:VCARD
+						</imsmd:vcard>
+          </imsmd:centity>
+          <imsmd:date>
+            <imsmd:datetime/>
+          </imsmd:date>
+        </imsmd:contribute>
+      </imsmd:lifecycle>
+      <imsmd:technical>
+        <imsmd:format>text/html</imsmd:format>
+        <imsmd:format>text/plain</imsmd:format>
+        <imsmd:format>text/x-imsqti-item-xml</imsmd:format>
+        <imsmd:format>image/gif</imsmd:format>
+        <imsmd:size>46785</imsmd:size>
+        <imsmd:location type="URI">http://localhost:8080/LOR/lo/1
+				</imsmd:location>
+        <imsmd:requirement>
+          <imsmd:type>
+            <imsmd:source>
+              <imsmd:langstring xml:lang="x-none">LOMv1.0
+							</imsmd:langstring>
+            </imsmd:source>
+            <imsmd:value>
+              <imsmd:langstring xml:lang="x-none">Browser
+							</imsmd:langstring>
+            </imsmd:value>
+          </imsmd:type>
+          <imsmd:name>
+            <imsmd:source>
+              <imsmd:langstring xml:lang="x-none">LOMv1.0
+							</imsmd:langstring>
+            </imsmd:source>
+            <imsmd:value>
+              <imsmd:langstring xml:lang="x-none"> Opera
+							</imsmd:langstring>
+            </imsmd:value>
+          </imsmd:name>
+          <imsmd:minimumversion>1.0</imsmd:minimumversion>
+          <imsmd:maximumversion>3.0</imsmd:maximumversion>
+        </imsmd:requirement>
+      </imsmd:technical>
+      <imsmd:educational>
+        <imsmd:interactivitytype>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">active
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:interactivitytype>
+        <imsmd:learningresourcetype>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">exercise
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:learningresourcetype>
+        <imsmd:interactivitylevel>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">low
+							</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:interactivitylevel>
+        <imsmd:intendedenduserrole>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">learner
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:intendedenduserrole>
+        <imsmd:context>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">Higher Education
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:context>
+        <imsmd:typicalagerange>
+          <imsmd:langstring xml:lang="en">15-18
+					</imsmd:langstring>
+        </imsmd:typicalagerange>
+        <imsmd:difficulty>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">very easy
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:difficulty>
+        <imsmd:typicallearningtime>
+          <imsmd:datetime>PT1M45S</imsmd:datetime>
+        </imsmd:typicallearningtime>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">Follow the problem
+						description</imsmd:langstring>
+        </imsmd:description>
+        <imsmd:language>pt</imsmd:language>
+      </imsmd:educational>
+      <imsmd:rights>
+        <imsmd:cost>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="x-none">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="x-none">no</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:cost>
+        <imsmd:copyrightandotherrestrictions>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="en">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="en">no</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:copyrightandotherrestrictions>
+        <imsmd:description>
+          <imsmd:langstring xml:lang="en">No license
+					</imsmd:langstring>
+        </imsmd:description>
+      </imsmd:rights>
+      <imsmd:classification>
+        <imsmd:purpose>
+          <imsmd:source>
+            <imsmd:langstring xml:lang="en">LOMv1.0
+						</imsmd:langstring>
+          </imsmd:source>
+          <imsmd:value>
+            <imsmd:langstring xml:lang="en">Discipline
+						</imsmd:langstring>
+          </imsmd:value>
+        </imsmd:purpose>
+        <imsmd:keyword>
+          <imsmd:langstring xml:lang="en">Ad-hoc
+					</imsmd:langstring>
+        </imsmd:keyword>
+      </imsmd:classification>
+    </imsmd:lom>
+    <ejmd:metadata>
+      <ejmd:general>
+        <ejmd:hints>
+          <ejmd:submission ejmd:time-solve="PT15M" ejmd:time-submit="PT1M" ejmd:attempts="3" ejmd:code-lines="30" ejmd:length="1000"/>
+          <ejmd:compilation ejmd:time="PT1M" ejmd:size="1000"/>
+          <ejmd:execution ejmd:time="PT1M"/>
+        </ejmd:hints>
+      </ejmd:general>
+      <ejmd:presentation>
+        <ejmd:description ejmd:resource="DESCRIPTION"/>
+      </ejmd:presentation>
+      <ejmd:evaluation>
+        <ejmd:tests>
+          <ejmd:testFiles ejmd:arguments="" ejmd:valorization="20">
+            <ejmd:input ejmd:resource="INPUT-1"/>
+            <ejmd:output ejmd:resource="OUTPUT-1"/>
+          </ejmd:testFiles>
+          <ejmd:testFiles ejmd:arguments="" ejmd:valorization="20">
+            <ejmd:input ejmd:resource="INPUT-2"/>
+            <ejmd:output ejmd:resource="OUTPUT-2"/>
+          </ejmd:testFiles>
+          <ejmd:testFiles ejmd:arguments="" ejmd:valorization="20">
+            <ejmd:input ejmd:resource="INPUT-3"/>
+            <ejmd:output ejmd:resource="OUTPUT-3"/>
+          </ejmd:testFiles>
+        </ejmd:tests>
+        <ejmd:solution ejmd:resource="SOLUTION" ejmd:compilationLine="gcc buddy_v1.c -o buddy_v1" ejmd:executionLine="buddy_v1" ejmd:language="C" ejmd:languageVersion="2.0"/>
+      </ejmd:evaluation>
+    </ejmd:metadata>
+  </metadata>
+  <organizations/>
+  <resources>
+    <resource identifier="DESCRIPTION" type="webcontent" href="">
+      <file href="">
+        <metadata>
+          <imsmd:lom>
+            <imsmd:general>
+              <imsmd:language>pt</imsmd:language>
+            </imsmd:general>
+            <imsmd:technical>
+              <imsmd:format>text/html</imsmd:format>
+            </imsmd:technical>
+          </imsmd:lom>
+        </metadata>
+      </file>
+      <file href="img9.png"/>
+    </resource>
+    <resource identifier="SOLUTION" type="SOLUTION">
+      <file href="risk.java"/>
+    </resource>
+    <resource identifier="INPUT-1" type="INPUT">
+      <file href="tests/T0/input"/>
+    </resource>
+    <resource identifier="OUTPUT-1" type="OUTPUT">
+      <file href="tests/T0/output"/>
+    </resource>
+    <resource identifier="INPUT-2" type="INPUT">
+      <file href="tests/T1/input"/>
+    </resource>
+    <resource identifier="OUTPUT-2" type="OUTPUT">
+      <file href="tests/T1/output"/>
+    </resource>
+    <resource identifier="INPUT-3" type="INPUT">
+      <file href="tests/T2/input"/>
+    </resource>
+    <resource identifier="OUTPUT-3" type="OUTPUT">
+      <file href="tests/T2/output"/>
+    </resource>
+  </resources>
+</manifest>

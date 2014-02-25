@@ -1,0 +1,286 @@
+<!part ext="head">
+
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Mooshak</title>
+   <link rel="stylesheet" href="$REL_BASE/styles/base.css" type="text/css">
+</head>
+
+<body>
+<br>
+
+<!part ext="pre">
+
+
+<script>
+
+Submetendo=false;
+function submissao(form) { Submetendo=true; }
+
+
+function verifica(form) {
+
+    // verifica apenas submissoes de programas
+    if(! Submetendo) {  return true;    }
+    Submetendo=false;
+
+    if(form.programa.value=="") {
+    alert('Programa no especificado');
+    return false;
+    } else if(extensaoInvalida(form.programa.value)) {
+    alert(' extension no valida '+'\nusar '+extensoesValidas() );
+    return false;
+    } else {
+    return confirm('Confirmar el envio?');
+    }
+}
+
+$languages
+
+function extensaoInvalida(fx) {
+    var p;
+    for(var ext in Linguagem) {
+    if((p=fx.lastIndexOf("."+ext))==-1)
+        continue;
+    if(p+ext.length+1==fx.length) {
+        return false;
+    }
+    }
+    return true;
+}
+
+function extensoesValidas() {
+
+    var validas="";
+    for(var ext in Linguagem) {
+        if(validas != "")
+        validas += " , ";
+        validas += "."+ext;
+    }
+    return validas;
+}
+
+
+</script>
+
+<html><form method="post" enctype="multipart/form-data" onSubmit="return {check(this);"} action="team2">
+
+<table width="100%" border="0" cellpadding="2" cellspacing="0">
+
+<tr>
+    <th bgcolor="777777" rowspan="4" width="2%">&nbsp;</th>
+    <th id="BaseForte" rowspan="4" width="20%">
+    <font color="white">
+    <h2> $designation</h2>
+    <h4>Equipo $team</h4>
+
+    <p align="right"><img src="../../icons/mooshak-16.png"><font size="-2" color="Pink">shak</font>&nbsp;</p>
+    </font>
+    </th>
+
+    <th width="2%">&nbsp;</th>
+    <th id="Title"> Problema </th>
+    <td id="Base" width="2%">&nbsp;</th>
+    <td id="Base"> $problems </td>
+    <th id="Base" width="2%">&nbsp;</th>
+    <th id="Base"  width="10%">
+          <font size="-1">
+          <input type="submit"  name="view"value="Ver"
+          width="$Button_width" size="$Button_width">
+          </font>
+    </th>
+    <th id="Base"  width="10%">
+          <font size="-1">
+          <input type="submit"  name="ask"value="Preguntar">
+          </font>
+    </th>
+
+</tr>
+
+<tr>
+
+    <th width="2%">&nbsp;</th>
+    <th id="Title"> Programa </th>
+    <td id="Base" width="2%">&nbsp;</th>
+    <td id="Base"> <input type="file" name="program" value="$program">
+     </td>
+    <th id="Base" width="2%">&nbsp;</th>
+    <th id="Base" width="10%">
+          <font size="-1">
+          <input type="submit"  name="submit" value="Enviar"
+            onClick="submissao(this.form);">
+          </font>
+    </th>
+<!part ext="printer-on">
+    <th id="Base"  width="10%">
+          <font size="-1">
+          <input type="submit"  name="print"    value="Imprimir">
+          </font>
+    </th>
+<!part ext="printer-off">
+    <th id="Base" width="10%">
+    <center>
+    <table border="1" width="80%" bgcolor="#CCCCCC">
+        <tr><td align="center">
+            <font color="#888888">  Imprimir   </font>
+        </td></tr>
+    </table>
+    </center>
+    </th>
+<!part ext="pos">
+</tr>
+
+<tr>
+
+    <th width="2%">&nbsp;</th>
+    <th id="Title"> Estado   </th>
+    <td id="Base" width="2%">&nbsp;</th>
+    <td id="Base">
+    $commands
+    </td>
+    <th id="Base" width="2%">&nbsp;</th>
+
+    <th id="Base" rowspan="2" colspan="2">
+
+      <input type="button"value="Ayuda" onClick="window.open('faq','state');">
+
+    </th>
+</tr>
+
+<tr>
+
+    <th width="2%">&nbsp;</th>
+    <th id="Title"> Listados</th>
+    <td id="Base" width="2%">&nbsp;</th>
+    <td id="Base">
+
+        Actualizar cada
+        $times
+        minutos ;
+
+        &nbsp; con
+        $lines
+    </td>
+    <th id="Base" width="2%">&nbsp;</th>
+    <td id="Base" align="right">
+    </td>
+</tr>
+
+</table>
+
+</form>
+
+<table width="100%" cellspacing="10" cellpadding="0">
+<tr><td><h3>$Message</h3></td><td align="right"><h4>$missing</h4></td></tr>
+</table>
+
+<!part ext="foot">
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<!part ext="head">
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml-stylesheet type="text/xsl" href="../../styles/quiz.xsl"?>
+<!-- OK -->
+<quiz>
+<!/part ext="head">
+
+
+<!part ext="group_head">
+	<quizGroup>
+<!/part ext="head">
+
+
+<!part ext="question_head">
+		<quizQuestion xml::id="$question_id">
+			<ask>$ask</ask>
+<!/part ext="head">
+
+
+<!part ext="choice">
+			<quizChoice xml::id="$choice_id">
+			
+			</quizChoice>
+<!/part ext="choice">
+
+
+
+
+
+<!part ext="question_foot">
+		</quizQuestion>
+<!/part ext="foot">
+
+
+
+<!part ext="group_foot">
+	</quizGroup>
+<!/part ext="foot">
+
+
+<!part ext="foot">
+</quiz>
+<!/part ext="foot">

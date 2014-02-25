@@ -1,0 +1,42 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Import Problem set</title>
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+	<script>
+</head>
+<body>
+<center>
+
+<H2>Import Problem set archive</H2>
+<form 
+	method="post"
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?message+$dir+importing">
+
+   File <input type="file" name="file"> 
+
+   <input type='submit' value='Import'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Note:</b> The file must be an archive (tgz tar or zip) with all the problems.
+   Each problem should be in its own directory but do <b><u>not</u></b> 
+   use a toplevel directory wrapping all the problems. 
+   Mooshak tries to figure out which files are programs, descriptions, images, 
+   input and output test data. You can use sub-directories
+   for each problem following Mooshak's strucure (tests, images, etc) but it is not
+   mandatory. 
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

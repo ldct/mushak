@@ -1,0 +1,43 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+
+</head>
+<body>
+<title>List sessions</title>
+<center>
+
+<h2>List sessions</h2>
+
+
+<table width="100%">
+<tr class="Header">
+<th>Team</th> 
+<th>Contest</th> 
+<th>Age</th>
+<th>Idle</th>
+</tr>
+
+<!part ext="line">
+<tr>
+
+<tr bgcolor="$color"
+	onmouseover="javascript:style.backgroundColor='#CCCCFF'" 
+	onmouseout="javascript:style.backgroundColor='$color'">
+<td>$user</td>	
+<td>$contest</td>	
+<td>$age</td>	
+<td>$idle</td>	
+</tr>
+
+
+<!part ext="foot">
+</table>
+
+</body>
+</html>

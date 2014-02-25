@@ -1,0 +1,18 @@
+Mime-Version: 1.0
+To: $recipient <$email>
+Subject: Mooshak: Pregunta al problema $Problem del equipo $Team
+From: $sender <$from>
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
+______________________
+
+    Concurso:       $sender
+    Problema:       $Problem
+    Equipo:         $Team
+    Estado:         $State
+    Asunto:         $Subject
+    Pregunta:       $Question
+    Respuesta:       $Answer
+
+______________________
+Buena suerte!

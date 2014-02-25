@@ -1,0 +1,78 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+#
+#						zp@ncc.up.pt   2006
+#						
+#-
+
+source  [ file dirname [ info script ] ]/html.tcl
+
+# converts to a temporary file in latin-1 encoding if needed
+proc my_encoding {file} {
+    
+    set dir  [ file dirname $file ]
+    set tail [ file tail $file ]
+    set name [ file rootname $tail ]
+    set myfile ${dir}/my_${tail}
+    set tmp  /tmp/${name}.txt
+
+    exec /usr/bin/tr {'<>'} {  } < $file > $tmp
+    set type [ exec /usr/bin/file $tmp ]
+    file delete $tmp
+    switch -regexp $type {
+	UTF-8 {
+		# recoding 
+	    exec recode utf-8..l1 < $file > $myfile
+	    return $myfile
+	}
+	ISO-8859  - ASCII {
+		# it is already in target encoding
+	    return $file
+	}
+	default {
+	    puts stderr "Unsupported encoding: $type"
+	    exit 8
+	}
+    }
+}
+
+proc read_in {fx} {
+
+    set fd [ open [ my_encoding $fx ] ]
+    set data [ read $fd ]
+    catch { close $fd }
+    return $data
+}
+
+proc validate {attempt_file solution_file} {
+
+    set attempt  [ html::parse [ string tolower [ read_in $attempt_file  ] ] ]
+    set solution [ html::parse [ string tolower [ read_in $solution_file ] ] ]
+
+    set compare  [ html::compare $solution $attempt ]
+    set classify [ html::classify $compare $solution ] 
+    set correct  [ lindex $compare 0 ]
+
+    puts "Mooshak_Mark: $classify"
+    puts ""
+    if { $compare != "" } { 
+	puts stderr [ html::tips $compare ]
+	exit 8	;#Compile Time Error
+    } else {
+	exit 0	;#Accepted
+    }
+
+    
+} 
+
+switch [ llength $argv ] {
+    2 {
+	eval validate $argv
+    }
+    default {
+	puts stderr "usage: validate <attempt> <solution>"
+    }
+}

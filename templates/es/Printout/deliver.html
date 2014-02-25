@@ -1,0 +1,38 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link
+    rel="stylesheet"
+    href="../../styles/$Conf(style).css"
+    type="text/css">
+</head>
+<body
+    onLoad="window.open('$Conf(controller)?command=listing&type=$listing','top');">
+<center>
+<form
+    method="post"
+    enctype="multipart/form-data"
+    action="$Conf(controller)?sms+printouts+$printout+deliver+$n">
+    <input type="hidden" name="Team" value="$Team">
+    <input type="hidden" name="Problem" value="$Problem">
+    <table
+        cellpadding="3"
+        cellspacing="0"
+        width="100%"
+        border="0">
+    <tr>
+        <td id="Base" align="left">
+        <b>Impresi&oacute;n</b>: I$n  <b>Problema</b>: $problem_name
+        <td id="Base" align="center">$state</td>
+    </tr>
+    <tr>
+        <td id="Base" align="left" colspan="2">
+        <b>Equipo</b>: $team
+        <b>Localizaci&oacute;n</b>: $location
+        </td>
+    </table>
+</form
+</center>
+</body>
+</html>
+

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://evae/messages"
+	xmlns:tns="http://evae/messages" elementFormDefault="qualified">
+
+	<element name="message" type="tns:MessageType">
+		<annotation>
+			<documentation>Top level element representing a message from our evaluation service to the client.</documentation>
+		</annotation></element>
+
+	<complexType name="MessageType">
+        <annotation>
+        	<documentation>Type of the message element</documentation>
+        </annotation>
+        <sequence minOccurs="1" maxOccurs="1">
+            <annotation>
+            	<documentation>Reply and request sequence.
+We send both the request and the reply to the client so a simple client only needs to show the data in a more friendly way.</documentation>
+            </annotation>
+            <element name="request" type="tns:RequestType" minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>request from the client</documentation>
+				</annotation></element>
+            <element name="reply" type="tns:ReplyType" minOccurs="1" maxOccurs="1">
+            	<annotation>
+            		<documentation>Reply from the evaluation service to the request on the request element.</documentation>
+            	</annotation></element>
+		</sequence>
+		<attribute name="id" type="int">
+			<annotation>
+				<documentation>Message id the evaluation service</documentation>
+			</annotation></attribute>
+        <attributeGroup ref="tns:DateAttributeGroup">
+        	<annotation>
+        		<documentation>Datetime representation</documentation>
+        	</annotation></attributeGroup>
+    </complexType>
+
+	<complexType name="ReplyType">
+		<choice minOccurs="1" maxOccurs="1">
+			<annotation>
+				<documentation>
+					depending on the request, the evaluation service
+					replies with the appropriate element.
+				</documentation>
+			</annotation>
+			<element name="capabilities" type="tns:CapabilitiesType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<sequence><element name="token" type="tns:TokenType" minOccurs="1" maxOccurs="1">
+			</element><element name="report" type="tns:ReportType" minOccurs="0" maxOccurs="1">
+			</element></sequence>
+		</choice>
+		<attributeGroup ref="tns:DateAttributeGroup"></attributeGroup>
+    </complexType>
+
+	<complexType name="RequestType">
+		<choice minOccurs="1" maxOccurs="1">
+			<sequence minOccurs="0" maxOccurs="1">
+				<element name="userData" type="tns:UserDataType">
+					<annotation>
+						<documentation>
+							General element used so store information
+							about the client that doesn't influence the
+							evaluation.
+						</documentation>
+					</annotation>
+				</element>
+				<element name="program" type="string">
+					<annotation>
+						<documentation>
+							The element that contains the program we are
+							evaluating
+						</documentation>
+					</annotation>
+				</element>
+				<element name="learningObject" type="anyURI">
+					<annotation>
+						<documentation>
+							The URI to the input and output we are going
+							to need for the evaluation.
+						</documentation>
+					</annotation>
+				</element>
+				<element name="capability" type="ID"></element>
+			</sequence>
+			
+			<element name="token" minOccurs="0" maxOccurs="1" type="tns:TokenType">
+                <annotation>
+                	<documentation>Token used on the getReport function.</documentation>
+                </annotation>
+			</element>
+		</choice>
+
+		<attributeGroup ref="tns:DateAttributeGroup"></attributeGroup>
+	</complexType>
+
+
+	<complexType name="CapabilitiesType">
+		<sequence>
+			<element name="capability" type="tns:CapabilityType"
+				minOccurs="1" maxOccurs="unbounded"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ReportType">
+		<sequence>
+			<element name="capability" type="tns:CapabilityType"
+				minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="programmingLanguage" type="string"
+				minOccurs="0" maxOccurs="1">
+			</element>
+			
+			<element name="exercise" type="tns:ExerciseType" maxOccurs="1"
+				minOccurs="1">
+			</element>
+			<element name="compilationErrors"
+				 type="string" 
+				 minOccurs="0">
+					<annotation>
+						<documentation>
+						  Error messages
+						  reported by the compiler
+						</documentation>
+					</annotation>
+			</element>
+
+			<element name="tests" type="tns:TestsType" maxOccurs="1"
+				minOccurs="0"></element>
+			<element name="summary" type="tns:SummaryType" maxOccurs="1"
+				minOccurs="0"></element>
+		</sequence>
+		<attribute name="evaluationServer" type="anyURI"></attribute>
+        <attributeGroup ref="tns:DateAttributeGroup"></attributeGroup>
+    </complexType>
+
+	<complexType name="TokenType">
+		<attribute name="id" type="anyURI"></attribute>
+	</complexType>
+
+	
+
+   
+    
+    <complexType name="ExerciseType">
+    	<simpleContent>
+        	<extension base="string">
+	            <attribute name="href" type="anyURI"/>
+        	</extension>
+    	</simpleContent>                
+	</complexType>
+    
+    
+    
+    <complexType name="ResultMessageType">
+        <attributeGroup ref="tns:ResultMessageAttributeGroup"></attributeGroup>
+    </complexType>
+
+    <complexType name="MarkType" mixed="true"><attributeGroup ref="tns:MarkAttributeGroup"></attributeGroup ></complexType>
+
+    <complexType name="OutputDifferencesType" mixed="true">
+        <sequence>
+            <any namespace="http://www.w3.org/1999/xhtml"
+            minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+
+
+    <complexType name="TestsType">
+    	<sequence>
+    		<element name="test" type="tns:TestType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="TestType">
+    	<sequence>
+    		<element name="input" type="string"></element>
+    		<element name="expectedOutput" type="string"></element>
+    		<element name="obtainedOutput" type="string"></element>
+    		<element name="outputDifferences" type="tns:OutputDifferencesType"></element>
+    		<element name="classify" type="string"></element>
+    		<element name="mark" type="tns:MarkType"></element>
+    		<element name="feedback" type="string"></element>
+    		<element name="environmentValues" type="tns:EnvironmentValuesType" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    	<attribute name="mode">
+    		<simpleType>
+    			<restriction base="string">
+    				<enumeration value="file"></enumeration>
+    				<enumeration value="group"></enumeration>
+    				<enumeration value="description"></enumeration>
+    				<enumeration value="generator"></enumeration>
+    				<enumeration value="program"></enumeration>
+    			</restriction>
+    		</simpleType>
+    	</attribute>
+    	<attribute name="executionTime" type="int"></attribute>
+    </complexType>
+
+
+    <complexType name="SummaryType">
+    	<sequence>
+    		<element name="mark" type="tns:MarkType"></element>
+    		<element name="classify" type="string"></element>
+    		<element name="feedback">
+		  <complexType>
+		      	<sequence>
+    			  <element name="item" 
+				   maxOccurs="unbounded"
+				   minOccurs="0">
+			    <complexType mixed="true">
+    			      <attribute name="type" type="string"></attribute>
+			    </complexType>
+			  </element>
+			</sequence>
+		  </complexType>
+		</element>
+    		<element name="environmentValues" type="tns:EnvironmentValuesType" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    
+
+ 
+        <attributeGroup name="MarkAttributeGroup">
+    	<attribute name="totalValue" type="string"></attribute>
+    	<attribute name="obtainedValue" type="string"></attribute>
+    </attributeGroup>
+
+        <attributeGroup name="ResultMessageAttributeGroup">
+    	<attribute name="error">
+    		<simpleType>
+    			<restriction base="string">
+    				<enumeration value="Accepted" ></enumeration>
+    				<enumeration value="Presentation Error"></enumeration>
+    				<enumeration value="Wrong Answer"></enumeration>
+    				<enumeration value="Output Limit Exceeded"></enumeration>
+				    <enumeration value="Memory Limit Exceeded"></enumeration>
+				    <enumeration value="Time Limit Exceeded"></enumeration>
+				    <enumeration value="Invalid Function"></enumeration>
+    			    <enumeration value="Runtime Error"></enumeration>
+				    <enumeration value="Compile Time Error"></enumeration>
+				    <enumeration value="Invalid Submission"></enumeration>
+				    <enumeration value="Program Size Exceeded"></enumeration>
+				    <enumeration value="Requires Reevaluation"></enumeration>
+				    <enumeration value="Evaluating" ></enumeration>
+    			</restriction>
+    		</simpleType>
+    	</attribute>
+    	<attribute name="mode">
+    		<simpleType>
+    			<restriction base="string">
+    				<enumeration value="error"></enumeration>
+    				<enumeration value="warning"></enumeration>
+    				<enumeration value="hint"></enumeration>
+    			</restriction>
+    		</simpleType>
+    	</attribute>
+    </attributeGroup>
+    <complexType name="EnvironmentValuesType">
+    	<sequence>
+    		<element name="environmentValue" type="tns:EnvironmentValueType" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="EnvironmentValueType">
+        
+        <attributeGroup ref="tns:EnvironmentValueAttributeGroup"></attributeGroup>
+    </complexType>
+    
+	<attributeGroup name="EnvironmentValueAttributeGroup">
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="value" type="string"></attribute>
+    </attributeGroup>
+    <complexType name="CapabilityType">
+    	<sequence>
+    		<element name="feature" type="tns:FeatureType"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
+    	</sequence>
+    	<attribute name="id" type="string"></attribute>
+    </complexType>
+
+    <complexType name="FeatureType">
+    	<attribute name="name" type="string"></attribute>
+    	<attribute name="value" type="string"></attribute>
+    </complexType>
+    
+
+    <complexType name="UserDataType">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="userValue" type="tns:UserValueType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+
+    <attributeGroup name="DateAttributeGroup">
+    	<attribute name="date" type="dateTime"></attribute>
+    </attributeGroup>
+
+    <attribute name="NewAttribute" type="string"></attribute>
+
+
+    <complexType name="UserValueType"><attributeGroup ref="tns:EnvironmentValueAttributeGroup"></attributeGroup></complexType>
+</schema>

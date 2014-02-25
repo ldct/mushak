@@ -1,0 +1,182 @@
+/*
+
+ Mooshak: managing programming contests on the web		April 2001
+ 
+			Zé Paulo Leal 		
+			zp@ncc.up.pt
+
+-----------------------------------------------------------------------------
+ file: base.css
+
+ Stylesheet for basic Mooshak windows
+
+ Validated in 2003/07/18 using http://jigsaw.w3.org/css-validator/validator
+
+*/
+
+BODY {
+	margin-top:		2mm; 
+	margin-bottom:		0mm;
+	color:			black;
+	background-color:	white;
+
+	font-family: 		sans-serif;
+}
+
+/* Listings */
+
+TABLE.Listing {
+      	border:			0;
+	width:			100%;
+	margin:			0;
+	padding:		0;
+}
+
+
+TR.Header {
+	 color:			black;
+	 background:		gray;
+}
+
+TD TH {
+	font-family: 		sans-serif;
+}
+
+INPUT.Button	{
+	width:		100px;
+}
+
+TABLE.Button {
+	width:		100px;
+	border:		2px;	
+	border-style:	sunken;
+	background:	white;
+	color:		black;
+}
+
+/* Formatting SELECT as menus */
+
+DIV.Menubar {
+	background:	white; 
+	width:		95%; 
+	padding: 	2pt; 
+	margin: 	2pt;
+}
+
+SELECT.Menu {
+	color:		black; 
+	font-weight:	normal; 
+	font-size:	100%; 
+	background:	white;
+	padding:	3px;
+	margin:		0;
+	border-style:	dotted;
+	border-color:	black;
+	border:		0;
+}
+
+OPTION.Button {
+	color:		black;
+	background:	white;
+	font-weight:	normal; 
+	font-size:	100%;
+}
+
+OPTION.ItemOn {
+	font-weight:	normal; 
+	font-size:	100%; 
+}
+
+OPTION.ItemOff {
+	color:		gray;
+	font-weight:	normal; 
+	font-size:	100%; 
+}
+
+#Top {
+	position:		absolute;
+	top:			0px;
+	left:			10px;
+	right:			10px;
+	width:			95%;
+}
+
+#Middle {
+	position:		absolute;
+	top:			0px;
+	left:			10px;
+	right:			10px;
+	width:			95%;
+	height:			100%;
+}
+
+
+#Bottom {
+	position:		absolute;
+	left:			10px;
+	right:			10px;
+	bottom:			0px;
+	width:			95%;
+	height:			100%;
+}
+
+
+#Title {
+	color:			black;
+	background-color:	white;
+}
+
+#Data {
+	color:			black;
+	background-color:	white;
+}
+
+#Judge {
+	color:			black;
+	background-color:	white;
+}
+
+#Control {
+	color:			black;
+	background-color:	white;
+}
+
+#Base {
+	color:			black;
+	background-color:	white;
+	font-family: 		Helvetica, sans-serif;
+}
+
+#BaseForte, #Banner  {
+	color:			black;
+	background-color:	white;
+}
+
+#Banner {
+	width:			100%;
+	padding:		0pt;
+	margin:			0pt;
+	border:			0pt;
+}
+
+#Button {
+	width:	100px;
+}
+
+div.Text {
+	whitespace:	pre;
+
+}
+
+A.Clickable {
+	text-decoration: underline; 
+        cursor: pointer;
+}
+
+SELECT.Header {
+	 color:			black;
+	 background:		white;
+	 font-weight:		bold;
+}
+
+SELECT.Normal { }

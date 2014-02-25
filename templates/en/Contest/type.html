@@ -1,0 +1,87 @@
+
+
+<!-- header of report -->
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Setting contest type</title>
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style)" 
+		type	="text/css">
+
+	<style>
+	td { font-size: small; }
+	</style>
+</head>
+<body>
+
+	<h2>Setting contest type</h2>
+
+
+<p>
+Use this dialog to set a <b>type</b> to your contest. A number of
+fields in different folders will be automatically set according to the
+following table. Set one of the available types using the radio
+buttons in the table's heading and then press Submit</b>
+
+
+	<form method="POST" action="$Conf(controller)?message+$self+set_type">
+	<table class="Listing" cellpadding="1" cellspacing="0" width="80%">
+
+	<tr class="Header">
+		<th rowspan="2">Folder</th>
+		<th rowspan="2">Field</th>
+		<th colspan="$span">Types</th>
+	</tr>
+	<tr class="Header">
+</!part ext="head">
+
+
+<!part ext="type">
+		<td><font color="white"><b>
+			<input	type="radio" 
+				name="type" 
+				value="$type" $checked>
+			$type</b></font>
+		</td>
+</!part ext="type">
+
+
+<!part ext="mid">
+	</tr>
+</!part ext="mid">
+
+
+<!part ext="attr_head">
+					<tr bgcolor="$color">
+						<td><code>$dir</code></td>
+						<td>$name</td>
+</!part ext="attr_head">
+
+
+<!part ext="attr_value">
+						<td><code>$value</code></td>
+</!part ext="attr_value">
+
+<!part ext="attr_foot">
+					</tr>
+</!part ext="attr_foot">
+
+
+<!part ext="foot">
+
+	</table>
+<p>
+<table width="100%">
+<tr>
+	<th>	<input class="Button" type="submit" value="Submit">	</th>
+	<th>	<input class="Button" type="reset" value="reset"> 	</th>
+</tr>
+</table>
+	</form>
+</body>
+</html>
+</!part ext="foot">
+

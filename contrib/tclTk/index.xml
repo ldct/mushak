@@ -1,0 +1,9 @@
+
+<DOMAIN>
+
+<CHECKER>check.tcl</CHECKER>
+<EDITOR>texto</EDITOR>
+<ERRORLOG>error_log</ERRORLOG>
+<DEBUGGER>application/x-wish</DEBUGGER>
+
+</DOMAIN>

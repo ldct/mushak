@@ -1,0 +1,256 @@
+<!part ext="frameset">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Mooshak</title>
+
+	<frameset rows="12%,*,10%" border="0" frameborder="no">
+		<frame 
+			name		="data_header"
+			src		="$Conf(controller)?data+$dir+header"
+			scrolling	="auto">
+		<frame 		
+			name		="data_tree"
+			src		="$Conf(controller)?data+$dir+tree#s"
+			scrolling	="auto">
+		<frame
+			name		="data_footer"
+			src		="$Conf(controller)?data+$dir+footer"
+			scrolling	="auto">
+	</frameset>
+
+</head>
+</html>
+<!/part ext="frameset">
+
+
+<!part ext="header_admin">
+<html>
+<head>
+<title>Mooshak</title>
+   <link 
+	rel	="stylesheet" 
+	href	="../../styles/$Conf(style).css" 
+	type	="text/css">
+</head>
+<body 
+	onLoad="$load" 
+	link="black" 
+	vlink="black"
+>
+&nbsp;
+<table 
+	id	="Bottom"
+	cellpadding="5" 
+	cellspacing="0" 
+	border	="0" >
+	<tr style="height: 10px;">
+		<th>&nbsp</th>
+		<th id="Data" width="40%">Admin</th>
+		<th>&nbsp</th>
+		<th id="Judge" width="40%"><font color="gray">Judge</font></th>
+		<th>&nbsp</th>
+
+	</tr>
+
+	<tr id="Data">
+		<td colspan="5"> $help_button </td>
+	</tr>
+</table>
+
+</body>
+</html>
+<!/part ext="header_admin">
+
+
+<!part ext="header_admin_judge">
+<html>
+<head>
+<title>Mooshak</title>
+   <link 
+	rel	="stylesheet" 
+	href	="../../styles/$Conf(style).css" 
+	type	="text/css">
+</head>
+<body 
+	onLoad="$load" 
+	link="black" 
+	vlink="black"
+>
+&nbsp;
+<table 
+	id	="Bottom"
+	cellpadding="5" 
+	cellspacing="0" 
+	border	="0" >
+	<tr style="height: 10px;">
+		<th>&nbsp</th>
+		<th id="Data" width="40%">Admin</th>
+		<th>&nbsp</th>
+		<th id="Judge">
+			<a 
+				href="$Conf(controller)?vtools" 
+				target="_parent">Judge</a>
+		</th>
+		<th>&nbsp</th>
+	</tr>
+
+	<tr id="Data">
+		<td colspan="5"> $help_button </td>
+	</tr>
+</table>
+
+</body>
+</html>
+<!/part ext="header_admin_judge">
+
+<!part ext="clipboard">
+		Clipboard &nbsp;&nbsp; [<font 
+			size	="-1" 
+			color	="$clip_color"> 
+			$clip_info 
+		</font> ]  &nbsp;&nbsp;
+<!/part ext="clipboard">
+
+<!part ext="footer">
+<html>
+<head>
+	<title>Mooshak</title>
+	   <link 
+		rel="stylesheet" 
+		href="../../styles/$Conf(style).css" 
+		type="text/css">
+</head>
+<body 
+	onLoad="document.search.words.select();">
+
+	<table 
+		id		="Top"
+		width		="100%" 
+		cellpadding	="5" 
+		cellspacing	="0" 
+		border		="0">
+		<tr>
+			<td id="Data" valign="top">
+
+				<form 
+					method	="post" 
+					action	="$Conf(controller)?data+$dir+search" 
+					name	="search"
+					target	="_parent">
+				<table 
+					cellpadding	="0" 
+					cellspacing	="0">
+				<tr>
+					<td rowspan="2">
+						<input
+							 type	="text"
+							 name	="words"
+							 value	="$words"
+							 size	="6">
+					</td>
+
+					<td rowspan="2">	
+						<input
+							 type	="submit"
+							 value	="Search"
+							 size	="8">
+					</td>
+					<td>
+						<font size="-2">
+						<input $check_up
+							type	="radio" 
+							name	="flow" 
+							value	="up"> Up
+					</font>
+					</td>
+					<td>
+						<font size="-2">
+						<input $check_label
+							type	="radio" 
+							name	="scope" 
+							value	="label"> Label
+						</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<font size="-2">
+						<input $check_down
+							type	="radio" 
+							name	="flow" 
+							value	="down"> Down
+						</font>
+					</td>
+					<td>
+						<font size="-2">
+						<input $check_content
+							type	="radio" 
+							name	="scope" 
+							value	="content"> Content
+						</font>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</td></tr>
+</table>
+</body>
+</html>	
+<!/part ext="footer">
+
+<!part ext="tree_header">
+<html>
+<head>
+<title>Mooshak</title>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<table 
+	id	="Middle"
+	width	="100%" 
+	 border	="0" 
+	cellpadding="5" 
+	cellspacing="0">
+<tr><td id="Data" valign="top">
+<!div style="background: #BB9999; margin: 10pt; height: 100%;"> 
+<font size="-1">
+<!/part ext="tree_header">
+
+<!part ext="tree_footer">
+</font>
+<!/div>
+</td></tr>
+</table>
+</body>
+</html>
+<!/part ext="tree_footer">
+
+<!part ext="directory">
+	<img src="../../icons/blank.png" width="$tab" height="1">
+	<a href="$uri" target="_parent">
+	<img border="0"	src="../../icons/$icon" hspace="3">
+	<font color="$color">$n</font></a>
+	<br/> 
+<!/part ext="directory">
+
+<!part ext="file">
+	<img src="../../icons/blank.png" width="$tab" height="1">
+	<$style><a href="$uri" target="_parent">
+	<img border="0" src="../../icons/$icon">
+	<font color="$color">$n</font></a></$style> 
+	<br/>
+<!/part ext="file">
+
+<!part ext="unreadable">
+	<img src="../../icons/blank.png" width="$tab" height="1">
+	<img border="0" src="../../icons/broken.png">
+	<i><font color="gray">$n</font></i>
+	<br>
+
+<!/part ext="unreadable">
+
+<!part ext="selected">
+	    <a name="s">
+<!/part ext="selected">
+

@@ -1,0 +1,64 @@
+<!--
+	Templates for splitting different type of pages using frames.
+	In some cases request are simply redirected
+-->
+<!part ext="ranking">
+	<meta http-equiv="refresh" 
+	content="0; url=$Conf(controller)?$variables&lines=26">
+<!/part ext="ranking">
+<!part ext="evolution">
+	<meta http-equiv="refresh" 
+	content="0; url=$Conf(controller)?$variables&lines=26">
+<!/part ext="evolution">
+<!part ext="statistics">
+	<meta http-equiv="refresh" 
+	content="0; url=$Conf(controller)?$variables&lines=26">
+<!/part ext="statistics">
+<!part ext="listing">
+	<frameset rows="65%,*" border="4" frameborder="yes">
+
+		<frame src="$Conf(controller)?$variables"	name="top">
+		<frame src="$Conf(controller)?warn"		name="bottom">
+
+	</frameset>
+<!/part ext="listing">
+
+<!part ext="modify">
+	<frameset rows="*,70%" border="0" frameborder="no">
+
+		<frame src="$Conf(controller)?$arguments"	name="form">
+		<frame src="$Conf(controller)?empty"		name="report">
+
+
+	</frameset>
+<!/part ext="modify">
+
+
+<!part ext="deliver">
+	<frameset rows="*,70%" border="0" frameborder="no">
+
+		<frame src="$Conf(controller)?$arguments"	name="form">
+		<frame src="$Conf(controller)?empty"		name="report">
+
+	</frameset>
+<!/part ext="deliver">
+
+<!part ext="checks">
+
+	<frameset rows="65%,*" border="0" frameborder="no">
+
+		<frame src="$Conf(controller)?$variables&lines=14"	name="top">
+		<frame src="$Conf(controller)?empty"		name="bottom">
+
+	</frameset>
+<!/part ext="checks">
+<!part ext="errors">
+
+	<frameset rows="65%,*" border="0" frameborder="no">
+
+		<frame src="$Conf(controller)?$variables"	name="top">
+		<frame src="$Conf(controller)?empty"		name="bottom">
+
+	</frameset>
+<!/part ext="errors">
+

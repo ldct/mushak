@@ -1,0 +1,40 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+
+<style>
+  span.sort {
+  margin: 0;
+  color: blue;
+  cursor: pointer;
+  }
+
+  span.sorted {
+  color: red;
+  }
+</style>
+</head>
+<body>
+<title>Mooshak reevaluation</title>
+<center>
+
+<h2>Mooshak reevaluation</h2>
+
+<form action="$Conf(controller)?operation+Reeval:$criteria+$dir" method="post">
+<fieldset>
+<legend>Submission selection critera</legend>
+
+ $label: $selector
+
+</fieldset>
+
+<input type="submit" value="Reeval" >
+
+</table>
+
+</body>
+</html>

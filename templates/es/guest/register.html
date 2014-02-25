@@ -1,0 +1,130 @@
+<!part ext="form">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+
+   <link REL="icon" HREF="../../icons/mooshak-16.png" TYPE="image/png">
+   <link REL="SHORTCUT ICON" HREF="../../icons/mooshak-16.png">
+
+</head>
+<body>
+<center>
+
+    <script>
+        for(i=0; i<2; i++)
+            document.writeln("<p>&nbsp;</p>");
+    </script>
+    <table  border="2"
+        cellpadding="10"
+        cellspacing="2">
+
+        <tr><th id="Base">
+
+    <h2>$FormData(designation): Registro</h2>
+
+    <form
+        action  ="$Conf(controller)?"
+        method  ="post">
+
+                    <input  type    ="hidden"
+                        name    ="command"
+                        value   ="register">
+
+        <table>
+            <tr>
+                <th>Concurso</th>
+                <td>
+                    $FormData(contest_selector)
+                </td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>
+                    <input  type    ="text"
+                        name    ="name"
+                        value   ="$FormData(name)"
+                        size    ="30">
+                </td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>
+                    <input  type    ="text"
+                        name    ="email"
+                        value   ="$FormData(email)"
+                        size    ="20">
+                </td>
+            </tr>
+
+            <tr>
+                <th valign="top">Grupo</th>
+                <td>$FormData(groups_menu)</td>
+            </tr>
+            <tr><td colspan="2">&nbsp;</td></tr>
+
+            <tr>
+                <td></td>
+                <th>
+                    <input  class="Button"
+                        type="submit"
+                        value="Enviar">
+                </tr>
+            <tr><td colspan="2">&nbsp;</td></tr>
+            <tr>
+                <td></td>
+                <th><font color="red">$message</font></th>
+            </tr>
+        </table>
+    </form>
+
+    </table>
+</center>
+</body>
+</html>
+<!/part ext="form">
+
+<!part ext="show">
+<html>
+<head>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+
+<center>
+
+
+<table  border="2"
+    cellpadding="10"
+    cellspacing="2">
+
+    <tr><th id="Base">
+
+
+
+        <h2>$FormData(designation): Registro</h2>
+
+    <table>
+        <tr><th>Nombre</th><td>$FormData(name)</td></tr>
+        <tr><th>Email</th><td>$FormData(email)</td></tr>
+
+        <tr><th>Grupo</th><td>$FormData(group)</td></tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr></td></td><th>$message</th></tr>
+    </table>
+
+        <font size="+1">
+            Se ha enviado un email con tu <b>Login</b> y<br>
+            <b>Password</b> para
+            acceder al <a href="$Conf(controller)?team">concurso on-line</a>
+        </font>
+
+
+</th></tr>
+</table>
+</center>
+
+</body>
+</html>
+<!/part ext="show">
+

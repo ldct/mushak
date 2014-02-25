@@ -1,0 +1,158 @@
+
+<!-- header of report -->
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Informe del env&iacute;o $id</title>
+    <link
+        rel ="stylesheet"
+        href    ="../../styles/$Conf(style).css"
+        type    ="text/css">
+</head>
+<body>
+    <h2>Informe #$nrels</h2>
+
+    <table>
+    <tr>
+        <th>Env&iacute;o</th>
+        <td>
+            <a href="$Conf(controller)?inspect+$Sub(contest_name)/submissions/$id">$id</a>
+        </td>
+    </tr>
+    <tr>
+        <th>Fichero</th>
+        <td>
+            <a href="$Conf(controller)?inspect+$Sub(contest_name)/submissions/$id/$Program">$Program</a>
+            <a href="$Conf(controller)/$Sub(contest_name)/submissions/$id/$Program">[Descargar]</a>
+        </td>
+
+        <tr><th>Recibido</td>   <td>$received</td></tr>
+        <tr><th>Analizado</td>   <td>$processed ($delay)</td></tr>
+<!/part ext="head">
+
+<!-- reporting team and group -->
+<!part ext="team">
+    <tr>
+        <th>Equipo</th>
+        <td>
+            <a href="$Conf(controller)?inspect+$Sub(contest_name)/groups/$group/$Team">
+                $team_name
+            </a> Login: <code>$Team</code> Grupo: $group [$group_acronym]
+        </td>
+<!/part ext="team">
+
+<!-- reporting language name -->
+<!part ext="language">
+    <tr>
+        <th>Lenguaje</th>
+        <td>
+            <a href="$Conf(controller)?inspect+$Sub(contest_name)/languages/$Language">
+                $Language
+            </a>
+        </td>
+<!/part ext="language">
+
+<!-- reporting problem name and title -->
+<!part ext="problem">
+    <tr>
+        <th>Problema</th>
+        <td>
+            <a href="$Conf(controller)?inspect+$Sub(contest_name)/problems/$Problem">
+                $problem_name: $title
+            </a>
+        </td>
+<!/part ext="problem">
+
+<!-- reporting compilation errors ; header for tests-->
+<!part ext="compile">
+    <tr>
+        <th>Compilaci&oacute;n</th>
+        <td>$Observations</td>
+    </tr>
+    </table>
+<!/part ext="compile">
+
+<!part ext="tests_head">
+    <p>
+    <table
+        border="1"
+        width="100%">
+    <tr>
+        <th>Test</th>
+        <th>Esperado</th>
+        <th>Obtenido</th>
+        <th>Diferencias</th>
+    </tr>
+<!/part ext="tests_head">
+
+<!-- reporting each test -->
+<!part ext="test">
+
+    <tr>
+        <td valign="top">
+            <a href="$Conf(controller)?inspect+$test">
+                $test_name
+            </a><br>
+            T=$Usage(cpu) seg.<br>
+            E=$Usage(elapsed) seg.<br>
+            M=$Usage(memory) Kb<br>
+            $classify<br>
+        </td>
+        <td valign="top"><pre>$expected</pre></td>
+        <td valign="top"><pre>$obtained</pre></td>
+        <td valign="top"><pre>$difference</pre></td>
+    </tr>
+<!/part ext="test">
+
+<!-- messages from special corrector for each test -->
+<!part ext="message">
+    <tr>
+        <td valign="top" colspan="4"><pre>
+            $message
+        </pre></td>
+    </tr>
+<!/part ext="message">
+
+<!-- skip remaing tests due to resource consuming submission -->
+<!part ext="tests_skip">
+    <tr>
+        <td
+        colspan ="4"
+        align="center">
+            <font color="red">
+                    <i>Consumo de recursos excesivo:
+                    saltando los tests restantes</i>
+                </font>
+        </td>
+    </tr>
+<!/part ext="tests_skip">
+
+
+<!part ext="tests_foot">
+    </table>
+    <p>
+<!/part ext="tests_foot">
+
+<!-- listing footer -->
+<!part ext="foot">
+    <table>
+    <tr>    <th>CPU   </th><td>$CPU ($Elapsed) seg.</td> </tr>
+    <tr>    <th>Memoria    </th><td>$Memory kbytes</td>          </tr>
+    <tr>    <th>Clasificaci&oacute;n</th><td>$Classify</td>       </tr>
+    <tr>    <th>Nota</th>     <td>$Mark</td>        </tr>
+    <tr>
+        <th valign="top">Observaciones</th>
+        <td><pre>$Observations</pre></td>
+    </tr>
+    <tr>
+        <th>C&oacute;digo</th>
+        <td></td>
+    </table>
+<pre>
+$code
+</pre>
+
+</body>
+<!/part ext="foot">
+

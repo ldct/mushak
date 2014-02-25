@@ -1,0 +1,173 @@
+
+array set Dic {
+
+      "unknown" 			"desconhecida"
+
+      "The judges modified a warning"	"Os juízes corrigiram um aviso"
+      "The judges issued a warning"	"Os juízes fizeram um aviso
+      "Your question was answered"	"A sua pergunta foi respondida"
+      "Congratulations, you problem was accepted"
+      		"Parabens, o seu problema foi aceite"
+
+      "Undefined field"			"Campo não definido"
+
+      "%s NOT allowed, contest %s"	"%s não são aceites, prova %s"
+      "Questions"			"Perguntas"			
+      "Submissions"			"Submissões"
+      "Printouts"			"Impressões"
+
+      "Please disable pop-up blocking for this site"
+	"Por favor desactive o bloqueamento de janelas popup para este site"
+
+      "created"				"criada"
+      "ready"				"preparada"
+      "running"				"em curso"
+      "finished"			"terminada"
+      "concluded"			"concluida"
+
+      "Program reprinted"		"Programa reimpresso"
+      "No filename"			"Falta nome de ficheiro"
+      "No file found"			"Ficheiro não encontrado"
+      "Printing is not active"		"Impressão inactiva"
+      "Missing printout template"	"Falta matriz de impressão"
+      "Missing CSS config file"		"Falta ficheiro de configuração CSS"
+      "Missing printer name"		"Falta name de impressora"
+      "Printed certificate"		"Certificado impresso"
+
+      "No contest available"		"Nenhuma prova disponível"
+      "The contest did not start"	"A prova ainda não começou"
+      "Contest running"			"Prova em curso"      
+      "Contest prepared"		"Prova preparada"      
+      "to start"			"para começar"
+      "to end"				"para terminar"
+      "Contest ended"			"Concurso terminou"
+      "nothing done" 			"nada feita"
+
+      "Missing directory"		"Falta directoria"
+
+      "All"				"Todos"
+
+      "Incomparable"			"Não comparáveis"
+      "Output too long: truncating"	"Output demasiado grande: truncando"
+      "Program too long: truncating"	"Programa demasiado grande: truncando"
+
+      "Subject"				"Assunto"
+      "Question"			"Pergunta"
+      "No matching questions"		"Nenhuma pergunta semelhante"
+      "Are you sure this question was already answered?"	
+      		"De certeza que esta pergunta já foi respondida?"
+
+
+
+      "Invalid command"			"Commando invalido"
+      "Invalid authentication" 		"Autenticação inválida"
+      "Unauthorized access"		"Acesso não autorizado"
+      "Unauthorized user profile"	"Perfile de utilizador inválido"
+
+      "Undefined variable"		"Variável indefinida"
+      "Variable with invalid value"	"Variável com valor inválido"
+      "Unreadable file"			"Ficheiro ilegível"
+      "Unreadable directory"		"Directoria ilegível"	
+      "Non empty directory"		"Directoria não vazia"
+      "Check"				"Verifique"
+      "No groups defined"		"Nenhum grupo definido"
+      "Just one group defined"		"Apenas um grupo definido"
+      "No teams in this group"		"Nenhuma equipa neste grupo"
+      "No languages defined"		"Nenhuma linguagem definida"
+      "Just one language defined"	"Apenas uma linguagem  definida"
+      "No problems defined"		"Nenhum problema definido"
+      "Just one problem defined"	"Apenas um problema definido"
+      "No tests defined"		"Nenhum teste definido"
+      "Just one test defined"		"Apenas um teste definido"
+      "Few tests defined"  		"Poucos testes definidos"
+      "No persons in this team"		"Nenhuma pessoa nesta equipa"      
+      "Just one person in this team"	"Apenas uma pessoa nesta equipa"
+      "Invalid list"			"Lista inválida"
+
+      "Users IDs already defined in interval"	
+      			"Já existem ID de utilizadores no intervalo"
+
+
+
+      "Missing person certificate layout" 
+		      		"Falta formatação de certificados pessoais"
+      "Missing team layout"		"Falta formatação da equipa"
+
+      "Missing attribute"		"Falta o atributo"
+      "Missing program file"		"Falta ficheiro com programa"
+      "Missing directory"		"Falta directoria"
+      "Missing problem"			"Falta problema"
+
+
+      "Error"				"Erro"
+      "Invalid user"			"Utlizador invalido"
+      "Wrong submission"		"Submissão errada"
+      "Wrong question"			"Pergunta errada"
+
+      "No contest activated" 		"Nenhum concurso activado"
+      "No contest selected" 		"Nenhum concurso seleccionado"
+      "Contest deactivated"		"Concurso activado"
+      "Contest deactivated"		"Concurso desactivado"
+      "Contest started"			"Concurso iniciou"
+      "Contest ended"			"Concurso terminou"
+
+      "Submission received"		"Submissão recebida"
+      "Submission NOT received"		"Submissão NÃO recebida"
+      "Submission NOT accepted"		"Submissão NÃO aceite"
+      "contest didn't start yet"	"a competição ainda não começou"
+      "contest ended"			"concurso terminou"
+      "Problem"				"Problema"
+      "already accepted"		"já aceite"
+      "Duplicated submission"		"Submissão repetida"
+      "upload error (please retry)"	"erro na tranferência (por favor volte a tentar)"
+      "Question about problem"		"QuestÃo sobre problema"
+      "Question NOT accepted"		"Questão NÃO aceite"
+      "Question received"		"Questão recebida"
+      "Unknown problem"			"Problema desconhecido"
+      "Problem description unavailable" "Enunciado do problema indisponível"
+      "Problem description"		"Descrição do problem"
+      "Printout accepted"		"Impressão aceite"
+      "Printout NOT accepted"		"Impressão NÃO aceite"
+      "No command selected"		"Nenhum comando seleccionado"
+
+      "Received"			"Recebido"
+
+      "Analyzer running" 		"Analisador em funcionamento"
+      "Analyzer stoped"      		"Analisador terminou"
+
+      "Incomparable"			"Incomparável"
+
+      "Submissions"		        "Submissões"
+      "Ranking"				"Classificação"
+      "Questions"			"Questões"
+      "Printouts"			"Impressões"
+
+       "No group defined"		"Nenhum group definido"		
+       "Just one group defined"		"Apenas um group definido"
+       "No language defined"		"Nenhuma linguagem definida"
+       "Just one language defined"	"Apenas uma linguagem definida"	
+       "Compiler is not executable"	"Compilador nao é executavel"
+       "Key file missing"		"Não existe ficheiro com chave"
+       "There is a key already"		"Já existe uma chave"
+       "Key generated"			"Chave gerada"
+       "Person certificate layout missing" 
+       				"Matriz de certificado pessoal em falta"
+
+
+        "replicating"			"replicando"
+	"replication error"		"erro na replicação"
+
+	"no problem defined"		"nenhum problem definido"
+	"just one problem defined"	"apenas um problem definido"
+
+	"Save file"			"Guardar ficheiro"
+
+	"Cannot write in file" 		"Sem permissão of escrita"
+	"Cannot read file"		"Sem permissão of leitura"
+	"Image does not exist"		"Imagem não existe"
+	"Images located"		"Imagens localizadas"
+	"Invalid language"		"Linguagem invalida"
+	"Compilation error"		"Erro de compilação"
+	"Wrong output"			"Output errado"
+
+}

@@ -1,0 +1,98 @@
+
+
+<html>
+<head>
+<title>Mooshak's Help: Reliability</title>
+</head>
+
+<h3>Reliability</h3>
+
+<p align="justify">A single Mooshak node - one Web server accessible
+through a set of Web clients on users machines - is sufficient for
+running a small programming contest (i.e. a contest with up to 20
+teams) where reliability is not at premium. Running an official
+contest, with a concern for reliability and larger number of teams,
+distributed in several sites, and a simultaneous online contest,
+requires a more complex setup, with a network of interconnected nodes.
+
+<p align="justify">A link from a node X towards a node Y, represents
+the direction in which contest data must be replicated (from server X
+to server Y). The main reasons for replicating contest data between
+Mooshak servers are to support:
+
+<ul>
+<li><p align="justify"><b>System Backup:</b> replication is used to
+maintain a backup system, with an updated version of the contest data,
+so that it can replace one of the servers in case of hardware failure.
+
+<li><p align="justify"><b>Online Contest:</b> replication propagates the
+contest data to a server with Internet access used to maintain an
+online contest simultaneously with an official local contest.
+
+<li><p align="justify"><b>Load balancing:</b> several servers
+distribute load among them and replicate their data to the others. In
+this case each server is assigned to a set of users, for instance,
+contestants to a server and jury to another, or contestants in
+different rooms to different servers.
+
+<li><b>Multi-site contest:</b> This case is similar to the previous
+but servers are in distant locations.
+</ul>
+
+<p align="justify">The Mooshak network configuration for a particular
+contest may contain several of these links. The following figure 
+represents the network for a contest taking place simultaneously in
+two sites, A and B, the first using two servers (Server A1 and Server
+A2) for load balancing and the last using just one server (Server
+B). Each site has a backup with an updated version of the contest
+data, capable of replacing any of the main servers in case of
+failure. Site A maintains also an online version of the contest where
+anyone on the Internet can compete against the official contestants
+physically located at either site A or at site B. Some nodes are
+connected in unidirectional links, such as those connecting servers
+with the backup nodes or online-contest servers, and other are
+bidirectional, such as those connecting contest servers among them.
+
+<p align="justify">The Mooshak replication uses the <b>rsync</b>
+remote-update protocol. This protocol updates differences between two
+sets of files over a network link, using an efficient checksum-search
+algorithm. The replication procedure is invoked frequently to
+propagate changes to other servers, typically every 60 seconds, and
+copies only the data that has been changed since the last
+replication. The object files produced by the compilation of programs
+are not replicated, just the evaluation reports. If necessary the
+programs may be reevaluated in a different machine.
+
+<p align="justify">The main issue with replication is the consistency
+of contest data, namely that no data fails to be replicated or is
+overwritten by replicated data. To guarantee that no data fails to be
+replicated we must ensure that there is a replication path connecting
+all servers interfacing with official contestants.
+
+<p align="justify">To address the problem of data being overwritten,
+we must differentiate between contest definition data (such teams,
+problems, programming languages) and contest transactions (such as
+submissions, questions and printouts). Of these two, contest
+transactions, specially submissions, are particularly important. To
+guarantee uniqueness all transaction data is keyed by a timestamp, the
+team ID and the problem ID. Thus, if team ID is unique in the system,
+and transactions from the same team are consistently sent to the same
+server, then there is no danger of losing transactions due to
+overwritten data since each transaction key is also unique.
+
+<p align="justify">Contest data is not, in principle, changed after
+the beginning of the contest. It should be updated in a single node
+for consistency sake, and that node must have a path to every other
+node in the network. The only exception to this case is the creation
+of teams for online-contest servers, as we allow contestants to
+register during the contest. In case of using load balancing for
+online-contest servers it is important to assign team creation to a
+single server. Otherwise, two teams with the same name, and same
+group, registering at same time in different servers could (although
+not very likely) share the same record.
+
+<p align="justify">For the above setup to work properly, all servers
+clocks must be synchronized. This can be achieved using the Network
+Time Protocol (NTP).
+
+</html>

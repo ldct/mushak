@@ -1,0 +1,144 @@
+
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Mooshak Service Sandbox</title>
+   <link rel="stylesheet" href="styles/base.css" type="text/css">
+
+   <style>
+     fieldset { padding: 2px; margin: 2px; }
+
+   </style>
+</head>
+
+<body>
+
+
+   <h2><img src="icons/mooshak.png"> Service Sandbox</h2>
+
+<p align="right">
+Response messages validated againts <a href="styles/erl.xsd">ERL XML Schema
+    definition</a>
+</p>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="5">
+<tr>
+<td valign="top" width="40%">
+<form method="get" action="cgi-bin/evaluate" target="response">
+      <fieldset>
+	<legend><h3> List capabilities</h3></legend> 
+
+	
+	<p>Request <input type="text" readonly="readonly"
+			value="cgi-bin/evaluate">	  
+
+	<input type="submit" value="Execute"> 
+
+	  &nbsp;&nbsp;
+	  Validate: <input type="checkbox" name="validate" value="1"
+	  checked>
+</p>
+      </fieldset>
+</form>
+</td>
+<td rowspan="4" valign="top">
+<iframe width="100%" height="700" name="response">Response</iframe>
+</td>
+</tr>
+
+<tr>
+<td valign="top" width="20%">
+
+<form method="post" enctype="multipart/form-data"
+      action="cgi-bin/evaluate/proto_service.C" target="response">
+      <fieldset>
+	<legend> <h3>Evaluate program</h3></legend>
+	<p> Problem Id: <input name="id" value="A"></p>
+
+
+	<p>Program: <input type="file" name="program"> </p>
+
+	<p>Capability: <input type="text"
+			value="proto_service.C"
+			 onChange="
+		this.form.action = 'cgi-bin/evaluate/' + this.value;
+		this.form.request.value = this.form.action;"> 
+	Language: <select name="lang">
+	    <option value=""></option>
+	    <option value="pt">Portuguese</option>
+	    <option value="en">English</option>
+	    <option value="es">Spanish</option>
+	    </select> </p>
+
+	<p>Request: <input name="request"  readonly="readonly"
+			   value="cgi-bin/evaluate/proto_service.C">
+
+	<input type="submit" value="Execute">
+
+	&nbsp;&nbsp;
+	Validate: <input type="checkbox" name="validate" value="1" checked></p>
+
+
+</fieldset>
+</form>
+
+</td>
+</tr>
+
+<tr>
+<td valign="top" width="20%">
+
+<form method="get" 
+      action="cgi-bin/report/" target="response">
+      <fieldset>
+	<legend> <h3>Get report</h3></legend>
+
+	<p>Report: <input type="report" 
+			value=""
+		  onchange="
+		this.form.action = 'cgi-bin/report/'+this.value;	
+		this.form.request.value = this.form.action;"> </p>
+	<p>Request: <input name="request" readonly="readonly"
+			   value="cgi-bin/report/">
+
+
+	<input type="submit" value="Execute"> 	  &nbsp;&nbsp;
+	  Validate: <input type="checkbox" name="validate" value="1"
+	  checked> </p>
+
+      </fieldset>
+</form>
+
+
+<tr>
+<td valign="top" width="20%">
+
+<form method="get" 
+      action="cgi-bin/content/" target="response">
+      <fieldset>
+	<legend> <h3>Get Content</h3></legend>
+
+	<p>Content: <input type="report" 
+			value=""
+		  onchange="
+		this.form.action = 'cgi-bin/content/'+this.value;	
+		this.form.request.value = this.form.action;"> </p>
+	<p>Request: <input name="request" readonly="readonly"
+			   value="cgi-bin/content/">
+	<input type="submit" value="Execute"> 	  
+ </p>
+
+      </fieldset>
+</form>
+
+
+</td>
+
+</tr>
+
+
+
+</table>
+
+
+</body>
+</html>

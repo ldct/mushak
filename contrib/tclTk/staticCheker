@@ -1,0 +1,107 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+#
+#						zp@ncc.up.pt   2006
+#						
+#-
+
+lappend auto_path  [ file dirname [ info script ] ]
+
+package require cgi
+package require saferTk
+package require match
+
+set TamanhoProgramaMinimo 100
+set SubstitutionFile checker_widget_mapping.tcl
+
+proc check {attempt_file solution_file} {
+    global TamanhoProgramaMinimo
+    global SubstitutionFile
+
+    set classe 0
+    set obs ""
+
+    set resolve	resolve	;# interpretador contendo a resolução
+    set exemplo	exemplo ;# interpretador contendo a solução
+
+    set attempt  [ html::parse [ string tolower [ read_in $attempt_file  ] ] ]
+    set solution [ html::parse [ string tolower [ read_in $solution_file ] ] ]
+
+
+    ::saferTk::avalia $exemplo $solution -100 +100
+    ::saferTk::ajusta $exemplo -100 +100
+    
+    if { [ string length [string trim $attempt] ] < $TamanhoProgramaMinimo } {
+	set obs "Programa excessivamente simples "
+	append obs "(menos de $TamanhoProgramaMinimo bytes)"
+    } elseif { [ catch { 
+	set output [ ::saferTk::avalia $resolve $attempt -100 -100 ] 
+	::saferTk::ajusta $resolve -100 +100
+    } erros ] } {
+	set classe 0
+	append obs "Erro: $erros \n"
+	# já nem tenta fazer mais nada
+    } else {
+	# actualiza o programa
+	catch { interp eval $resolve [ list update idletasks ] } erros
+	append obs $erros\n
+	::saferTk::ajusta resolve -100 -100
+
+	# compara os interfaces do exemplo e da resolução 
+	# (retorna substituições)
+	## ::interface::exemplifica    
+
+	set nerros 0
+	set classe 100	   
+	if { [ set erros [ match::unifica $exemplo $resolve sub ] ] != "" } {
+	    foreach erro $erros {
+		switch -regexp -- $erro {
+		    "^Deveriam existir"		{ incr classe -70  }
+		    "^Na posição do objecto"	{ incr classe -40  }
+		    "^Opcção"			{ incr classe -30  }
+		}
+		if { [ incr nerros ] < 5 } {
+		    append obs $erro\n
+		}   
+	    }		
+	} else {
+	    set fd [ open $SubstiyutionFile w ]
+	    puts $sub
+	    catch { close $fd }
+	}
+
+    }
+
+
+    regsub -all \n $obs { } obs
+
+    # retirar caracteres nulos que baralham as transsmissões
+    regsub -all \0 $output {} output
+
+    puts "Mooshak_Mark: $classe"
+    puts ""
+    puts stderr $output
+	 
+    if { $compare < 100 } { 
+	exit 8	;#Compile Time Error
+    } else {
+	exit 0	;#Accepted
+    }
+    puts -nonewline "$output"
+    flush stdout
+}
+
+switch [ llength $argv ] {
+    3 {
+	eval check $argv
+    }
+    default {
+	puts stderr "usage: validate <attempt> <solution> <tests>"
+    }
+}
+
+
+destroy .

@@ -1,0 +1,159 @@
+
+
+<html>
+<head>
+<title>Mooshak's Help: Automated Judging</title>
+</head>
+
+<h3>Automated Judging</h3>
+
+<p align="justify">The automated judge is the corner stone of
+Mooshak. Its role is to automatically classify a submission according
+to a set of rules and produce a report with the evaluation for further
+validation by a judge person.
+
+<p align="justify">A submission is composed by data relevant for the
+evaluation process, that is the program source code, the team-id, the
+problem-id, and the programming language (this is automatically
+inferred from the source code file extension). Submissions are
+automatically judged and the corresponding result is almost
+instantaneously displayed to the teams, although initially in a
+pending state. 
+
+<p align="justify">Judge persons have the responsibility of validating
+pending classifications, making them final, and occasionally modify
+initial classifications. A classification may have to be modified as a
+result of changes in the compilation and execution conditions
+(e.g. changes in test cases) that required reevaluating
+submissions. Reevaluation produces another report that has to be
+compared with previous ones.
+
+<p align="justify">The automated judging can be divided in two parts
+according to the type of analysis:
+
+<ul>
+<li><p align="justify"><b>Static analysis</b> checks the integrity of
+submitted data (source-program) and, if successful, produces an
+executable program.
+
+<li><p align="justify"><b>Dynamic analysis</b> is performed upon a
+ successful static analysis phase and is composed of one or more
+ executions of the program.
+</ul>
+
+<p align="justify">Static analysis starts by verifying if the
+submitted problem has already been solved, in which case the
+submission is rejected and no classification is given. Then it goes on
+to confirm the verifications made by the interface, i.e. by double
+checking the submitted data for team ownership, problem-id and size of
+program source. If it succeeds in this verification, it compiles the
+submitted program using the compilation command line defined in the
+administration interface. Mooshak can be more or less tolerant
+according to the flags chosen for each compiler. An error or compiler
+warning detected in this stage aborts the automated judging and
+dynamic analysis is skipped. The following table lists the
+verifications performed during static analysis and the associated
+classifications upon failure.<p>
+
+<table align="center" border=1>
+<tr>
+<th>Verifications</th> <th>Classification</th>
+</tr>
+<tr>
+<td>Team</td> <td>Invalid submission</td>
+</tr>
+<tr>
+<td>Language</td> <td>Invalid submission</td>
+</tr>
+<tr>
+<td>Problem</td> <td>Invalid submission</td>
+</tr>
+<tr>
+<td>Program size</td> <td>program too long</td>
+</tr>
+<tr>
+<td>Compilation</td> <td>Compile time error</td>
+</tr>
+</table>
+
+
+<p align="justify">Dynamic analysis involves the execution of the
+submitted program with each test case assigned to the problem. A test
+is defined by an input and an output file. The input file is passed by
+the standard input to the program being executed and its standard output is
+compared with the output file. The errors detected during dynamic
+analysis determine the classifications listed in the following table.<p>
+
+
+<table align="center" border=1>
+<tr>
+<th>Severity</th> <th>Classification</th><th>Meaning</th>
+</tr>
+<tr>
+<td>6</td> <td>Requires reevaluation</td><td> for some reason the program has to be re-evaluated;
+</tr>
+<tr>
+<td>5</td> <td>Time limit exceeded</td><td>the program did not finish
+within the allocated amount of time;
+</tr>
+
+<tr>
+<td>4</td> <td>Output too long</td><td> the program generates an
+output too long for this problem; the limits are dependent on the test
+cases, but are usually low (default limit is around 100KB);
+</tr>
+
+<tr>
+<td>3</td> <td>Run-time error</td><td>the program ``crashed'', i.e. it exited
+prematurely due to a run-time error;
+</tr>
+
+<tr>
+<td>2</td> <td>Wrong answer</td><td>the program runs through one or
+more test cases withouth a run-time error but the output did not match
+the expected output;
+</tr>
+
+<tr>
+<td>1</td> <td>Presentation error</td><td>the output seems to be
+correct but it is not presented in the required format. Since it is
+not always easy to distinguish this message from the wrong answer
+message, it is only sent in obvious cases;
+</tr>
+
+<tr>
+<td>0</td> <td>Accepted</td><td>the program passed all tests and is
+accepted as correct;</td>
+</tr>
+</table>
+
+<p align="justify">Each classification has an associated severity rank
+and the final classification is that with the highest severity rank
+found in all test cases. The highest severity is given to the rare
+situation where the system has an indication that the test failed due
+to lack of operating system resources (inability to launch more
+processes, for instance). The lowest severity is the case where no
+other error was found, using the test cases, and therefore the
+submission is accepted as a solution to the problem.
+
+<p align="justify">The automatic judge marks an execution as
+"Accepted" only if the the standard output is exactly equal to the
+test output file. Otherwise the output file and standard output are
+normalized and compared again. In the normalization both outputs being
+compared are stripped of all formatting characters. If after this
+process the outputs become equal then the submission is marked as
+having a "presentation error"; otherwise it is marked as a "wrong
+answer". In the current implementation the normalization trims white
+characters (spaces, newlines and tabulation characters) and replaces
+sequences of white characters by a single space. This is a general
+normalization rule since white characters are only used for
+formatting. In a specific problem other classes of characters could
+have the same meaning. For instance, in a problem where the only
+meaningful characters are digits, other characters, such as letters or
+punctuation, could be treated as formatting characters. This cannot be
+done in general since many problems have a meaningful output that
+includes letters. This feature will require having a meaningful class
+of characters defined for each problem output.
+
+
+</html>

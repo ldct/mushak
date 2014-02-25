@@ -1,0 +1,99 @@
+
+<!-- header of report -->
+<!part ext="head">
+<report evaluationServer="Mooshak" date="$processed">
+	<!-- Report #$nrels generated for this submission -->
+	<capability id="$Conf(capability)"/>
+<!/part ext="head">
+
+<!-- reporting team and group -->
+<!part ext="team">
+<!/part ext="team">
+
+<!-- reporting language name -->
+<!part ext="language">
+<programmingLanguage>$Language</programmingLanguage>
+<!/part ext="language">
+
+<!-- reporting problem name and title -->
+<!part ext="problem">
+	<exercise href="$problem_name">$title</exercise>
+
+<!/part ext="problem">
+
+<!-- reporting compilation errors ; header for tests-->
+<!part ext="compile">
+<compilationErrors><![CDATA[$Observations]]></compilationErrors>
+<!/part ext="compile">
+
+<!part ext="tests_head">
+<tests>
+<!/part ext="tests_head">
+
+<!-- reporting each test -->
+<!part ext="test">
+<test>
+  
+  <input><![CDATA[$input]]></input>
+  <expectedOutput><![CDATA[$expected]]></expectedOutput>
+  <obtainedOutput><![CDATA[$obtained]]></obtainedOutput>
+  <outputDifferences><![CDATA[$difference]]></outputDifferences>
+  <classify>$classify</classify>
+  <mark>$mark</mark>
+  <feedback>$Feedback</feedback>
+  <environmentValues>
+    <environmentValue name="realTimeSecs" value="$Usage(cpu)"/>
+    <environmentValue name="elapsedTimeSecs" value="$Usage(elapsed)"/>
+    <environmentValue name="memoryUsageKb" value="$Usage(memory)"/>
+    <environmentValue name="classify" value="$classify"/>
+  </environmentValues>
+</test>
+
+<!/part ext="test">
+
+<!-- messages from special corrector for each test -->
+<!part ext="message">
+	<!-- special corrector output
+	     DOLAR message
+	-->
+<!/part ext="message">
+
+<!-- skip remaing tests due to resource consuming submission -->
+<!part ext="tests_skip">
+	<!--
+	   Resource consuming program: skipping remaining tests
+	  -->
+<!/part ext="tests_skip">
+
+
+<!part ext="tests_foot">
+</tests>
+<!/part ext="tests_foot">
+
+<!-- Feedback items -->
+<!part ext="feedback_item">
+		<item type="$type"><![CDATA[$item]]></item>
+<!/part ext="feedback_item">
+
+<!-- listing footer -->
+<!part ext="foot">
+
+<summary>
+
+  <mark>$Mark</mark>
+  <classify>$Classify</classify>
+  <feedback>
+    $Feedback
+  </feedback>
+  <environmentValues>
+    <environmentValue name="realTimeSecs" value="$CPU"/>
+    <environmentValue name="elapsedTimeSecs" value="$Elapsed"/>
+    <environmentValue name="memoryUsageKb" value="$Memory"/>
+    <environmentValue name="observations" value="$Observations"/>
+  </environmentValues>
+
+</summary>
+
+</report>
+<!/part ext="foot">
+

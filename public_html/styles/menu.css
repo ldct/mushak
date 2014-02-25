@@ -1,0 +1,39 @@
+
+
+.menubar {
+	 border: 		1px;
+	 border-style: 	solid;
+	 padding:		0;
+	 margin:		0;
+}
+
+.menubutton {
+     position:		relative;
+	 border: 		2px;
+	 border-style:	ridge;
+	 cursor:		pointer;
+	 margin:		0;
+	 padding:		0;
+}
+
+.menu {
+    position:		absolute;
+    visibility:		hidden;
+	width:			5cm;
+	margin:			0;
+	padding:		0;
+	background:		lightGrey;
+	border-width:	0 1px 1px 0;
+	border-color:	grey;
+	left:			0;
+}
+
+.menuitem {
+	padding:		1mm;
+	
+}
+
+
+.selected {
+	background:		grey;
+}

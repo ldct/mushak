@@ -1,0 +1,97 @@
+
+<h2>Setup and initial testes FAQ</H2>
+
+<ul>
+
+
+<li><b>How do I configure Mooshak with SELinux</b></li>
+
+
+Restrictions enforced by SELinux are registered in a log file, suc as  <code>/var/log/audit/audit.log</code>.
+
+Using the tools <code>audit2why</code> and </code>audit2allow</code>
+you can analyze and create a module with a security policy that can be
+added with the command line: 
+
+<pre> semodule –i </pre>
+
+Here is a policy file for Mooshak
+
+
+<pre>
+module mooshak 1.0;
+
+ 
+
+require {
+
+    type home_root_t;
+
+    type httpd_sys_script_t;
+
+    class file { setattr read create ioctl write getattr unlink open append };
+
+    class dir { setattr read create write rmdir remove_name open add_name };
+
+}
+
+#============= httpd_sys_script_t ==============
+
+allow httpd_sys_script_t home_root_t:dir { setattr read create write rmdir remove_name open add_name };
+
+allow httpd_sys_script_t home_root_t:file { setattr read create
+getattr write ioctl unlink open append };
+
+</pre>
+ 
+(Answer contributed by David Carvalho - david@di.ubi.pt)
+
+</li>
+
+
+<li><b>I get a server error after accessing Mooshak's initial page</b></li>
+
+This probably means that your Apache configuration does not support a
+/cgi-bin/ directory for users. To allow programs to be executed in
+this directory you should include these lines in the Apache
+configuration file e restart the server. 
+
+<pre>
+&lt;Directory /home/*/public_html/cgi-bin>
+     Options +ExecCGI -Includes -Indexes
+     SetHandler cgi-script
+&lt/Directory>
+</pre>
+
+
+<li><b>When I use the save command in the admin's screen I get an error message</b></li>
+
+Mooshak's scripts and data files are installed in a certain OS
+user's home - by default <code>mooshak</code> - and the CGI scripts should run
+with the same user. The <code>suexec</code> module of Apache runs
+CGI scripts in users directories as the corresponding and ensures that
+scripts cannot be invoked by other users. Mooshak expects
+<code>suexec</code> in order to run properly.
+
+<p>If you have this kind of error then you probably don't have
+<code>suexec</code> installed. Some distributions install
+<code>suexec</code> by default when you install Apache. Sometimes you
+may need to recompile Apache with a certain configuration</p>
+
+
+<p>Of course that you can just give all permissions to all data files by
+executing <code>chmod -R 777 data</code> command in Mooshak's home
+directory but I advise you against it. You will be compromising your
+contest security. 
+
+
+<li><b> I am using Fedora Core 3 and when Mooshak calls gcc to compile C/C++
+  programs it produces either Internal Error or SegFault, but the
+  programs compile on the shell</b></li>
+
+People using Mooshak reported that starting Apache in init.d, i.e.,
+<code>httpd start</code>, intead of <code>startssl</code> solved this
+problem. Apparently this script sets important environment variables
+
+
+</ul>

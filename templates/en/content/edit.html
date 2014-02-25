@@ -1,0 +1,49 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link 
+	rel	="stylesheet" 
+	href	="../../styles/$Conf(style).css" 
+	type	="text/css">
+</head>
+<body>
+	<h4>$fx</h4>
+	<table>
+		<tr>
+			<td colspan="3">
+				<form 
+					method	="post" 
+					action	="$Conf(controller)?edit+$fx">
+					<textarea 
+						rows	="20" 
+						cols	="80" 
+						name	="data"
+						>$data</textarea>
+			</td>
+		</tr>
+		<tr>
+			<th>
+					<input 
+						type	="reset" 
+						value	="Reset">
+			</th>
+			<th>
+					<input 
+						type	="submit" 
+						value	="Change">
+			</th>
+				</form>
+			<th>
+				<form 
+					method	="post" 
+					action	="$Conf(controller)?content+$dir+1">
+					<input 
+						type	="submit" 
+						value	="Return">
+				</form>
+			</th>
+		</tr>
+	</table>
+</body>
+</html>
+

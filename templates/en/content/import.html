@@ -1,0 +1,44 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Import $type Folder</title>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<center>
+
+<H2>Import $type Folder: <code>$dir</code></H2>
+
+<form 
+	method="post"
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?importing+$dir">
+
+   File <input type="file" name="file"> 
+
+   <input type='submit' value='Import'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Note:</b> You can import either:
+   <ul>
+   <li>an XML file with all the data for this directory</li>
+   <li>an archive containing both the XML description and the files</li>
+   </ul>
+
+Valid formats for the archive are <code>zip</code>, <code>tar</code>, <code>tgz</code>, <code>tbz2</code>.
+
+<p/>
+
+<b>Hint</b> If you are unsure about the format start by <a href="$Conf(controller)?export+$dir">exporting this directory</a> and edit its content (XML description and files).
+
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

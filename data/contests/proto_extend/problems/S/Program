@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Agenda</title>
+</head>
+<body>
+<form action="agendar.cgi">
+
+<table border=1 cellspacing=3 cellpadding=5 bgcolor="lightgrey">
+
+<tr><th colspan=3>
+<input type=button value="&lt;-">
+Data: <input type=text size=2> / <input type=text size=2> / <input type=text size=4>
+<input type=button value="-&gt;">
+</th></tr>
+
+<tr  bgcolor="lightBlue">
+<th>Hora</th>
+<th>Tarefa</th>
+<th>Alarme</th>
+<tr><th>9.00  <td><input type=text size=20> <td><input type=checkbox>
+<tr><th>10.00 <td><input type=text size=20> <td><input type=checkbox>
+<tr><th>11.00 <td><input type=text size=20> <td><input type=checkbox>
+<tr><th>12.00 <td><input type=text size=20> <td><input type=checkbox>
+<tr><th>13.00<td><input type=text size=20> <td><input type=checkbox>
+<tr><th>14.00<td><input type=text size=20> <td><input type=checkbox>
+<tr><th>15.00<td><input type=text size=20> <td><input type=checkbox>
+<tr><th>16.00<td><input type=text size=20> <td><input type=checkbox>
+<tr><th>17.00<td><input type=text size=20> <td><input type=checkbox>
+
+<tr><td><td>
+<input type=button value="Aceitar">
+<input type=button value="Cancelar">
+</table>
+
+
+</form>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Mooshak</title>
+   <link 
+	rel="icon" 
+	href="../../icons/mooshak-16.png" 
+	type="image/png">
+   <link 
+   	rel="shortcut icon" 
+	href="../../icons/mooshak-16.png">
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	type="text/css">
+
+   <script language="Javascript" type="text/javascript">
+   function isToplevel() {
+	return window.parent == window;
+   }
+
+   function execute(menu) {
+ 	for(var i=0; i < menu.options.length; i++)
+	   with(menu.options[i])
+	   	if(selected) {	
+	           window.open(value,'_self');
+		   menu.options[i].selected=false;
+                }
+        menu.options[0].selected=true;
+   }  
+
+
+   </script>
+<style>
+SELECT.Menu, OPTION.Button, OPTION.ItemOn, OPTION.ItemOff{
+	background:	#FFFFCC;
+	color:		#666666;
+	font-size:	75%; 
+	
+}
+
+OPTION.ItemOff {
+	color:		LightGrey;
+}
+
+</style>
+
+</head>
+<body onLoad="if(! isToplevel()) return window.open('$Conf(controller)?relogin','_top');">
+
+<div style="width: 95%; padding: 0pt; margin: 0pt;">
+$menu_bar
+</div>
+<center>
+
+	<form 	method="post"
+		action="$Conf(controller)">
+		<input type="hidden" name="command"   value="$command">
+		<input type="hidden" name="arguments" value="$arguments">
+
+	<script  language="Javascript" type="text/javascript">
+		for(i=0; i<3; i++)
+			document.writeln("<p>&nbsp;</p>");
+	</script>
+	<table 	border="2"
+		cellpadding="10" 
+		cellspacing="2">
+
+		<tr><th	id="Base">
+		<h2>$Mooshak_authentication</h2>
+	<table 
+		cellpadding="10" 
+		cellspacing="0" 
+		border="0" 
+		width="50%">
+		
+		
+		<tr>
+			<th>$Contest</th>
+			<td colspan="2">$contests</td>
+		</tr>
+		<tr>
+			<th>$User</th>
+			<td colspan="2">
+				<input type="text" name="user"></td>
+		</tr>
+		<tr>
+			<th>$Password</th>
+			<td colspan="2">
+				<input type="password" name="password">
+			</td>
+		</tr>
+
+		<tr>
+			<th colspan="4">
+				<font color="red">$message</font>
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<input type="submit" class="Button" value="Login">
+			</th>
+			<th>
+				<input type="reset" class="Button" value="Reset">
+			</th>
+			<th>
+				<input 
+					type="button" 
+					class="Button"
+					value="Register"
+					$registrable
+					OnClick="window.open('$Conf(controller)?register','_self');"
+				>
+			</th>
+			<th>
+				<input type="button" class="Button" value="Guest"
+				OnClick="window.open('$Conf(controller)?guest','_self');"
+				>
+			</th>
+			
+	</table>
+	</th>
+	</table>
+	<div style="position: absolute;	bottom: 0; left: 0; width: 100%">
+	<table border="0" style="font-size: x-small; color: gray; width: 100%">
+	<tr>
+	<td align="left" width="20%">Version $VERSION</td>
+	<td align="center" width="40%">	
+	&#169; Department of Computer Science - Faculty of Science - University of Porto 
+	</td>
+	<td align="right" width="20%">
+	  	<code>zp&#64;dcc&#46;fc&#46;up&#46;pt</code>
+	</td>
+	</tr>
+	</table>
+	</div>
+
+
+</center>
+</body>
+</html>
+
+	
+

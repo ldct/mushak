@@ -1,0 +1,52 @@
+<!--                          					-->
+<!-- Top level element		 				-->
+<!--                          					-->
+
+
+<!part ext="message">
+<?xml version="1.0" encoding="UTF-8"?>
+<message xmlns="http://evae/messages" id="$message_id" date="$message_date">
+  <request date="$request_date">
+    $request
+  </request>
+  <reply date="$reply_date">
+    $reply
+  </reply>
+</message>
+<!/part ext="message">
+
+<!part ext="request_user_data">
+    <userData>$userData</userData>
+<!/part ext="request_user_data">
+
+<!part ext="request_process_evaluate">
+    <program><![CDATA[$programCode]]></program>
+    <learningObject>$lo</learningObject>
+    <capability>$capability</capability>
+<!/part ext="request_process_evaluate">
+
+<!part ext="request_process_token">
+    <token id="$token"/>
+<!/part ext="request_process_token">
+
+
+<!part ext="userData">
+		<userValue name="$name" value="$value"/>
+<!/part ext="userData">
+
+<!part ext="capabilities">
+	<capabilities>
+	  $capabilities
+	</capabilities>
+<!/part ext="capabilities">
+
+
+
+<!part ext="capability">
+	<capability id="$capability_id">$features</capability>
+<!/part ext="capability">
+
+
+<!part ext="feature">
+		<feature name="$feature_name" value="$feature_value"/>
+<!/part ext="feature">

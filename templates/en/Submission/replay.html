@@ -1,0 +1,52 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+
+</head>
+<body>
+<title>Replay submissions</title>
+<center>
+
+<h2>Replay submissions</h2>
+
+<form 
+	method	="post" 
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?operation+importing+$dir">
+
+	<table>
+
+		<tr>
+			<th rowspan="3">Type</th>
+			<td><input type="radio" name="type" value="sequential">
+			<td>
+			Replay submission after submission.The next submission
+			is started only after conclusion of the previous one.
+			</td>
+		</tr>
+		<tr>
+			<td><input type="radio" name="type" value="paced">
+			<td>
+			Submissions start in the order they were received with 
+			maximum interval of $Max_delay, hence submission 
+			start evaluation while the previous are still execute.
+			</td>
+		</tr>
+		<tr>
+			<td><input type="radio" name="type" value="eager">
+			<td>
+			Submissions start in the order they were received with 
+			no interval between them; expect an heavy load in your
+			server.
+			</td>
+		</tr>
+
+	</table>
+
+</form>
+

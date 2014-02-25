@@ -1,0 +1,109 @@
+
+<h3>Problem set</h3>
+
+
+<p align="justify">The problem set in Mooshak comprehends the
+definition of problem descriptions in html, figures referenced within
+the html file, input and output test cases and official solutions for
+the problem. Each problem resides in a separate folder.
+
+<p align="justify">Inside the folder for the contest you are setting
+up, open the <tt>Problems</tt> folder and then to create the problem
+set you can either do it <a href="#stepbystep">step by step</a> or
+else by <a href="#importing">importing from a tar-file</a>.<p>
+
+<hr>
+
+<a name="stepbystep"></a><b>Step by step:</b>
+
+
+<ol>
+<li><p align="justify"><b>Add new problem</b> give a name to a new folder
+for the problem we are going to define.<p>
+
+<li><p align="justify"><b>Define attributes for the problem:</b> open
+the problem folder and define its attributes. The name you give to
+problem is the used in the Contestants interface and also in the
+submissions and classification views. Usually, the names are capital
+letters or numbers. The <tt>Wording</tt> attribute is where you should
+specify the html-file for this problem. The <tt>Program</tt> attribute
+allows you to specify a program source file that is a solution for
+this problem. Lastly, you can specify the time limit (<tt>Timeout</tt>
+attribute) for this problem. The time limit can be confirmed by the
+system once a solution program is given, just press the <tt>Test</tt>
+button.
+
+<p align="justify">To complete the problem definition, you need to
+specify the test cases and images for the html-file within folders
+<tt>Tests</tt> and <tt>Images</tt>. Each test case should reside in a separate folder.
+
+
+<li><p align="justify"><b>Add new test case</b> open the
+<tt>Tests</tt> folder and then give a name to a new folder where the
+input and out test files will be stored. For example, if you are
+defining the first test case of problem <tt>A</tt>, then call the
+first test case folder <tt>A1</tt>.<p>
+
+<li><p align="justify"><b>Upload the input and output test files:</b> open the
+test case folder and specify the test files for input and output.
+
+</ol>
+
+<p align="justify">You have to repeat 
+<ul>
+<li>steps 3 and 4 to create all test cases for a given problem;
+<li>steps 1 and 2 to create all problems to be used in the contest (and then repeat steps 3 and 4 as necessary).
+</ul>
+
+<p align="justify">Please note that at every interface where you can
+upload a file (say a problem description, a program solution or input
+and output test files) you also have the opportunity to edit those
+files within Mooshak, once they have been uploaded. This gives
+administrators greater freedom to make quick fixes if necessary.
+
+<p align="justify">A faster process to add the problem set data into Mooshak is by doing the following.
+
+<a name="importing"></a><p align="justify"><b>Importing data from a tar-file:</b> 
+
+<p align="justify">Mooshak allows data describing the problem set to
+be imported from a tar-file. In order to it, open the
+<tt>Problems</tt> folder and then press the button <tt>Import</tt> and
+give the file name.
+
+<p align=justify">The tar-file being imported must group the files
+that make the problem set in a directory hierarchy as expect by
+Mooshak. For example, a tar-file for a problem set with 2 problems (A
+and B) with 2 test cases each would produce a directory hierarchy as
+follows (file names are just indicative):
+
+<pre>
+A:
+  a.html
+  a.c
+  Images:
+    a1.gif
+    a2.gtif
+  Tests:
+    A1:
+     in.1
+     out.1
+    A2:
+     in.2
+     out.2
+B:
+  b.html
+  b.c
+  Images:
+    b.gif
+  Tests:
+    B1:
+     input.1
+     output.1
+    B2:
+     input.2
+     output.2
+</pre>
+
+<p align="justify">Last, Mooshak also allows you export the problem set into an XML file (????).
+
+CONFERIR COM ZP QUESTAO DO XML.

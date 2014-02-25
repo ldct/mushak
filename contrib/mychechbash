@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+echo ----------
+echo ARGS=$ARGS
+echo DIR=$DIR
+echo CONTEXT=$CONTEXT
+echo INPUT=$INPUT
+echo OUTPUT=$OUTPUT
+echo OBTAINED=$OBTAINED
+echo CLASSIFY_CODE=$CLASSIFY_CODE
+echo ----------
+
+exit $CLASSIFY_CODE

@@ -1,0 +1,60 @@
+
+BODY {
+	background-color:	#EEEE99;
+
+	font-family: 		"Helvetica, sans-serif";
+	color:			#555555;
+}
+
+#Found {
+	display: inline;
+	color: green;
+	font-size: Large;
+}
+
+#Error {
+	color: red;
+	font-size: Large;
+	font-family: 		"Courier, sans-serif";	
+}
+
+
+TD TH {
+	font-family: 		"Helvetica, sans-serif";
+}
+
+#Titulo {
+	background-color:	#999999;
+}
+
+#Dados {
+	background-color:	#FFCCCC;
+	background-color:	#CC9999;
+}
+
+#Juri {
+	background-color:	#99FFFF;
+	background-color:	#9999CC;
+}
+
+#Controlo {
+	background-color:	#99CC99;
+}
+
+#Base {
+	background-color:	#CCFFFF;
+	background-color:	#CCCCFF;
+	background-image:	url(../icons/Base.gif);
+	font-family: 		"Helvetica, sans-serif";
+}
+
+#BaseForte {
+	background-color:	#CCCCFF;
+	background-color:	#AAAAFF;
+	background-image:	url(../icons/BaseForte.gif);
+}
+
+#Botao {
+	width:	100px;
+}
+

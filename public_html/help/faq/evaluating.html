@@ -1,0 +1,33 @@
+
+<h2>Evaluating submissions FAQ</h2>
+
+<ul>
+
+<li><b>I have a submission that Mooshak classifies as ... but when I
+run it on the shell it works just fine </b>
+
+In Mooshak executions are similar to those you launch from the command
+line, but you have to have in mind that Mooshak uses a safe execution
+command to execute you program as an underprivileged user. To have
+exactly the same type of execution you use the following command line
+
+<pre>
+
+	~mooshak/bin/safeexec --exec $COMMAND_LINE
+
+</pre>
+
+In fact Mooshak invokes <code>safexec</code> with more command line
+options to enforce limits over system resources (memory, time, etc),
+but with  this command line you may find, for instance, that your
+program requires certain environment variables that are not available
+to the <code>safeexec</code> user.
+<p>
+Also, if you copy data files for the test vectors using the clipboard 
+(CUT-PAST) that were produced in Windows then you should be aware that
+Mooshak runs in Linux and this system uses a single end-of-file
+character, instead of the sequence used by Windows. 
+
+</li>
+
+</ul>

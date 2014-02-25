@@ -1,0 +1,292 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+#
+#
+# Convert CSV file with sigarra enrolement data 
+# to an XML file with groups of teams to be imported to Mooshak
+#
+#					José Paulo Leal
+#					zp@dcc.fc.up.pt
+# Usage:
+#           sigarra2mooshak [ id | name ] < sigarra.csv > mooshak.xml
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+
+### ----- CVS file features -----
+set SKIP_HEADER_LINES	0	;# number of line to skip in header
+set SKIP_FOOTER_LINES	0 	;# number of line to skip in footer
+set RECORD_SEPARATOR	"\n"
+set FIELD_SEPARATOR	"\t"
+set ID_POSITION		0	;# Column position of field used as login
+set REMOVE_EMPTY_LINES  0	;# 1=remove ; 0=preserve
+set NORMAL_FIELD_SEPS	0	;# 1=normalize; 0 preserve
+
+set REMOVE_STRING_QUALIFIERS 1	;# 1=remove ; 0=preserve
+set TRIM_FIELDS 	     1	;# 1=remove ; 0=preserve
+set STRING_QUALIFIER        \"
+set REMOVE_EMPTY_FIELDS	     1	;# 1=remove ; 0=preserve
+
+set INVALID_CHARACTERS {[^[:print:][:space:]]|\xA0} ;# unprintable chars
+set REMOVE_INVALID_CHARACTERS 1	;# 1=remove ; 0=preserve
+set IGNORE_UNMAPPED_FIELDS    1	;# 1=remove ; 0=preserve
+set DEFAULT_GROUP	Alunos	;# Default group name
+set MISSING_FIELDS_AS_NULL    1	;# 1=remove ; 0=preserve
+set NULL_VALUE               {}
+
+
+### ----- XML file features -----
+set CHARACTER_ENCODING 	"UTF-8"	;# character encoding form XML file
+
+set GroupFields { Designation Acronym Authentication LDAP }
+
+set TeamFields { Name  Profile }
+
+## Mapping CSV fields to XML attributes
+## 	name 		- uses Team Name as login
+## 	id (default) 	- uses registration ID as login
+proc select_mapping {type} {
+    global FieldMapping
+    global ComputedField
+
+    switch $type  {
+
+	name {
+	    array set FieldMapping {
+	    }
+	
+	    array set ComputedField {
+	    }
+	}
+
+	bi - BI {
+
+	    variable FIELD_SEPARATOR	","
+
+	    variable TeamFields  { Name  Profile ct:Password }
+	    variable GroupFields { Designation Acronym }
+
+	    array set FieldMapping {
+		BI			BI
+		Nome			Name
+		Sigla			Group
+		Curso			Designation
+	    }
+	    
+	    array set ComputedField {
+		Id		{ format "%d" $id }
+		Acronym		{ format "%s" $Value($id,Group) }
+		ct:Password	{ format "%d" $id }
+		Profile		{ subst team }
+	    }
+
+
+	}
+
+	id  - default {
+	    array set FieldMapping {
+		NCD			NCD
+		Nome			Name
+		Prática			Group
+
+	    }
+	    
+	    array set ComputedField {
+		Id		{ format "%09s" $id }
+		Designation	{ format "Turma %s" $Value($id,Group) }
+		Acronym		{ format "%s" $Value($id,Group) }
+		Authentication	{ subst "LDAP" }
+		LDAP		{ subst "alunos" }
+		Profile		{ subst team }
+	    }
+	}
+    }
+}
+
+## Generates a valid login from (team) name
+proc loginOfName {name} {
+
+    regsub -all  \  $name {_} name
+    regsub -all {[^\w\d_]} $name {} name
+
+    return $name
+}
+
+## Import CSV file: apply mapping and compute some fields (attributes)
+proc import {} {
+    global SKIP_HEADER_LINES
+    global SKIP_FOOTER_LINES
+    global RECORD_SEPARATOR
+    global FIELD_SEPARATOR
+    global ID_POSITION
+    global REMOVE_EMPTY_LINES
+    global NORMAL_FIELD_SEPS
+    global TRIM_FIELDS
+    global REMOVE_STRING_QUALIFIERS
+    global STRING_QUALIFIER
+    global REMOVE_EMPTY_FIELDS
+    global INVALID_CHARACTERS
+    global REMOVE_INVALID_CHARACTERS
+    global IGNORE_UNMAPPED_FIELDS
+    global DEFAULT_GROUP
+    global NULL_VALUE
+
+    global Groups 
+    global Teams
+    global Value
+    global FieldMapping 
+    global ComputedField
+
+    set Groups {}
+
+    set data   [ read stdin ]
+
+    if $REMOVE_INVALID_CHARACTERS {
+	regsub -all $INVALID_CHARACTERS $data {} data 
+    }
+
+    if $REMOVE_EMPTY_LINES {
+	regsub -all \n(\ |\t)*\n $data \n data
+    }
+    if $NORMAL_FIELD_SEPS {
+	regsub -all (\ |\t){2,}  $data $FIELD_SEPARATOR data	
+    }
+
+    set data   [ split $data $RECORD_SEPARATOR ]
+
+    set fields {}
+    foreach field [split [lindex $data $SKIP_HEADER_LINES] $FIELD_SEPARATOR ] {
+	if $REMOVE_STRING_QUALIFIERS {
+	    set field [ string trim $field $STRING_QUALIFIER ]
+	}
+
+	if $TRIM_FIELDS {
+	    set field [ string trim $field ]
+	}
+	if { [ string trim $field ] == "" } {
+	    if $REMOVE_EMPTY_FIELDS continue else {
+		error "Unexpected empty field"
+	    }	    
+	}
+	if [ info exists FieldMapping($field) ] {
+	    lappend fields $FieldMapping($field)
+	} elseif {  $IGNORE_UNMAPPED_FIELDS } {
+	    lappend fields -
+	} else {
+	    error [ format "Unmapped field '%s'" $field ]
+	}
+    }
+
+    set first	[ expr $SKIP_HEADER_LINES + 1 ]
+    set last	end-$SKIP_HEADER_LINES
+    #foreach line [ lsort -index end [ lrange $data $first $last ] ] {}
+    foreach line  [ lrange $data $first $last ] {
+
+	set line [ split [ string trim $line ] $FIELD_SEPARATOR ]
+
+	if { [ string trim $line ] == "" } continue
+
+	set id [ string trim [ lindex $line $ID_POSITION ] ]
+
+	# Regular fields
+	set i 0
+	foreach field $fields {
+	    set value [ lindex $line $i ]
+
+	    if $TRIM_FIELDS {
+		set value [ string trim $value ]
+	    }
+
+	    if $REMOVE_STRING_QUALIFIERS {
+		set value [ string trim $value $STRING_QUALIFIER ]
+	    }
+	    set Value($id,$field) $value
+	    incr i
+	}					     
+
+	# Group is a mandatory field
+	if { ! [ info exists Value($id,Group) ] } {
+	    set Value($id,Group) $DEFAULT_GROUP
+	}
+	if { [ lsearch $Groups $Value($id,Group) ] == -1 } {
+	    lappend Groups $Value($id,Group)
+	    set Teams($Value($id,Group)) {}
+	} 
+	lappend Teams($Value($id,Group)) $id
+
+	# Computed fields
+	foreach field [ array names ComputedField ] {
+	    set Value($id,$field) [ eval $ComputedField($field) ]
+	}
+	
+
+    }
+}
+
+## Export XML file using data colelcted on import
+proc export {} {
+    global CHARACTER_ENCODING
+
+    global Groups 
+    global Teams
+    global Value
+    global GroupFields
+    global TeamFields
+
+    if { [ lsearch $TeamFields ct:Password ] > -1 } {
+	set namespaces \
+	    {xmlns:ct="http://www.ncc.up.pt/mooshak/clear_text_password"}
+    } else {
+	set namespaces {}
+    }
+
+    puts [ format {<?xml version="1.0" encoding="%s" standalone="yes"?>} \
+	$CHARACTER_ENCODING ]
+    puts [ format {<Groups xmlns="http://www.ncc.up.pt/mooshak/" %s>} \
+	       $namespaces ]
+
+    foreach group  $Groups {
+	set team [ lindex $Teams($group) 0 ] ;# a representative team
+
+	set args  {} 
+	foreach field $GroupFields {
+	    append args [ format { %s="%s"} $field [get_value $team $field] ]
+	}
+	puts \t[ format {<Group xml:id="%s" %s>} $group $args ]
+
+
+	foreach team $Teams($group) {
+
+	    set args  {} 
+	    foreach field $TeamFields {
+		append args [ format { %s="%s"} $field [get_value $team $field]]
+	    }
+
+	    set id $Value($team,Id)
+	    puts \t\t[format {<Team xml:id="%s.%s"%s/>} $group $id $args]
+	}
+	puts \t[ format {</Group>} ]
+    }
+    puts [ format {</Groups>} ]
+}
+
+
+proc get_value {team field} {
+    global MISSING_FIELDS_AS_NULL 
+    global NULL_VALUE
+
+    global Value
+
+    if [ info exists Value($team,$field) ] {
+	set value $Value($team,$field)
+    } elseif $MISSING_FIELDS_AS_NULL {
+	set value $NULL_VALUE
+    } else {
+	error [ format "Missing field %s for team %s " $field $team ]
+    }
+    
+    return $value
+}
+
+select_mapping $argv ; import ; export 

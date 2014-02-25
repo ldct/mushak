@@ -1,0 +1,209 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+#
+#
+# Convert CSV file with IEEExtreme registration data 
+# to an XML file with groups of teams to be imported to Mooshak
+#
+#					José Paulo Leal
+#					zp@dcc.fc.up.pt
+# Usage:
+#           IEEExtreme2mooshak [ id | name ] < IEEExtreme.csv > Mooshak.xml
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+
+### ----- CVS file features -----
+set SKIP_HEADER_LINES	0	;# number of line to skip in header
+set SKIP_FOOTER_LINES	0 	;# number of line to skip in footer
+set RECORD_SEPARATOR	"\n"
+set FIELD_SEPARATOR	";"
+set ID_POSITION		0	;# Column position of field used as login
+set REMOVE_EMPTY_LINES  1	;# 1=remove ; 0=preserve
+set REMOVE_STRING_QUALIFIERS 1  ;# 1=remove ; 0=preserve (quotes in strings)
+set NORMAL_FIELD_SEPS	0	;# 1=normalize; 0 preserve
+
+### ----- XML file features -----
+set CHARACTER_ENCODING 	"UTF-8"	;# character encoding form XML file
+
+set GroupFields { Designation Acronym }
+
+set TeamFields { Name Email ct:Password Location Profile }
+
+## Mapping CSV fields to XML attributes
+## 	name 		- uses Team Name as login
+## 	id (default) 	- uses registration ID as login
+proc select_mapping {type} {
+    global FieldMapping
+    global ComputedField
+
+    array set FieldMapping {
+	BI			Id
+	Sigla			Group
+	Curso			Designation
+	"First name"		First
+	"Last name"		Last
+	"Team role"		Role
+	Email			Email
+	Country			Country
+	"Team name"		Team
+	"Institution name"	Group
+	Status			Status
+	Gender			Gender
+    }
+    
+    array set ComputedField {
+	Name		{ format "%s %s" $Value($id,"First") $Value($id,"Last") }  
+	Profile		{ subst team } 
+	Acronym		{ set Value($id,Group) }
+	Location	{ subst "" }
+    }
+    
+}
+
+	# ct:Password	{ set Value($id,Id) }
+
+
+#		Group		{ format "R%02s" $Value($id,Region) }
+#		Acronym		{ format "R%02s" $Value($id,Region) }
+#		Designation	{ format "Region %s" $Value($id,Region) }
+
+## Generates a valid login from (team) name
+proc loginOfName {name} {
+
+    regsub -all  \  $name {_} name
+    regsub -all {[^\w\d_]} $name {} name
+
+    return $name
+}
+
+## Import CSV file: apply mapping and compute some fields (attributes)
+proc import {} {
+    global SKIP_HEADER_LINES
+    global SKIP_FOOTER_LINES
+    global RECORD_SEPARATOR
+    global FIELD_SEPARATOR
+    global ID_POSITION
+    global REMOVE_EMPTY_LINES
+    global REMOVE_STRING_QUALIFIERS
+    global NORMAL_FIELD_SEPS
+
+    global Groups 
+    global Teams
+    global Value
+    global FieldMapping 
+    global ComputedField
+
+    set Groups {}
+
+    set data   [ read stdin ]
+
+    if $REMOVE_EMPTY_LINES {
+	regsub -all \n(\ |\t)*\n $data \n data
+    }
+    if $NORMAL_FIELD_SEPS {
+	regsub -all (\ |\t){2,}  $data $FIELD_SEPARATOR data	
+    }
+    
+    if { $REMOVE_STRING_QUALIFIERS } {
+	regsub -all {\"} $data {} data
+    }
+
+    set data   [ split $data $RECORD_SEPARATOR ]
+
+    set fields {}
+    foreach field [split [lindex $data $SKIP_HEADER_LINES] $FIELD_SEPARATOR ] {
+	if [ info exists FieldMapping($field) ] {
+	    lappend fields $FieldMapping($field)
+	} else {
+	    error [ format "Unmapped field %s" $field ]
+	}
+    }
+
+    set first	[ expr $SKIP_HEADER_LINES + 1 ]
+    set last	end-$SKIP_HEADER_LINES
+
+    if $REMOVE_EMPTY_LINES {
+	set clean {}
+	foreach line $data {
+	    if { ! [ string equal [ string trim $line ] "" ] } {
+		lappend clean $line
+	    }
+	}
+	set data $clean
+    }
+
+    ## 
+    foreach line [ lsort -index end [ lrange $data $first $last ] ] {
+	set line [ split [ string trim $line ] $FIELD_SEPARATOR ]
+	set id [ lindex $line $ID_POSITION ]
+
+	set i 0
+	foreach field $fields {
+	    set Value($id,$field) [ lindex $line $i ]
+	    incr i
+	}					     
+	foreach field [ array names ComputedField ] {
+	    set Value($id,$field) [ eval $ComputedField($field) ]
+	}
+	
+	if { [ info exists Value($id,Group) ] } {
+	    if { [ lsearch $Groups $Value($id,Group) ] == -1 } {
+		lappend Groups $Value($id,Group)
+		set Teams($Value($id,Group)) {}
+	    } 
+	    lappend Teams($Value($id,Group)) $id
+	}
+    }
+}
+
+## Export XML file using data colelcted on import
+proc export {} {
+    global CHARACTER_ENCODING
+
+    global Groups 
+    global Teams
+    global Value
+    global GroupFields
+    global TeamFields
+
+    if { [ lsearch $TeamFields ct:Password ] > -1 } {
+	set namespaces \
+	    {xmlns:ct="http://www.ncc.up.pt/mooshak/clear_text_password"}
+    } else {
+	set namespaces {}
+    }
+
+    puts [ format {<?xml version="1.0" encoding="%s" standalone="yes"?>} \
+	$CHARACTER_ENCODING ]
+    puts [ format {<Groups xmlns="http://www.ncc.up.pt/mooshak/" %s>} \
+	       $namespaces ]
+
+    foreach group  $Groups {
+	set team [ lindex $Teams($group) 0 ] ;# a representative team
+
+	set args  {} 
+	foreach field $GroupFields {
+	    append args [ format { %s="%s"} $field $Value($team,$field) ]
+	}
+	puts \t[ format {<Group xml:id="%s" %s>} $group $args ]
+
+
+	foreach team $Teams($group) {
+
+	    set args  {} 
+	    foreach field $TeamFields {
+		append args [ format { %s="%s"} $field $Value($team,$field) ]
+	    }
+
+	    set id $Value($team,Id)
+	    puts \t\t[format {<Team xml:id="%s.%s"%s/>} $group $id $args]
+	}
+	puts \t[ format {</Group>} ]
+    }
+    puts [ format {</Groups>} ]
+}
+
+
+select_mapping $argv ; import ; export 

@@ -1,0 +1,52 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+# This scripts invokes vbnc using sudo to ensure that it executed
+# with and an UID with an user home directory. 
+#
+# First of all this script assumes that VisualBasic of Mono (vbnc) 
+# is installed 
+#
+# Also, this script requires the following configuration in the sudoers file  
+#
+# ## Anyone can execute vbnc as anyone on any machine without 
+# ALL ALL = (ALL) NOPASSWD: /usr/bin/vbnc
+
+
+set VNC /usr/bin/vbnc
+
+set file [ lindex $argv 0 ]
+
+set users [ lrange $argv 1 end ]
+
+if { $users == {} } { 
+    set user zp
+} else {
+    set pos  [ expr int(rand() * [ llength $users ]) ]
+    set user [ lindex $users $pos ]
+}
+
+
+if { [ catch {
+   set output [ exec sudo -u $user -n $VNC -nologo $file ]
+} message ] } {
+    set output ""
+} else {
+
+    foreach pattern {
+	{Assembly '[^']*' saved successfully to '[^']*'.\n}
+	{Compilation successful\n}
+	{Compilation took \d{2}:\d{2}:\d{2}\.\d+}
+    } {
+	regsub $pattern $output {} output
+    }
+
+    set message ""
+}
+
+
+puts -nonewline $output
+puts -nonewline stderr $message

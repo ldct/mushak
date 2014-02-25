@@ -1,0 +1,15 @@
+package require tcltest
+namespace import tcltest::*
+
+source email.tcl
+
+test mime-1 {get mime type from file} { email::mime email.tcl } {text/plain} 
+
+foreach {mime ext} { 
+    application/x-compressed-tar .tgz
+    application/x-tar		 .tar
+    application/zip		 .zip
+    application/octect-stream	 {}
+} {
+  test extension_from_mime:$mime {} { email::extension_from_mime $mime } $ext
+}

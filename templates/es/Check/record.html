@@ -1,0 +1,32 @@
+<!part ext="head">
+<html>
+    <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link
+        rel ="stylesheet"
+        href    ="../../styles/$Conf(style).css"
+        type    ="text/css">
+    </head>
+    <body>
+
+    <h2>    <a href="$Conf(controller)?check">Listas de comprobaci&oacute;n</a> :
+        <href="$Conf(controller)?check+$clist">$Name</a> : $date $time  </h2>
+
+        <ul>
+<!/part ext="head">
+
+
+<!part ext="lin">
+            <li>Test $n: $error
+<!/part ext="lin">
+
+
+<!part ext="foot">
+        </ul>
+
+            <b>$i errores encontrados</b>
+
+    </body>
+</html>
+<!/part ext="foot">
+

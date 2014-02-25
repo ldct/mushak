@@ -1,0 +1,168 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<title>Import quiz from LaTeX file</title>
+<center>
+
+<H2>Import quiz from LaTeX file</H2>
+<form 
+	method	="post" 
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?operation+importing_latex+$dir">
+
+   File <input type="file" name="file"> 
+
+   <input type='submit' value='Import'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+
+Use LaTeX files formated with
+style <a href="../../styles/mooshakquiz.sty"><code>mooshakquiz.sty</code></a>. 
+The following example is a quiz with a single group where a
+single question is rondomly selected from a set of two questions with
+mathematical expressions and graphics. Make sure you import the
+graphics to <code>images</code> folder.
+
+
+<pre style="background: white;">
+
+\documentclass{article}
+\usepackage{mooshakquiz}
+
+\begin{document}
+\begin{quizgroup}{1}
+Function graph 
+  \begin{quizquestion} The graph of the function represented by the equation &dollar;2x +3y +3=0&dollar; is\\: 
+    \begin{quizchoice}{true} \includegraphics[width=3cm]{figure1a.jpg} \end{quizchoice}
+    \begin{quizchoice}{false} \includegraphics[width=3cm]{figure1b.jpg} \end{quizchoice}
+    \begin{quizchoice}{false} \includegraphics[width=3cm]{figure1c.jpg} \end{quizchoice}
+  \end{quizquestion}
+
+\begin{quizquestion} Which graph represents the graph of a function with domain &dollar;\mathbb{R}&dollar;?\\
+    \begin{quizchoice}{false} \includegraphics[width=3cm]{figure3a.jpg} \end{quizchoice}
+    \begin{quizchoice}{true} \includegraphics[width=3cm]{figure3b.jpg} \end{quizchoice}
+    \begin{quizchoice}{false} \includegraphics[width=3cm]{figure3c.jpg} \end{quizchoice}
+  \end{quizquestion}
+\end{quizgroup}
+\end{document}
+</pre>
+
+
+</td>
+</tr>
+
+
+</center>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

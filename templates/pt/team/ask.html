@@ -1,0 +1,90 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	title="Mooshak in color"
+	type="text/css">
+<script>
+  function check(f) {
+	if(f.subject.value == "" ) {
+		alert('No subject');
+			return false;
+	}
+	if(f.question.value == "" ) {
+		alert('No question');
+		return false;
+	}
+	return true;
+  }
+</script>
+</head>
+<body>
+<center>
+<form 
+	method="post" 
+	onSubmit="return check(this);" 
+	target="answer" 
+	action="$Conf(controller)?">
+
+	<input type="hidden" name="command" value="asked">
+	<input type="hidden" name="problem" value="$problem">
+	<input type="hidden" name="team" value="$team">
+
+
+	<table 
+		cellpadding	="20" 
+		cellspacing	="0" 
+		width		="100%"
+		 border="0">
+	<tr>
+		<td 
+			id	="Base" 
+			rowspan	="2" 
+			align	="left">
+				Antes de submeter verifique se a sua questão
+			<ul>
+				<li>já foi respondida</li>
+				<li>está formulada claramente</li>
+			</ul>
+		</td>
+
+		<td 
+			id	="Base" 
+			rowspan	="2" 
+			align	="right">
+			<b>Assunto:</b>
+			<input 
+				type	="text" 
+				name	="subject" 
+				size	="45" 
+				maxsize	="60"><br>
+			<textarea 
+				name	="question" 
+				cols	="70" 
+				rows	="10">
+			</textarea>
+		</td>
+		<th 	id="Base">
+			<input 
+				class	="Button"
+				type	="submit" 
+				name	="asked"	
+				value	="Submeter"><br>
+			</th>
+	</tr>
+	<tr>
+		<th	id="Base">
+			<input 
+				class	="Button" 
+				type	="reset" 
+				value	="Limpar"><br>
+		</th>
+	</tr>
+</table>
+</form
+</center>
+</body>
+</html>
+

@@ -1,0 +1,329 @@
+<!part ext="head">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Mooshak: Herramientas</title>
+   <link
+    rel ="stylesheet"
+    href    ="../../styles/$Conf(style).css"
+    type    ="text/css">
+
+    <script language="JavaScript">
+
+function just_those_selected(form,button) {
+
+    button.checked=false;
+    form.submit();
+}
+
+function all_items(form,select) {
+    for(var i=0; i < select.options.length; i++)
+        select.options[i].selected=false;
+    form.submit();
+}
+
+    </script>
+</head>
+<html>
+<body
+    onLoad="document.control.submit();"
+    link="black"
+    vlink="black">
+
+
+    <table
+        width   ="100%"
+        cellpadding="5"
+        cellspacing="0"
+        border="0">
+<!/part ext="head">
+
+<!part ext="admin">
+        <tr style="height: 10px;">
+            <th>&nbsp</th>
+            <th id="Data" width="40%">
+                <a href="$Conf(controller)?data">$admin</a>
+            </th>
+            <th>&nbsp</th>
+            <th id="Judge" width="40%">$judge</th>
+            <th>&nbsp</th>
+            </tr>
+
+        <tr>
+            <td     id  ="Judge"
+                colspan ="3" >
+                $help_button
+            </td>
+            <td     id  ="Judge"
+                align   ="right">
+                <font size="-1">
+                <a  target="bottom"
+                    href="$Conf(controller)?warn">[$warning]</a>
+                </font>
+            </td>
+            <td     id  ="Judge">&nbsp;</td>
+        </tr>
+
+<!/part ext="admin">
+
+<!part ext="team">
+        <tr>
+            <td colspan="1" id="Judge">
+                $help_button
+            </td>
+            <th colspan="2" id="Judge">Equipo: $Conf(user)</th>
+        </tr>
+<!/part ext="team">
+
+
+<!part ext="judge">
+        <tr>
+            <td colspan="1" id="Judge">
+                $help_button
+            </td>
+            <th colspan="2" id="Judge">Juez: $Conf(user) en
+                <form   name    ="contest"
+                    method  ="post"
+                    target  ="_top"
+                    action  ="$Conf(controller)">
+                    $contests
+                </form>
+            </th>
+        </tr>
+<!/part ext="judge">
+
+<!part ext="runner">
+        <tr>
+            <td colspan="1" id="Judge">
+                $help_button
+            </td>
+            <th colspan="2" id="Judge">Usuario: $Conf(user)</th>
+        </tr>
+<!/part ext="runner">
+
+<!part ext="guest">
+        <tr>
+            <td colspan="1" id="Judge">
+                $help_button
+            </td>
+
+            <th colspan="2" id="Judge">
+                <form   name    ="contest"
+                    method  ="post"
+                    target  ="_top"
+                    action  ="$Conf(controller)">
+                    Invitado en $contests
+                </form>
+            </th>
+        </tr>
+<!/part ext="guest">
+
+<!part ext="view">
+        <tr>
+            <td     id="Judge"
+                colspan="5"
+                valign="top"
+                height="480">
+<form
+    name    ="control"
+    method  ="POST"
+    target  ="work"
+    action  ="$Conf(controller)?split" >
+
+        <input  type    ="hidden"
+            name    ="command"
+            value   ="listing">
+
+        <input  type    ="hidden"
+            name    ="page"
+            value   ="0">
+
+            <center>
+            <table
+                cellpadding ="2"
+                cellspacing ="0"
+                border="0">
+
+
+            <tr>
+                <td id="Base" colspan="3">
+                    <b>$view:</d>
+                </td>
+            </tr>
+<!/part ext="view">
+
+<!part ext="listing">
+            <tr>
+                <td id="Base">&nbsp;</td>
+                <td id="Base">
+                    <input  $checked
+                        type="radio"
+                        name="type"
+                        value="$tool"
+                        onClick="this.form.submit();">
+                </td>
+                <td id="Base" colspan="1">$label</td>
+        </tr>
+<!/part ext="listing">
+
+<!part ext="rest">
+
+        <tr>
+            <td colspan="3">
+                <font size="-2">&nbsp;</font>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" id="Base">
+                <b>$problems_:</b>
+                 &nbsp;  &nbsp;
+                 <b>$teams_:</b>
+            </td>
+        </tr>
+        <tr>
+            <td id="Base">
+                <font size="-1">
+                    <input checked
+                        type    ="checkbox"
+                        name    ="all_problems"
+                        onClick ="all_items(
+                          this.form,
+                          this.form.problems);">
+                    Todo
+                </font>
+            </td>
+
+            <td
+                id  ="Base"
+                 colspan="2">
+                <font size="-1">
+                    <input  checked
+                        type    ="checkbox"
+                        name    ="all_teams"
+                        onClick ="all_items(
+                          this.form,
+                          this.form.teams);">
+                    Todo
+                    <input  $grouped_checked
+                        type    ="checkbox"
+                        name    ="grouped"
+                        onClick ="window.open('$Conf(controller)?vtools+$grouped_toggle','select');">
+                    Grupos
+                </font>
+            </td>
+
+
+        </tr>
+        <tr>
+            <td     id  ="Base"
+                valign  ="top"
+                colspan ="1">
+                <font size="-1">
+                    <select multiple
+                        name    ="problems"
+                        size    ="9"
+                        onChange="just_those_selected(
+                          this.form,
+                          this.form.all_problems);">
+                        $problems
+                    </select>
+                </font>
+            </td>
+
+            <td     id  ="Base"
+                valign  ="top"
+                colspan ="2">
+                <font size="-1">
+                    <select multiple
+                        name    ="teams"
+                        size    ="9"
+                        onChange="just_those_selected(
+                          this.form,
+                          this.form.all_teams);">
+                    $teams
+                    </select>
+                </font>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <font size="-2">&nbsp;</font>
+            </td>
+        </tr>
+
+        <tr>
+            <td id="Base" colspan="3"><b>$update:</b></td>
+        </tr>
+        <tr>
+            <td id="Base">&nbsp;</td>
+            <td id="Base"colspan="2">$_every
+            $time $_minutes<br>
+            $_with $lines $_lines
+            </td>
+
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="4" align="right">
+                <a target="_top" href="$Conf(controller)?logout">
+                    <font size="-1">[$logout]</font>
+                </a>
+            </td>
+        </tr>
+    </table>
+</center>
+</form>
+<!/part ext="rest">
+
+<!part ext="inactive_admin">
+
+<h4>Ning&uacute;n concurso seleccionado</h4>
+<div align="left">
+Puedes elegir entre:
+<ul>
+<li>Seleccionar primero un concurso (solapa <a href="$Conf(controller)?data">Admin</a>);</li>
+<li> <a href="$Conf(controller)?login" target="_top">Entrar</a> con una cuenta de juez en el concurso que quieras manejar.</li>
+</div>
+<p>
+<!/part ext="inactive_admin">
+
+
+<!part ext="inactive_judge">
+
+<h4>Ning&uacute;n concurso seleccionado</h4>
+<div align="left">
+
+Por favor, seleccione el concurso en el
+<a target="_top" href="$Conf(controller)?login"><b>formulario de login</b></a>.
+
+</div>
+
+<script>
+document.control.action='$Conf(controller)';
+</script>
+
+<p>
+<!/part ext="inactive_judge">
+
+
+<!part ext="inactive_guest">
+
+<h4>Ning&uacute;n concurso seleccionado</h4>
+<div align="left">
+
+
+
+</div>
+<p>
+<!/part ext="inactive_guest">
+
+
+<!part ext="foot">
+</td></tr>
+</table>
+
+</body>
+<html>
+<!part ext="foot">
+

@@ -1,0 +1,3 @@
+set         Name Pakistan
+set     ISO_code pk
+set        Image pk.png

@@ -1,0 +1,180 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link
+        rel ="stylesheet"
+        href    ="../../styles/$Conf(style).css"
+        type    ="text/css">
+    <script>
+function validate(f) {
+  var i;
+  if(isNaN(i=parseInt(f.Mark.value)) || i!=f.Mark.value)
+    {
+      alert(f.Mark.value+" no es un entero");
+      f.Mark.select();
+      f.Mark.focus();
+      return false;
+    } else {
+      f.Mark.value=i;
+    }
+    return true;
+}
+    </script>
+</head>
+<body onload="window.open('$page','$window');">
+    <form
+        method  ="post"
+        action  ="$Conf(controller)?sms+submissions+$sub+modify+$n"
+        onSubmit="return validate(this);">
+
+        <table
+            id  ="Base"
+            width   ="100%"
+            border  ="0"
+            cellpadding="6"
+            cellspacing="0">
+            <tr>
+                <th>S$n</th>
+                <td>$result</td>
+                <td>
+                    <input
+                        type    ="$type"
+                        name    ="Mark"
+                        value   ="$Mark"
+                        size    ="4">
+                </td>
+                <td>$state</td>
+                <td>
+                    <input
+                        type    ="submit"
+                        name    ="todo"
+                        value   ="Enviar">
+                </td>
+                <td id="BaseForte">Informe $report</td>
+                <td id="BaseForte">
+                    <input
+                        type    ="submit"
+                        name    ="todo"
+                        value   ="Reevaluar">
+                </td>
+
+                <td>
+                    <a
+                        target  ="_blanc"
+                        href    ="../help?interfaces/judge/validate">
+                        <img
+                            border  ="0"
+                            src ="../../icons/unknown.png">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

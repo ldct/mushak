@@ -1,0 +1,400 @@
+<!--                                            -->
+<!-- Preamble common to all listings                -->
+<!--                                            -->
+<!part ext="pre">
+<pre>
+<!/part ext="pre">
+
+<!--                                            -->
+<!-- Submissions (sub): head  lin mine root         --> 
+<!--                                            -->
+<!part ext="sub:head">
+#\tTime\tTeam\tProblem\tLanguage\tResult\tState\n
+<!/part ext="sub:head">
+
+<!part ext="sub:lin">
+$n\t$hour\t$group_acronym $team_name\t$problem_name\t$Language\t$Classify\t$State\n
+<!/part ext="sub:lin">
+
+<!-- This is my submission and I can download it-->
+<!part ext="sub:mine">
+$n\t$hour\t$group_acronym $team_name\t$problem_name\t$Language\t$Classify\t$State\n
+<!/part ext="sub:mine">
+
+
+<!part ext="sub:root">
+$n\t$hour\t$group_acronym $team_name\t$problem_name\t$Language\t$Classify\t$State\n
+<!/part ext="sub:root">
+
+<!--                                                  -->
+<!-- ranking (ran) : head  head_problem end_problem team_problem end_team -->
+<!--                                                  -->
+
+<!part ext="ran:head">
+#\tId\tGroup\tName  
+<!/part ext="ran:head">
+
+<!part ext="ran:head_problem">
+\t$problem_name 
+<!/part ext="ran:head_problem">
+
+<!part ext="ran:end_head">
+\tSolved\tPoints\n
+<!/part ext="ran:end_head">
+
+<!part ext="ran:team">
+$n\t$team\t$group_acronym\t$team_name
+<!/part ext="ran:team">
+
+<!part ext="ran:team_problem">
+\t$status
+<!/part ext="ran:team_problem">
+
+<!part ext="ran:end_team">
+\t$problems_total\t$total_time\n        
+<!/part ext="ran:end_team">
+
+<!--                                                 -->
+<!-- questions (que) : head lin root normal_warning root_warning     -->
+<!--                                                 -->
+
+<!part ext="que:head">
+
+    <th align="left">#</th>
+    <th align="left">
+    <form action="$Conf(controller)" style="margin: 0;">
+    <input type="hidden" name="command" value="listing">
+    $time_selector
+    </form>
+    </th>
+    <th align="left">Pa&iacute;s</th>
+    <th align="left">Equipo</th>
+    <th align="left">Problema</th>
+    <th align="left" colspan="2">Asunto</th>
+    <th align="left">Estado</th>
+    <td align="right">$help_button</a></td>
+
+<!/part ext="que:head">
+
+<!part ext="que:lin">
+
+    <td>$n</td>
+    <td>$hour</td>
+    <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+    <td><font color="$group_color">$group_acronym $team_name</font></td>
+    <td><font color="$problem_color">$problem_name</font></td>
+    <td colspan="2"><font size="-1">$subject</font></td>
+    <td colspan="2">$state</td>
+
+<!/part ext="que:lin">
+
+
+<!part ext="que:lin_enf">
+
+    <td><b>$n</b></td>
+    <td><b>$hour</b></td>
+    <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+    <td><b><font color="$group_color">$group_acronym $team_name</font></b></td>
+    <td><b><font color="$problem_color">$problem_name</font></b></td>
+    <td colspan="2"><b><font size="-1">$subject</font></b></td>
+    <td colspan="2"><b>$state</b></td>
+
+<!/part ext="que:lin_enf">
+
+
+<!part ext="que:root">
+
+    <td><a target="bottom" href="$Conf(controller)?sms+questions+$sub+answering+$n">Q$n</a></td>
+    <td>$hour</td>
+    <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+    <td><font color="$group_color">$group_acronym $team_name</font></td>
+    <td><a target="bottom" href="$Conf(controller)?description+$Problem"><font color="$problem_color">$problem_name</font></td></td>
+    <td colspan="2"><font size="-1">$subject</font></td>
+    <td colspan="2">$state</td>
+
+<!/part ext="que:root">
+
+
+<!part ext="que:normal_warning">
+
+    <td>$n</td>
+    <td>$hour</td>
+    <th colspan="2">
+    <font color="red">Juez</b>
+    </td>
+    <td><font color="$problem_color">$problem_name</font></td>
+    <th colspan="2"><font size="-1" color="red">$subject </font></th>
+    <td colspan="2">$state</td>
+
+<!/part ext="que:normal_warning">
+
+<!part ext="que:root_warning">
+
+    <td><a target="bottom" href="$Conf(controller)?sms+questions+$sub+answering+$n">Q$n</a></td>
+    <td>$hour</td>
+    <th colspan="2">
+    <font color="red">Juez</b>
+    </td>
+    <td><a target="bottom" href="$Conf(controller)?description+$Problem"><font color="$problem_color">$problem_name</font></td></td>
+    <th colspan="2"><font size="-1" color="red">$subject </font></th>
+    <td colspan="2">$state</td>
+
+<!/part ext="que:root_warning">
+
+
+<!--                                                 -->
+<!-- printouts (pri) : head lin root                     -->
+<!--                                                 -->
+
+<!part ext="pri:head">
+
+    <th align="left">#</th>
+    <th align="left">
+    <form action="$Conf(controller)" style="margin: 0;">
+    <input type="hidden" name="command" value="listing">
+    $time_selector
+    </form>
+    </th>
+    <th align="left">Pa&iacute;s</th>
+    <th align="left">Equipo</th>
+    <th align="left">Problema</th>
+    <th colspan="3"align="left">Estado</th>
+    <td align="right">$help_button</td>
+
+<!/part ext="pri:head">
+
+<!part ext="pri:lin">
+
+    <td>$n</td>
+    <td>$hour</td>
+    <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+    <td><font color="$group_color">$group_acronym $team_name</font></td>
+    <td><font color="$problem_color">$problem_name</font></td>
+    <td colspan="4">$state</td>
+
+<!/part ext="pri:lin">
+
+<!part ext="pri:root">
+
+    <td><a target="bottom" href="$Conf(controller)?split+sms+printouts+$sub+deliver+$n">P$n</a></td>
+    <td>$hour</td>
+    <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+    <td><font color="$group_color">$group_acronym $team_name</font></td>
+    <td><font color="$problem_color">$problem_name</font></td>
+    <td  colspan="2">&nbsp;</td>
+    <td colspan="4">$state</td>
+
+<!/part ext="pri:root">
+
+<!--                                                 -->
+<!-- balloons (bal) : head lin root                      -->
+<!--                                                 -->
+
+<!part ext="bal:head">
+    
+        <th align="left">#</th>
+        <th align="left">
+            <form action="$Conf(controller)" style="margin: 0;">
+            <input type="hidden" name="command" value="listing">
+            $time_selector
+            </form>
+        </th>
+        <th align="left">Pa&iacute;s</th>
+        <th align="left">Equipo</th>
+        <th align="left">Problema</th>
+        <th colspan="3"align="left">Estado</th>
+        <td align="right">$help_button</td>
+    
+<!/part ext="bal:head">
+
+<!part ext="bal:lin">
+    
+        <td>$n</td>
+        <td>$hour</td>
+        <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+        <td><font color="$group_color">$group_acronym $team_name</font></td>
+        <td><font color="$problem_color">$problem_name</font></td>
+        <td colspan="4">$state</td>
+    
+<!/part ext="bal:lin">
+
+<!-- listing line for previledge users (admin and judge) -->
+<!part ext="bal:root">
+    
+        <td><a target="bottom" href="$Conf(controller)?split+sms+balloons+$sub+deliver+$n">B$n</a></td>
+        <td>$hour</td>
+        <td><img src="../../icons/flags/f0-$group_flag.png"></td>
+        <td><font color="$group_color">$group_acronym $team_name</font></td>
+        <td><font color="$problem_color">$problem_name</font></td>
+        <td  colspan="2">&nbsp;</td>
+        <td colspan="4">$state</td>
+    
+<!/part ext="bal:root">
+
+<!--                                                 -->
+<!-- pending (pen) : head   (uses others defined above)      -->
+<!--                                                 -->
+
+
+<!part ext="pen:head">
+    
+        <th align="left">#</th>
+        <th align="left">
+            <form action="$Conf(controller)" style="margin: 0;">
+            <input type="hidden" name="command" value="listing">
+            $time_selector
+            </form>
+        </th>
+        <th align="left">Pa&iacute;s</th>
+        <th align="left">Equipo</th>
+        <th align="left">Problema</th>
+        <th colspan="3"align="left">Estado</th>
+        <td align="right">$help_button</td>
+    
+<!/part ext="pen:head">
+
+
+<!--                                            -->
+<!-- statistics (sta): head head_problem end_cab result     -->
+<!--                   result_problem empty percent end_result  -->
+<!--                                            -->
+
+<!part ext="sta:head">
+    
+        <th rowspan="2" width="11%">Resultado</th>
+        <th colspan="$nprob">Problemas</th>
+        <th rowspan="2" width="11%">Total</th>
+        <td width="10" align="right" rowspan="2">$help_button</td>
+    
+    
+<!/part ext="sta:head">
+
+<!part ext="sta:head_problem">
+        <th width="10%"><font color="$problem_color">$problem_name</font></th>
+<!/part ext="sta:head_problem">
+
+<!part ext="sta:end_cab">
+    
+<!/part ext="sta:end_cab">
+
+<!part ext="sta:result">
+    
+        <th 
+            bgcolor ="lightgrey" 
+            rowspan ="2">
+                <font 
+                    size="-1"
+                    color="$res_color">$result</font>
+        </th>
+<!/part ext="sta:result">
+
+<!part ext="sta:result_problem">
+        <td align="center">
+<!/part ext="sta:result_problem">
+
+<!part ext="sta:value">
+                $value
+<!/part ext="sta:value">
+
+<!part ext="sta:empty">
+                &nbsp;
+<!/part ext="sta:empty">
+
+<!part ext="sta:end_problem">
+        </td>
+<!/part ext="sta:end_problem">
+
+<!part ext="sta:percent">
+    
+<!/part ext="sta:percent">
+
+<!part ext="sta:end_result">
+        <th colspan="2">$total</th>
+    
+<!/part ext="sta:end_result">
+
+<!--                                                -->
+<!-- evolution (evo): head head_problem end_head            -->
+<!--                  line line_problem value empty end_problem end_line-->
+<!--                                                -->
+
+<!part ext="evo:head">
+
+    <th rowspan="2" width="11%">
+    <form action="$Conf(controller)" style="margin: 0;">Time
+    <input type="hidden" name="command" value="listing">
+    $interval_selector
+    </form>
+    </th>
+    <th colspan="$nprob">Problemas
+    <font size="-1">
+    Aceptados: <img src="../../icons/green.png"  height="$Stretch">
+    Rechazados: <img src="../../icons/red.png"  height="$Stretch">
+    Preguntas: <img src="../../icons/blue.png"  height="$Stretch">
+    </font>
+    </th>
+
+
+<!/part ext="evo:head">
+
+<!part ext="evo:head_problem">
+<th width="10%"><font color="$problem_color">$problem_name</font></th>
+<!/part ext="evo:head_problem">
+
+<!part ext="evo:end_head">
+
+<!/part ext="evo:end_head">
+
+<!part ext="evo:line">
+
+    <th>$time</th>
+<!/part ext="evo:line">
+
+<!part ext="evo:line_problem">
+<td align="center" valign="center">
+<table border="1" width="100%" cellspacing="0" cellpadding="0"><td>
+<!/part ext="evo:line_problem">
+
+<!part ext="evo:value">
+    <font size="-2">
+    $value<img src="../../icons/$color.png" width="$stretch"  height="$Stretch">
+    </font>
+<!/part ext="evo:value">
+
+<!part ext="evo:empty">
+    &nbsp;
+<!/part ext="evo:empty">
+
+<!part ext="evo:end_problem">
+</td></table>
+</td>
+<!/part ext="evo:end_problem">
+
+<!part ext="evo:end_line">
+
+<!/part ext="evo:end_line">
+
+
+<!--                                            -->
+<!-- Footer: common to all listings                 -->
+<!--                                            -->
+
+<!part ext="empty">
+<!/part ext="empty">
+
+<!part ext="mid">
+<!/part ext="mid">
+
+<!part ext="back_button">
+<!/part ext="back_button">
+
+<!part ext="page_number">
+<!/part ext="page_number">
+
+<!part ext="forward_button">
+<!/part ext="forward_button">
+
+<!part ext="no_button">
+
+<!part ext="foot">
+</pre>

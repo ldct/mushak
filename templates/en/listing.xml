@@ -1,0 +1,224 @@
+<!--                          					-->
+<!-- Preamble common to all listings 				-->
+<!--                          					-->
+
+<!part ext="pre">
+<?xml version="1.0" encoding="UTF-8"?>
+<mooshaklisting>
+
+<!/part ext="pre">
+
+<!--                          					-->
+<!-- Submissions (sub): head  lin mine root			--> 
+<!--                          					-->
+
+<!part ext="sub:head">
+
+<listing type="submission">
+
+<!/part ext="sub:head">
+
+<!part ext="sub:lin">
+
+<line n="$n" hour="$hour" group_acronym="$group_acronym"
+team_name="$team_name" problem_name="$problem_name" language="$Language"
+classify="$Classify" state="$State" />
+
+<!/part ext="sub:lin">
+
+<!-- This is my submission and I can download it-->
+<!part ext="sub:mine">
+
+<mine n="$n" hour="$hour" group_acronym="$group_acronym"
+team_name="$team_name" problem_name="$problem_name" language="$Language"
+classify="$Classify" state="$State" />
+
+<!/part ext="sub:mine">
+
+<!part ext="sub:root">
+<root n="$n" hour="$hour" group_acronym="$group_acronym"
+team_name="$team_name" problem_name="$problem_name" language="$Language"
+classify="$Classify" state="$State" />
+<!/part ext="sub:root">
+
+<!--                          						  -->
+<!-- ranking (ran) : head_problem end_problem team_problem end_team -->
+<!--                          						  -->
+
+<!part ext="ran:head">
+<listing type="ranking">
+
+<!/part ext="ran:head">
+
+
+
+<!part ext="ran:head_problem">
+
+	<problem color="$problem_color" name="$problem_name"/>
+
+<!/part ext="ran:head_problem">
+
+
+
+<!part ext="ran:end_head">
+
+<!/part ext="ran:end_head">
+
+
+<!part ext="ran:team">
+
+<line n="$n" group_acronym="$group_acronym" team_name="$team_name"
+
+<!/part ext="ran:team">
+
+<!part ext="ran:team_problem">
+status="$status"
+<!/part ext="ran:team_problem">
+
+<!part ext="ran:end_team">
+problems_total="$problems_total" total_time="$total_time" />		
+<!/part ext="ran:end_team">
+
+<!--                          						 -->
+<!-- questions (que) : head lin root normal_warning root_warning	 -->
+<!--                          						 -->
+
+<!part ext="que:head">
+<listing type="question">
+<!/part ext="que:head">
+
+
+<!part ext="que:lin">
+<line n="$n" hour="$hour" group_acronym="$group_acronym"
+team_name="$team_name" problem_name="$problem_name" subject="$subject"
+state="$state" />
+<!/part ext="que:lin">
+
+<!part ext="que:lin_enf">
+<!/part ext="que:lin_enf">
+
+<!part ext="que:root">
+<line n="$n" hour="$hour" group_acronym="$group_acronym"
+team_name="$team_name" problem_name="$problem_name" subject="$subject"
+state="$state" />
+<!/part ext="que:root">
+
+
+<!part ext="que:normal_warning">
+<line n="$n" hour="$hour" group_acronym="$group_acronym"
+team_name="$team_name" problem_name="$problem_name" subject="$subject"
+state="$state" />
+<!/part ext="que:normal_warning">
+
+<!part ext="que:root_warning">
+<!/part ext="que:root_warning">
+
+
+<!--                          						 -->
+<!-- printouts (pri) : head lin root 					 -->
+<!--                          						 -->
+
+<!part ext="pri:head">
+<listing type="printout">
+<!/part ext="pri:head">
+
+<!part ext="pri:lin">
+<line n="$n" hour="$hour" group_acronym="$group_acronym"
+$team_name="$team_name" problem_name="$problem_name" state="$state" />
+<!/part ext="pri:lin">
+
+<!part ext="pri:root">
+<!/part ext="pri:root">
+
+<!--                          						 -->
+<!-- balloons (bal) : head lin root 					 -->
+<!--                          						 -->
+
+<!part ext="bal:head">
+<listing type="balloon">
+<!/part ext="bal:head">
+
+<!part ext="bal:lin">
+<line n="$n" hour="$hour" group_acronym="$group_acronym"
+$team_name="$team_name" problem_name="$problem_name" state="$state" />
+<!/part ext="bal:lin">
+
+<!part ext="bal:root">
+<!/part ext="bal:root">
+
+<!--                          						 -->
+<!-- pending (pen) : head 	(uses others defined above)		 -->
+<!--                          						 -->
+
+
+<!part ext="pen:head">
+<listing type="pending"> 
+<!/part ext="pen:head">
+
+<!--                          					-->
+<!-- statistics (sta): head head_problem end_cab result 	-->
+<!--                   result_problem empty percent end_result	-->
+<!--                          					-->
+
+
+<!part ext="sta:head_problem">
+<listing type="statistics" problem_name="$problem_name">
+<!/part ext="sta:head_problem">
+
+<!part ext="sta:result">
+<line result="$result" 	
+<!/part ext="sta:result">
+
+<!part ext="sta:value">
+value="$value"
+<!/part ext="sta:value">
+
+<!part ext="sta:end_result">
+total="$total" />
+<!/part ext="sta:end_result">
+
+<!--                          						-->
+<!-- evolution (evo): head head_problem end_head  			-->
+<!--                  line line_problem value empty end_problem end_line-->
+<!--                          						-->
+
+
+
+<!part ext="evo:head_problem">
+<listing type="evolution" problem_name="$problem_name">
+<!/part ext="evo:head_problem">
+
+<!part ext="evo:line">
+<line time="$time" 
+<!/part ext="evo:line">
+
+<!part ext="evo:value">
+value="$value" />
+<!/part ext="evo:value">
+
+<!--                          					-->
+<!-- Footer: common to all listings 				-->
+<!--                          					-->
+
+<!part ext="empty">
+<!/part ext="empty">
+
+<!part ext="mid">
+<!/part ext="mid">
+
+<!part ext="back_button">
+<!/part ext="back_button">
+
+<!part ext="page_number">
+<!/part ext="page_number">
+
+<!part ext="forward_button">
+<!/part ext="forward_button">
+
+<!part ext="no_button">
+
+<!part ext="foot">
+	</listing>
+</mooshaklisting>
+
+

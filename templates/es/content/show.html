@@ -1,0 +1,311 @@
+<!part ext="frameset">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Mooshak</title>
+
+    <frameset rows="10%,*,20%" border="0" frameborder="no">
+
+        <frame src="$Conf(controller)?content+$dir+header+$update" name="content_header">
+        <frame src="$Conf(controller)?content+$dir+data"     name="content_data">
+        <frame src="$Conf(controller)?content+$dir+footer" name="content_footer">
+    </frameset>
+</head>
+</html>
+<!/part ext="frameset">
+
+<!part ext="redirect">
+<META HTTP-EQUIV="Refresh" CONTENT="0; URL=$redirect">
+</!part ext="redirect">
+<!part ext="head">
+<html>
+<head>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+   <script language="JavaScript" type="text/javascript"><!--
+
+   function execute(menu) {
+    for(var i=0; i < menu.options.length; i++)
+       with(menu.options[i])
+        if(selected) {
+           if(value=="save")
+             with(window.parent.frames["content_data"]) {
+                     changed=false;
+                 if(check_form(document.forms[0]))
+                         document.forms[0].submit();
+                 }
+           else if(value=="revert")
+             with(window.parent.frames["content_data"]) {
+                  if(changed==true && confirm("Perder cambios?")) {
+                     changed=false;
+                 document.forms[0].reset();
+                }
+           }
+               else if(text.lastIndexOf("...")+3==text.length)
+                  window.open(value,'_blanc',
+                          'width=700,height=500,scrollbars=yes');
+           else
+                  window.open(value,'work');
+           menu.options[i].selected=false;
+                }
+        menu.options[0].selected=true;
+   }
+
+//--></script>
+</head>
+<body onLoad="$on_load">
+<div class="Menubar">
+$menu_bar
+</div>
+</body>
+</html>
+
+<!part ext="top">
+<html>
+<head>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+   <script language="JavaScript">
+   changed=false;
+
+   function change() {
+      var value
+      if(arguments.length==0)
+         value=true;
+      else
+         value=arguments[0];
+      changed=value;
+      window.parent.frames["content_footer"].document.forms[0].changebox.checked=value;
+   }
+
+   function check_changed() {
+      if(changed && confirm("Guardar cambios?"))
+         if(check_form(document.forms[0]))
+              document.forms[0].submit();
+   }
+
+   password=new Array();
+   function check_form(f) {
+     for(p in password) {
+       if(f[p].value != f["_"+p].value) {
+          alert("Las claves no coinciden");
+      return false;
+       }
+     }
+     return true;
+   }
+
+   </script>
+</head>
+<body onUnload="check_changed();">
+
+<form
+    method  ="post"
+    enctype ="multipart/form-data"
+    target  ="work"
+    onSubmit="return check_form(this);"
+    action  ="$Conf(controller)?content+$edir">
+<!-- onSubmit is not working when submit() invoked by a JS function -->
+<p>
+
+<table border="0" wisth="100%" cellspacing="5">
+
+
+<!part ext="choice">
+<tr>
+    <th align="right">
+
+    $var <select name="$var" onChange="this.form.submit();">
+    $options($var)
+    </select></th>
+    <td>
+    <table border="1">
+    $choice
+    </table>
+    </td>
+</tr>
+
+
+<!part ext="status">
+<tr>
+    <th align="right"> $text</th>
+    <th colspan="4">$value</th>
+</tr>
+<!/part ext="status">
+
+<!part ext="fatal">
+<tr>
+    <th align="right" valign="top"> $text</th>
+    <td colspan="4"><font color="red">$value</font></td>
+</tr>
+<!/part ext="fatal">
+
+<!part ext="warning">
+<tr>
+    <th align="right" valign="top"> $text</th>
+    <td colspan="4"><i>$value</i></td>
+</tr>
+<!/part ext="warning">
+
+<!part ext="text">
+<tr>
+    <th align="right"> $text</th>
+    <td colspan=4>
+        <input type="text" name="$var"  value="$value"  size="30"
+        onChange="change();" title="$tip">
+    </td><td>$help</td>
+</tr>
+<!part ext="long-text">
+<tr>
+    <th align="right"> $text</th>
+    <td colspan=4>
+        <textarea name="$var" rows="10" cols="40" title="$tip"
+            onChange="change();">$value</textarea>
+    </td><td>$help</td>
+</tr>
+
+<!part ext="password">
+<tr>
+    <th align="right"> $text</th>
+    <td colspan="4">
+        <input type="password" name="$var" value="" size="14"
+        onChange="password['$var']=null; change();" title="$tip">
+
+        <input type="password" name="_$var" value="" size="14"
+        onChange="password['$var']=null; change();" title="$tip">
+        <font size="-1">reescribir clave</font>
+    </td><td>$help</td>
+</tr>
+<!/part ext="password">
+
+<!part ext="hidden">
+<!/part ext="hidden">
+<!part ext="date">
+<tr>
+    <th align="right"> $text</th>
+    <td colspan=4>
+        <input type="text" name="$var"  value="$value"  size="15"
+            onChange="change();" title="$tip">
+        <input type="button" value="ahora"   onClick="this.form.$var.value='now'; change();">
+        <input type="button" value="nunca" onClick="this.form.$var.value='';    change();">
+    </td>
+</tr>
+<!part ext="fx">
+<tr>
+    <th align="right"><a target="select" href="$Conf(controller)?data+$dir/$value">$text</a></th>
+    <td colspan=4>
+        <code><input type="file" name="$var"
+            onChange="change();" title="$tip">
+        <a href="$Conf(controller)?edit+$dir/$value" target="work"><img alt="Edit" src="../../icons/note05.gif"border="0"></a>
+    </td><td>$help</td>
+</tr>
+<!part ext="menu">
+<tr>
+    <th align="right">$text</th><td colspan=4>
+    <select name="$var" onChange="change();" title="$tip">
+    $options($var)
+    </select>
+    $help</td>
+</tr>
+
+<!part ext="list">
+<tr>
+    <th align="right">$text</th><td colspan=4>
+    <select name="$var" multiple size="10" onChange="change();" title="$tip">
+    $options($var)
+    </select>
+    $help</td>
+</tr>
+
+<!part ext="ref">
+<tr>
+    <th align="right">
+        <a  href="$Conf(controller)?data+$path/$value"
+            target="select">$text</a>
+    </th>
+    <td colspan=4>
+    <select name="$var" onChange="change();" title="$tip">
+    $options($var)
+    </select>
+    $help</td>
+</tr>
+<!part ext="prog">
+<tr>
+    <th align="right">$text</th><td colspan=4><i>prog</i></td>
+</tr>
+<!part ext="dir">
+<!part ext="dirs">
+<tr>
+    <th align="right">$text</th><td colspan=2><input type="text" name="$var">
+    <input
+        type    ="image"
+        src ="../../icons/doc05.gif"
+        border  ="0"
+        title   ="Carpeta nueva"
+        alt ="New folder"
+        title   ="$tip">
+    <br>
+    <font size="-1"> introduzca una lista de nombres de carpetas separados por espacios</font>
+    <br>
+    <font size="-1"> o el n&uacute;mero de carpetas a crear autom&aacute;ticamente</font>
+
+</tr>
+
+
+<!part ext="bot">
+
+</tr>
+</table>
+
+</form>
+
+</body>
+</html>
+
+<!part ext="frozen">
+
+<pre style="background: #CCCCCC; color: #999999">
+
+$content
+
+</pre>
+
+
+
+<!part ext="foot">
+<html>
+<head>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<hr>
+<div>
+<table width="100%">
+<tr><th>Clase</th><td>$text </td>
+<td rowspan="2" valign="center" align="right">
+<form>Cambiado:
+    <input
+        type    ="checkbox"
+        name    ="changebox"
+        onChange="document.forms[0].changebox.checked=window.parent.frames['content_data'].changed;"></form>
+</td></tr>
+<tr><th>Ruta</th><td><code> $dir </code></td></tr>
+</table>
+</form>
+</div>
+<hr>
+</body>
+
+<!part ext="void">
+<html>
+<head>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+
+<h2>Tipo de carpeta desconocido y/o faltan ficheros en la carpeta.</h2>
+
+Use <b>File | Reset</b> para restablecer al contenido por omisi&oacute;n en una carpeta de
+clase <code>$guess</code>.
+
+</body>
+</html>
+

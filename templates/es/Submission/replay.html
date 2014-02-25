@@ -1,0 +1,52 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link
+        rel ="stylesheet"
+        href    ="../../styles/$Conf(style).css"
+        type    ="text/css">
+
+</head>
+<body>
+<title>Rejuzgar env&iacute;os</title>
+<center>
+
+<h2>Rejuzgar env&iacute;os</h2>
+
+<form
+    method  ="post"
+    enctype="multipart/form-data"
+    target="_self"
+    action="$Conf(controller)?operation+importing+$dir">
+
+    <table>
+
+        <tr>
+            <th rowspan="3">Tipo</th>
+            <td><input type="radio" name="type" value="sequential">
+            <td>
+            Rejuzgar env&iacute;os uno a uno. El siguiente env&iacute;o
+            s&oacute;lo comienza despu&eacute;s de haber acabado el anterior.
+            </td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="type" value="paced">
+            <td>
+            Los env&iacute;os empiezan en el orden en que fueron recibidos
+            con un intervalo m&aacute;ximo de $Max_delay seg., por lo tanto, un env&iacute;o
+            empieza a ser evaluado mientras los anteriores est&aacute;n en ejecuci&oacute;n.
+            </td>
+        </tr>
+        <tr>
+            <td><input type="radio" name="type" value="eager">
+            <td>
+            Los env&iacute;os empiezan en el orden en que fueron recibidos
+            sin ning&uacute;n intervalo entre ellos; es previsible una elevada carga
+            en el servidor.
+            </td>
+        </tr>
+
+    </table>
+
+</form>
+

@@ -1,0 +1,326 @@
+The architecture of Mooshak is that of a typical web application: a
+client-server framework connecting the contestants and jury with the
+machine where problem submissions are recorded, analyzed and
+validated. This model was adopted since it solves efficiently the
+fundamental issues of a distributed system with Mooshak requirements,
+namely:
+
+MM GUI The HTML features are sufficient to layout the forms and tables
+required for submitting data and displaying information. Scripting on
+client side is enough for form validation purposes and Mooshak does
+not require any other processing on the client side.
+
+MM Communication HTTP supports file upload which is required to submit
+programs during contests and to manage contest data. Mooshak does not
+require complex interaction patterns. Hence, the lack of state and
+session on HTTP are drawbacks that can be easily overcome.
+
+MM Security HTTP provides users authentication and access
+control. Using HTTP over a secure socket layer (HTTPS) provides data
+encryption during communication.
+
+MM Infrastructure Most of the infrastructure required for running a Web application is already installed or is easily available. Moreover, it does not require changing existing security policies.
+
+Figure [fig:arch] represents the architecture of Mooshak, structured
+in vertical and horizontal layers. The users interface layer on the
+top includes the machines used by the teams, jury, administrators and
+general audience to access the system. The graphical users interface
+is rendered in HTML and interaction data is communicated back to a
+server on the application layer using the HTTP protocol. The
+application layer is composed of set of servers, each using its own
+data management system.
+
+Mooshak has also a vertical structure, where each layer groups a set
+of client machines to their server. We call nodes to these vertical
+layers since they are the basic component of a Mooshak network. To be
+sure, a simple contest may be managed using a single Mooshak node.
+
+Figura:
+
+
+We will now concentrate on detailing the implementation of a Mooshak
+server, emphasizing on its automated judging and its data management
+approach using persistent objects.Then, we describe how a network of
+Mooshak nodes is used to deal with issues such as backup, load
+balancing and multi-site contests.
+
+3.1 Mooshak server
+
+The Mooshak server is an Apache HTTP server extended with external
+programs using the CGI protocol, running on a Linux operating
+system. Apache is responsible for the communication, authentication,
+access control and encryption. The external programs (CGIs) are
+responsible for generating HTML interfaces and processing form
+data. They are implemented in Tcl and manage data using persistent
+objects over the file system. Tcl was chosen for being a scripting
+language with powerful tools for process management and for
+interfacing the file system. These features were used to implement the
+automated judging and data management with persistent objects as
+described in more detail next.
+
+3.1.1 Automated judging
+
+The automated judge is the corner stone of Mooshak. Its role is to
+classify a submission according to a set of rules and produce a report
+with the evaluation to be validated by a person judge. A submission is
+composed by data relevant for the evaluation process, that is the
+program source code, the team-id, the problem-id, and the programming
+language (this is automatically inferred from the source code file
+extension). Submissions are automatically judged and almost
+instantaneously displayed to the teams, although initially in a
+pending state. The judge persons have the responsibility of validating
+pending classifications, making them final, and occasionally modify
+initial classifications. A classification may have to be modified as a
+result of changes in the compilation and execution conditions
+(e.g. changes in test cases) that required reevaluating
+submissions. Reevaluation produces another report that has to be
+compared with previous ones.
+
+The automated judging can be divided in two parts according to the
+type of analysis:
+
+MM Static analysis checks integrity of data related to the submission
+and, if successful, produces an executable program.
+
+MM Dynamic analysis is performed after a successful static analysis
+and is composed of one or more executions of the program.
+
+Static analysis starts by verifying if the submitted problem has
+already been solved, in which case the submission is rejected and no
+classification is given. Then it goes on to confirm the verifications
+made by the interface, i.e. by double checking the submitted data for
+team ownership, problem-id and size of program source. If it succeeds
+in this verification, it compiles the submitted program using the
+compilation command line defined in the administration
+interface. Mooshak may be more or less tolerant according to the flags
+chosen for each compiler. An error or compiler warning detected in
+this stage aborts the automated judging and dynamic analysis is
+skipped. Table [tab:verifications] lists the verifications performed
+during static analysis and the associated classifications upon
+failure.
+
+figure:
+
+Dynamic analysis involves the execution of the submitted program with
+each test case assigned to the problem. A test is defined by an input
+and an output file. The input file is passed by the standard input to
+the program execution and its standard output is compared with the
+output file. The errors detected during dynamic analysis determine the
+classifications listed in Table [tab:tests]. Each classification has
+an associated severity rank and the final classification is that with
+the highest severity rank found in all test cases. The highest
+severity is given to the rare situation where the system has an
+indication that the test failed due to lack of operating system
+resources (inability to launch more processes, for instance). The
+lowest severity is the case where no other error was found, using the
+test cases, and therefore the submission is accepted as a solution to
+the problem.
+
+figure:
+
+The automatic judge marks an execution as "Accepted" only if the the
+standard output is exactly equal to the test output file. Otherwise
+the output file and standard output are normalized and compared
+again. In the normalization both outputs being compared are stripped
+of all formatting characters. If after this process the outputs become
+equal them the submission is marked as having a "presentation error";
+otherwise it is marked as a "wrong answer". In the current
+implementation the normalization trims white characters (spaces,
+newlines and tabulation characters) and replaces sequences of white
+characters by a single space. This is a general normalization rule
+since white characters are only used for formatting. In a specific
+problem other classes of characters could have the same meaning. For
+instance, in a problem where the only meaningful characters are
+digits, other characters, such as letters or punctuation, could be
+treated as formatting characters. This cannot be done in general since
+many problems have a meaningful output that includes letters. This
+feature will require having a meaningful class of characters defined
+for each problem output.
+
+The compilation and the execution of programs are the two most
+insecure points of a contest management system. Provided it fits in a
+single file, a team can submit virtually any program in one of the
+contest languages, including a bogus or malicious program capable of
+jeopardizing the system and ruin the contest. For that reason Mooshak
+compiles and executes programs in a secure environment, with the
+privileges of an insecure user and with several limits. Most of these
+limits are independent of problems, with the exception of execution
+timeout that is adjusted to each problem. The timeout for each problem
+is determined before the contest and it is the maximum time taken by
+the judges solutions, with all test cases, rounded up for the next
+integer (in seconds). The timeout for compilation is 60 seconds. The
+other resource limits enforced are listed in Table [tab:limits] with
+their default values in bytes (except for the number of
+child-processes) .
+
+figure:
+
+3.1.2 Persistent objects
+
+The Mooshak data uses an object oriented approach - that we call
+persistent objects - to blend data, recorded on the file system, with
+Tcl code. This approach structures application and is the basis for
+the replication mechanism describes in Section [sec:network]. Hence,
+Mooshak does not use a separate data management system, typical of the
+three-tier model so popular among Web applications. The next
+paragraphs try to justify this choice and describe the persistent
+objects mechanism.
+
+Most Web application rely on relational database managements system
+(RDBMS) to store data. This systems provide independence between
+application and data as well as efficient tools for managing and
+querying data. On the other hand a RDBMS introduces extra complexity:
+the RDBMS itself requires a installation and management; the mismatch
+between application data structures and database structure that forces
+the application extra processing to converting data between the two
+formats.
+
+Arguably, for some applications the RDBMS may not the best approach to
+manage its data. This may be the case a programming contest management
+data given its characteristics:
+
+MM Small The amount of data is comparatively small and does not
+require sophisticated indexing. The larger data structures are those
+that record transactions (e.g. problem submissions) and they do seldom
+require more than 1000 records per contest.
+
+MM Variable Records include data of variable sizes such as program
+code and object files, problem sheets (HTML files with images).
+
+MM Structured Data can conveniently be organized in an hierarchical
+view to simplify navigation and editing on the interface.
+
+MM Accessible Programs and test data must be easily accessible from
+the command line interpreter.
+
+MM Distributed Data must be efficiently copied between different
+machines to enable replication.
+
+Having in mind that a good part of the data used by Mooshak is
+conveniently represented in plain files - source and object programs,
+data files, HTML files and images - it seams reasonable to base the
+data management directly over the operating system, using files to
+record data and directories to maintain structure. Thus, we define a
+persistent object as a special kind of object that is made persistent
+by recording its definition directly on the file system, and is
+therefore referenced by a pathname.
+
+A persistent object belongs to a class that determines both its
+attributes and the operations it supports. A class is implemented as a
+Tcl module with two new declarations: Attributes and Operations. The
+Attributes declaration states the names and types of attributes of the
+class. The supported types include text values, enumerations, files,
+sub-objects and references to other persistent objects. Hence, a
+persistent object is implemented as a directory containing its files
+and sub-objects as sub-directories. The other values as well as the
+object's class are recorded in special hidden files in that directory.
+
+An operation is a kind of method. In the definition of an operation
+the attribute names refer to the values of the current object. A class
+operation is invoked when a message is passed to the object. The
+object reference defines a context for the operation and the values
+for the attributes.
+
+figure:
+
+Figure [code:class] illustrates a class Counter with a single
+attribute Value. Please note that the value is declared as text since
+persistent objects do not provide numeric types. The reason behind the
+lack of numeric types is the fact that these types do not exist
+neither in Tcl nor in HTTP. Hence, for Web applications written Tcl,
+numeric attributes are redundant. The operations reset, increment and
+show allow us to operate on this attribute.
+
+It should be noted that that persistent objects are in no way related
+with incr Tcl, a full fledged object oriented language based on
+Tcl. The data management of Mooshak owes more to the Tk graphical
+object library: both have pathnames as object references and a flat
+(without inheritance) set of classes.
+
+3.2 Mooshak network<sec:network>
+
+A single Mooshak node - a Web server accessible through a set of Web
+clients on users machines - is sufficient for running a small
+programming contest (i.e. a contest with up to 20 teams) where
+reliability is not at premium. Running an official contest, with a
+concern for reliability and larger number of teams, distributed in
+several sites and a simultaneous online contest requires a more
+complex setup, with a network of interconnected nodes.
+
+A link between the Mooshak nodes X and Y consists on the replication
+of the contest data from the server X to the server Y. The main
+reasons for replicating contest data between Mooshak servers are to
+support:
+
+MM System Backup Replication is used to maintain a backup system, with
+an updated version of the contest data, so that it can replace one of
+the servers in case of hardware failure.
+
+MM Online Contest Replication propagates the contest data to a server
+with Internet access used to maintain an online contest simultaneously
+with an official local contest.
+
+MM Load balancing Several servers distribute load among them and
+replicate their data to the others. In this case each server is
+assigned to a set of users, for instance, contestants to a server and
+jury to another, or contestants in different rooms to a different
+servers.
+
+MM Multi-site contest This case is similar to the previous but servers
+are in distant locations.
+
+The Mooshak network configuration for a particular contest may contain
+several of these links. Figure [fig:network] represents the network
+for a contest taking place simultaneously in two sites, A and B, the
+first using two servers (Server A1 and Server A2) for load balancing
+and the last using just one server (Server B). Each site has a backup
+with an updated version of the contest data, capable of replacing any
+of the main servers in case of failure. Site A maintains also an
+online version of the contest where anyone on the Internet can compete
+against the official contestants physically located at either site A
+or at site B. Some nodes are connected in unidirectional links, such
+as those connecting servers with the backup nodes or online-contest
+servers, and other are bidirectional, such as those connecting contest
+servers among them.
+
+The Mooshak replication uses the rsync remote-update protocol. This
+protocol updates differences between two sets of files over a network
+link, using an efficient checksum-search algorithm. The replication
+procedure is invoked frequently to propagate changes to other servers,
+typically every 60 seconds, and copies only the data that has been
+changed since the last replication. The object files produced by the
+compilation of programs are not replicated, just the evaluation
+reports. If necessary the programs may be reevaluated in a different
+machine.
+
+The main issue with replication is the consistency of contest data,
+namely that no data fails to be replicated or is overwritten by
+replicated data. To guarantee that no data fails to be replicated we
+must ensure that there is a replication path connecting all servers
+interfacing with official contestants.
+
+To address the problem of data being overwritten, we must
+differentiate between contest definition data (such teams, problems,
+programming languages) and contest transactions (such as submissions,
+questions and printouts). Of these two, contest transactions,
+specially submissions, are particularly important. To guarantee
+uniqueness all transaction data is keyed by a timestamp, the team ID
+and the problem ID. Thus, if team ID is unique in the system, and
+transactions from the same team are consistently sent to the same
+server, then there is no danger of losing transactions due to
+overwritten data since each transaction key is also unique.
+
+Contest data is not, in principle, changed after the beginning of the
+contest. It should be updated in a single node for consistency sake,
+and that node must have a path to every other node in the network. The
+only exception to this case is the creation of teams for
+online-contest servers, as we allow contestants to register during the
+contest. In case of using load balancing for online-contest servers it
+is important to assign team creation to a single server. Otherwise,
+two teams with the same name, and same group, registering at same time
+in different servers could (although not very likely) share the same
+record.
+
+For the above setup to work properly, all servers clocks must be
+synchronized. This can be achieved using the Network Time Protocol
+(NTP).

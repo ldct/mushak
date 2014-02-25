@@ -1,0 +1,79 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+<title> Session data mining</title>
+</head>
+<script>
+
+var xmlhttp=false;
+/*@cc_on @*/
+/*@if (@_jscript_version >= 5)
+// JScript gives us Conditional compilation, we can cope with old IE versions.
+// and security blocked creation of the objects.
+ try {
+  xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+ } catch (e) {
+  try {
+   xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  } catch (E) {
+   xmlhttp = false;
+  }
+ }
+@end @*/
+if (!xmlhttp && typeof XMLHttpRequest!='undefined') {
+  xmlhttp = new XMLHttpRequest();
+}
+
+setInterval("getSizeStatus()",3000);
+
+function getSizeStatus() {
+     xmlhttp.open("GET", "",true);
+     xmlhttp.onreadystatechange= function () {
+	 if (xmlhttp.readyState==4) {
+	     showSizeStatus(xmlhttp.responseText)
+	 }
+     }
+     xmlhttp.send(null);
+}
+
+function showSizeStatus(responseText) {
+   var data = JSON.parse(responseText)
+   
+   var size = document.getElementById("size");
+   var status = document.getElementById("status");
+
+   size.innerHTML = data.size;
+   status.innerHTML = data.status;
+}
+
+</script>
+<body>
+
+<center>
+<h2> Session data mining</h2>
+</center>
+
+<p>
+Saving in a single (large) file with
+submission data from all contests in this Mooshak installation.
+</p>
+
+
+<p>
+This process may take a while. When completed it will be available in
+a file named <code>$DATA_FILE_NAME</code>.
+</p>
+
+<p>This file has currently <span id="size">0<span> and is <span id="status">empty</span>
+
+
+<p>
+Please send it <a href="mailto:zp@dcc.fc.up.pt">José Paulo Leal</a>
+</p>
+</body>
+</html>
+ 

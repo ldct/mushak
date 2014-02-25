@@ -1,0 +1,286 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>FAQ de Mooshak</title>
+   <link
+    rel="stylesheet"
+    href="../../styles/$Conf(style).css"
+    title="Mooshak en color"
+    type="text/css">
+
+</head>
+<body>
+<h2 center>Preguntas M&#225;s Frecuentes</h2>
+<dl>
+  <dt><b>&#191;Qu&#233; puedo hacer dentro de este entorno?</b></dt>
+  <dd>El entorno de Mooshak te permite visualizar los enunciados de los problemas, enviar
+    soluciones a los problemas, hacer preguntas a los jueces, ver todos los env&#237;os realizados
+    (tanto los tuyos como los de los dem&#225;s equipos) y los resultados de los mismos, y ver la
+    clasificaci&#243;n actual.</dd><p>
+  <dt><b>&#191;C&#243;mo recibe el programa los datos de entrada? &#191;C&#243;mo debe producir la salida?</b></dt>
+  <dd>Los datos de entrada se leen desde la <em>entrada est&#225;ndar</em> y la salida debe
+    escribirse siempre en la <em>salida est&#225;ndar</em>.</dd><p>
+  <dt><b>&#161;He intentado enviar la soluci&#243;n a un problema y obtengo el mensaje &quot;Programa
+    con extensi&#243;n no v&#225;lida&quot;!</b></dt>
+  <dd>Tienes que enviar el c&#243;digo fuente del programa, no el ejecutable. Un env&#237;o es
+    aceptado para su evaluaci&#243;n s&#243;lo si su extensi&#243;n corresponde con alguno de los
+    lenguajes admitidos en el concurso. </dd><p>
+  <dt><b>&#191;Qu&#233; lenguajes y compiladores est&#225;n actualmente disponibles?</b></dt>
+    <dd>Para este concurso, el analizador acepta los siguientes lenguajes y usa los siguientes
+    compiladores:
+    <p>
+    <center>
+    <table border="1"  cellpadding="10">
+    <tr>
+        <th>Lenguaje</th>
+        <th>Compilador</th>
+        <th>Versi&#243;n</th>
+        <th>L&#237;nea de Comandos</th>
+        <th>Extensi&#243;n</th>
+    </tr>
+
+$languages
+    </table>
+    </center>
+    </dd>
+<p>
+
+
+  <dt><b>&#191;Cu&#225;l es el significado de los mensajes de evaluaci&#243;n?</b></dt>
+  <dd>Los mensajes resultantes de la evaluaci&#243;n de un env&#237;o son los siguientes:<br>
+    <table border="1" cellpadding="10">
+      <tr>
+        <td><b>Accepted</b>:</td>
+        <td>tu programa ha pasado todas las pruebas y es aceptado como correcto.</td>
+      </tr>
+      <tr>
+        <td><b>Compile Time Error</b>:</td>
+        <td>el sistema no ha sido capaz de compilar tu programa. El compilador devolvi&#243; un error
+        o un aviso (<em>warning</em>).</td>
+      </tr>
+      <tr>
+        <td><b>Runtime Error</b>:</td>
+        <td>tu programa ha fallado durante la ejecuci&#243;n, es decir, ha acabado prematuramente
+        debido a un error en tiempo de ejecuci&#243;n.</td>
+      </tr>
+      <tr>
+        <td><b>Time Limit Exceeded</b>:</td>
+        <td>tu programa no ha acabado en el tiempo disponible para el problema dado.</td>
+      </tr>
+      <tr>
+        <td><b>Wrong Answer</b>:</td>
+        <td>tu programa se ha ejecutado correctamente pero la salida obtenida no coincide con la
+        salida esperada por el juez.</td>
+      </tr>
+      <tr>
+        <td><b>Presentation Error</b>:</td>
+        <td>la salida de tu programa parece ser correcta, pero no est&#225; presentada en el formato
+        requerido. Esto s&#243;lo sucede en casos triviales (por ejemplo, cuando faltan o sobran
+        espacios o l&#237;neas en blanco), mientras que en otros casos (por ejemplo, si faltan o
+        sobran comas) se producir&#225; un mensaje de Wrong Answer.</td>
+      </tr>
+      <tr>
+        <td><b>Invalid Submission</b>:</td>
+        <td>tu env&#237;o no cumple con las extensiones requeridas; o bien se ha intentado realizar un
+        env&#237;o sin usar el interface de Mooshak.</td>
+      </tr>
+      <tr>
+        <td><b>Output Limit Exceeded</b>:</td>
+        <td>tu programa genera una salida demasiado larga para este problema; los l&#237;mites
+        dependen de los casos de prueba, pero normalmente no son muy grandes (suele estar
+        alrededor de los 100KB). </td>
+      </tr>
+      <tr>
+        <td><b>Program Size Exceeded</b>:</td>
+        <td>tu programa es demasiado largo y no ser&#225; considerado (el l&#237;mite est&#225; alrededor de
+        los 100KB). </td>
+      </tr>
+      <tr>
+        <td><b>Requires Reevaluation</b>:</td>
+        <td>por alguna raz&#243;n tu programa tiene que ser reevaluado. </td>
+      </tr>
+      <tr>
+        <td><b>Invalid Function</b>:</td>
+        <td>tu programa ha violado una regla del concurso, como llamar librer&#237;as no est&#225;ndar;
+        tambi&#233;n puede deberse a que ha finalizado con <code>exit(1)</code> o incluso <code>return
+        1</code>, o alguna construcci&#243;n similar indicando un error en ejecuci&#243;n.</td>
+      </tr>
+    </table>
+  </dd><p>
+  <dt><b>&#191;Hay l&#237;mites impuestos en el sistema de evaluaci&#243;n?</b></dt>
+  <dd><p align="center">Existen varios l&#237;mites que si se superan penalizar&#225;n tu env&#237;o:
+
+<center>
+    <p>
+        <table border="1" cellpadding="10">
+$params
+        </table>
+<b> * </b> Tambi&#233;n depende del problema
+</center>
+
+
+    </dd>
+<p>
+
+  <dt><b>&#161;Cuando pulso el bot&#243;n &quot;Enviar&quot; no ocurre nada!</b></dt>
+  <dd>Debes comprobar la pol&#237;tica de cach&#233; usada por el navegador. Las p&#225;ginas deber&#237;an
+    ser recuperadas del servidor siempre que se detecte alg&#250;n cambio. Si las p&#225;ginas nunca
+    se piden al servidor, no ser&#225;n actualizadas en tu navegador. En <i>Mozilla</i> y <i>Netscape</i>
+    comprueba el men&#250; &quot;Edici&#243;n&quot; | &quot;Preferencias&quot; | &quot;Avanzadas&quot;
+    | &quot;Cach&#233;&quot; y elige &quot;Siempre (yo veo la p&#225;gina)&quot;.</dd><p>
+  <dt><b>El formato del interface de Mooshak tiene una apariencia muy extra&#241;a.</b></dt>
+  <dd>Prueba seleccionando un tipo de letra m&#225;s peque&#241;o. Alternativamente, intenta eliminar
+    las barras de navegaci&#243;n y personales del navegador (men&#250; &quot;Ver&quot;). </dd><p>
+  <dt><b>He pulsado el bot&#243;n &quot;Enviar&quot; y obtengo el mensaje &quot;Programa no
+    especificado&quot;.</b></dt>
+  <dd>Debes seleccionar primero el archivo con el c&#243;digo fuente del programa. Pulsa
+    &quot;Examinar...&quot; para abrir un di&#225;logo de selecci&#243;n de archivo, o bien escribe el
+    nombre del programa (con la ruta completa) en el recuadro que hay a la izquierda del
+    bot&#243;n &quot;Enviar&quot;. </dd><p>
+  <dt><b>&#191;C&#243;mo puedo hacer una pregunta relativa al enunciado de un problema?</b></dt>
+  <dd>Pulsa el bot&#243;n &quot;Preguntar&quot; en la esquina superior derecha. Aparecer&#225; un
+    formulario donde puedes escribir la pregunta y enviarla a los jueces del concurso. Antes
+    de pulsar el bot&#243;n &quot;Preguntar&quot; debes comprobar si has seleccionado el problema
+    correcto.</dd><p>
+
+</dl>
+</body>
+</html>
+
+<!part ext="ling">
+<tr>
+    <th>$name</th>
+    <td>$compiler</td>
+    <td align="right">$version</td>
+    <td><code>$compile</code></td>
+    <td align="right"><code>.$extension</code></td>
+</tr>
+<!part ext="param">
+<tr>
+    <th>$text</th>
+    <td align="right">$value</td>
+</tr>
+
+
+<!part ext="MaxCore">
+Tama&#241;o de core
+<!part ext="MaxData">
+Datos ejecuci&#243;n
+<!part ext="MaxOutput">
+Tama&#241;o de salida
+<!part ext="MaxStack">
+Pila de ejecuci&#243;n
+<!part ext="MaxRSS">
+Tama&#241;o residente
+<!part ext="MaxProg">
+C&#243;digo del programa
+<!part ext="RealTimeout">
+Tiempo total evaluaci&#243;n
+<!part ext="CompTimeout">
+Tiempo de compilaci&#243;n
+<!part ext="ExecTimeout">
+Tiempo de ejecuci&#243;n *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

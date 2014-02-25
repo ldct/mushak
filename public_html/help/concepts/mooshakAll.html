@@ -1,0 +1,131 @@
+
+<h2>Mooshak: Concepts</h2>
+
+<h3>What is Mooshak?</h3>
+
+
+Mooshak is a client-server application to fully manage and run
+programming contests. It is web-based and therefore all of its
+functionalities are accessible through interfaces deployed on a
+web-browser, irrespective of the operating system were the browser is
+running. These interfaces use the HTML 4.0 frame set and no processing
+is made on the browser, except for some data input validations that
+are implemented with ECMAScript. Java and plugins were avoided on
+purpose to simplify the use of the interface by any machine on the
+Internet. 
+
+<h3>Main Features</h3>
+
+Mooshak provides a number of features, namely:
+
+<ul>
+<li> <b>General:</b>
+ <ul>
+ <li> accommodates different users with rather different access
+permissions to the system: contest directors, judges, contestants and
+general public.
+ <li> supports single site as well as multi-site contests; it is also
+ prepared to allow simultaneous local and online contests.
+ <li> conforms with ACM-ICPC rules to classify contestants
+ submissions.
+ <li> can import data files produced by ACM-ICPC central registration
+database.
+ <li> provides means to produce pariticipation certificates based on
+ the contest classification.
+ <li> supports a number of programming languages, namely C, C++,
+Pascal, and Java.
+ </ul>
+
+<li> <b>System security and data protection:</b>
+
+<ul>
+ <li> access to the system is controlled by user authentication, except
+in the case of the public view that is open to everyone.
+ <li> supports data replication to allow rapid system recovery in case
+ of failure.
+ <li> provides a safe execution environment to run the programs. This
+ environment limits resources available to contestant programs, hence
+ preventing them from interfering with the system.
+</ul>
+
+<li> <b>Users and interfaces:</b>
+<ul>
+<li> provides different interface views according to the type of user
+accessing the system. The interface only shows the functionalities
+accessible to that user.
+
+<li> <b>Administration view</b> allows contest directors to setup a new
+contest and to add all data necessary to make it operational; problem
+descriptions; solutions, test inputs and outputs for the problems;
+teams and contestants data; programming languages; date for the contest,
+starting and finishing times, etc.
+
+<li> <b>Jury view</b> allows a person jury to validate the judging
+made by the automatic judging system, to re-evaluate submissions if
+necessary, and to answer questions posed by contestants and to track
+the handling of printouts to contestants.
+
+<li> <b>Contestants view</b> allows contestants to submit solution programs,
+to ask questions, to print their programs, to access the submissions
+list, to access current classification, and to visualize problem
+descriptions.
+
+<li> <b>Public view</b> allows any user on the Internet to follow online
+the progress of the contest; they can access the submissions list,
+current classifications and other statistics listings regarding the
+contest.
+</ul>
+
+</ul>
+
+<h3>Mooshak Evaluation Messages</h3>
+
+Solutions to problems submitted for judging are called runs. Each run
+is judged as accepted or rejected, and the team is automatically
+notified of the result. The meaning of the judgements is as follows:
+
+<ul>
+<li><b>Accepted</b>: your program passed all tests and is accepted as correct;
+<li><b>Presentation error</b>:  the output seems to be correct but it is
+not presented in the required format. Since it is not always easy to
+distinguish this message from the wrong answer message, it is only
+sent in obvious cases;
+<li><b>Wrong answer</b>:  your program runs through one or more test
+cases withouth a run-time error but the output did not match the
+expected output;
+<li><b>Time-limit exceeded</b>: your program did not finish within the
+allocated amount of time; 
+<li> Run-time error</b>:  your program ``crashed'', i.e. it exited
+prematurely due to a run-time error;
+<li><b>Compile time error</b>:  the system was not able to successfully
+compile your program. The compiler return an error or warning;
+<li><b>Invalid submission</b>:  your submission does not comply with
+expected extensions, or attempt to submit without following the
+interface; 
+<li><b>Output too long</b>:  your program generates an output too long
+for this problem; the limits are dependent on the test cases, but are
+usually low (default limit is around 100KB);
+<li><b>Program too long</b>:  your program is too long and will not be
+considered (default limit is around 100KB);
+<li><b>Requires re-evaluation</b>:  for some reason your program has to be re-evaluated;
+<li><b>Contest rule violation</b>: your program violates a contest rule
+like calling non-standard libraries.
+</ul>
+
+<h3>Ranking Contestants/Teams</h3>
+
+Mooshak uses the rules defined by the ACM-ICPC committee to rank
+contestants at contests.
+
+<ol>
+<li> The contestant that solved most problems is ranked first.
+<li> Contestants who solve the same number of problems are ranked by
+the least total time. 
+<li> The total time is the sum of the time consumed for each problem
+solved. The time consumed for a solved problem is the time elapsed
+from the beginning of the contest to the submittal of the accepted run
+plus 20 minutes for each rejected run. There is no time consumed for a
+problem that is not solved.
+</ol>
+
+

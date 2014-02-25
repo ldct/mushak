@@ -1,0 +1,103 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Mooshak: Checking contest</title>
+<link 	rel	="stylesheet" 
+	href	="../../styles/$Conf(style)" 
+	type	="text/css">
+</head>
+<body>
+	<h2>Checking contest</h2>
+
+	<table 
+		width	="100%" 
+		border	="0" 
+		cellpadding="2" 
+		cellspacing="2">
+
+		<tr>
+			<th id="Base">Teams</th>
+			<th id="Base">Problems</th>
+			<th id="Base">Others</td>
+			<td>
+				<a 
+					target="_blanc" 
+				href="$Conf(controller)?help+interfaces/admin/verify">
+					<img 
+						border="0" 
+						src="../../icons/unknown.png">
+				</a>		
+			</th>
+		</tr>
+		<tr>
+<!/part ext="head">
+
+
+<!part ext="top_head">
+			<td 
+				valign="top" 
+				bgcolor="#DDDDDD">
+					<font size="-1">
+<!/part ext="top_head">
+
+
+<!part ext="dir_head">
+				<li>$name
+					<ul>
+<!/part ext="dir_head">
+
+<!part ext="Fatal">
+					<li>
+						<b>
+							<font color="red">
+								$message
+							</font>
+						</b>
+					</li>
+<!/part ext="Fatal">
+
+<!part ext="Warning">
+					<li>
+						<font color="red">
+								$message
+						</font>
+					</li>
+<!/part ext="Warning">
+
+
+<!part ext="Trash">
+					<li>
+						<font color="white">
+							$message
+						</font>
+					</li>
+<!/part ext="Trash">
+
+
+<!part ext="top_foot">
+				</font>
+			</td>
+<!part ext="top_foot">
+
+<!part ext="dir_foot">
+				</ul>
+			</li>
+<!/part ext="dir_foot">
+
+<!part ext="foot">
+		</tr>
+	</table>
+
+	<div align="right">
+		<table border="0">
+			<tr><th>Fatal errors</th>	<td> $Fatal</td></tr>
+			<tr><th>Warning</th>		<td> $Warning</td></tr>
+			<tr><th>Trash</th>		<td> $Trash</td></tr>
+		</table
+	</div>
+
+</body>
+</html>
+<!/part ext="foot">
+

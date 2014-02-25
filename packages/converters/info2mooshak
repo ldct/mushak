@@ -1,0 +1,102 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+set ENCODING ISO-8859-1
+set ENCODING UTF-8
+
+
+array set FieldName {
+    BI		ct:Password
+    Nome	Name
+    Email	Email
+}
+
+proc import {} {
+    global Groups 
+    global Teams
+    global Value
+    global Fields
+
+    set Groups {}
+
+    set data   [ read stdin ]
+    regsub -all \n(\ |\t)*\n	$data 	\n data		;# remove empty lines
+    regsub -all (\ |\t){2,} 	$data 	\t  data	;# normalize field separators
+
+    set data   [ split $data \n ]
+    set Fields [ lindex $data 1 ]
+
+    foreach line [ lsort -index end [ lrange $data 2 end-2 ] ] {
+	set line [ split [ string trim $line ] \t ]
+	set ncd [ lindex $line 0 ]
+	set i 0
+	foreach field $Fields {
+	    set Value($ncd,$field) [ lindex $line $i ]
+	    # puts "Value($ncd,$field) [ lindex $line $i ]"
+	    incr i
+	}					     
+	
+	if { [ info exists Value($ncd,P) ] } {
+	    if { [ lsearch $Groups $Value($ncd,P) ] == -1 } {
+		lappend Groups $Value($ncd,P)
+		set Teams($Value($ncd,P)) $ncd
+	    } else {
+		lappend Teams($Value($ncd,P)) $ncd 
+	    }
+	}
+    }
+    
+}
+
+proc export {{ldap 0}} {
+    global ENCODING
+    global Groups 
+    global Teams
+    global Value
+    global Fields
+    global FieldName
+
+    puts {<?xml version="1.0" encoding="$ENCODING" standalone="yes"?>}
+    puts -nonewline {<Groups xmlns="http://www.ncc.up.pt/mooshak/" }
+    if $ldap {
+	puts {>}
+    } else { 
+	puts {xmlns:ct="http://www.ncc.up.pt/mooshak/clear_text_password">}
+    }
+
+    foreach group  $Groups {
+	puts \t[ format {<Group xml:id="%s" Designation="%s" Acronym="%s">} \
+		     $group "Turma $group" $group ]
+	foreach team $Teams($group) {
+	    set args  [ format { %s="%s"} Profile team ]
+	    foreach field $Fields {
+		if [ info exists FieldName($field) ] {
+		    append args [ format { %s="%s"} $FieldName($field) \
+				       $Value($team,$field)  ]
+		}
+	    }
+	    if $ldap {
+		if { ! [ regexp {^(\d\d)(\d\d)(\d\d)(\d\d\d)$} $team - \
+		    year faculty degree serial ] } {
+		    puts stderr "invalid NCD: $team"
+		    continue
+		}
+		set id c${year}${degree}${serial}
+	    } else {
+		set id $team
+	    }
+	    puts \t\t[format {<Team xml:id="%s.%s"%s/>} $group $id $args]
+	}
+	puts \t[ format {</Group>} ]
+    }
+    puts [ format {</Groups>} ]
+}
+
+
+
+if [ regexp -- -ldap $argv ] { set ldap 1 } else { set ldap 0 }
+
+import ; export $ldap

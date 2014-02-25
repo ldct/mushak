@@ -1,0 +1,24 @@
+
+<!part ext="result">
+<result base-url = "$base" >
+  <request source="$source" message="$request_message" />
+  $response
+</result>
+<!/part ext="result">
+
+
+<!part ext="response">
+  <response message="$response_message">
+    <resources>
+      $resources
+    </resources>
+  </response>
+<!/part ext="response">
+
+<!part ext="resource">
+      <resource idCol = "$collection" idLo = "$id">$title</resource>
+<!/part ext="resource">
+
+<!part ext="collection">
+      <resource idCol = "$collection">$name</resource>
+<!/part ext="collection">

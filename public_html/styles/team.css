@@ -1,0 +1,138 @@
+
+body {
+	background:	rgb(255,255,245); /* lightYellow; */ 
+	color:		rgb(47,49,49);			/* Dark Slate Grey;*/
+}
+
+#header {
+        position:	relative;
+        top:		0;
+	left:		0;	
+	width:		100%;
+	height:		3cm;
+	padding:	2mm;
+}
+
+#logo {
+	position:	absolute;
+	top:		0;
+	left:		0;
+	width:		3cm;
+        margin:		5mm 5mm 5mm 5mm;
+}
+
+#contest {
+	position:	absolute;
+	top:		2cm;
+	left:		5mm;
+	font-family:	Sans-serif;
+	font-weight: 	bold;
+	font-size:	larger;
+	color:		rgb(233,175,175);
+}
+
+#problems {
+	position:	absolute;
+	top:		0;
+	left:		4cm;
+	font-family:	Sans-serif;
+	font-weight: 	bold;
+        padding:	2mm 2mm 2mm 2mm;
+        margin:		2mm 2mm 2mm 2mm;
+
+
+}
+
+div.tabs {
+	border-style:	solid;
+	border-color:	rgb(190,190,190);		/* grey; */
+	border-width: 0 0 1px 0;
+	padding:	0mm 5mm 0mm 5mm;
+}
+
+
+span.tab {
+	margin:		5mm 5mm 5mm 0mm;;
+	padding: 	0mm 5mm 0mm 5mm;
+	border-style:	solid;
+	border-width:	1px 2px 0 1px;
+	border-color:	rgb(190,190,190);		/* Grey; */
+	background:	rgb(211,211,211);		/* Light Grey; */
+	cursor:		pointer;
+	/* cursor:	hand;		/* cross browser IE 5.0 and 5.5 */
+}
+
+
+span.tab {
+        position:	relative;
+	margin:		5mm 5mm 5mm 0mm;;
+	padding: 	0mm 5mm 0mm 5mm;
+	border-style:	solid;
+	border-width:	1px 2px 0 1px;
+	border-color:	rgb(190,190,190);		/* Grey; */
+	background:	rgb(211,211,232);		/* ? */
+	cursor:		pointer;
+	font-family:	Sans-serif;
+	font-weight:	bold;
+}
+
+span.highlight {
+	background:	rgb(211,211,255);
+}
+
+span.selected {
+	color:		black;
+	top:		1px;
+	background:	rgb(248,248,255);	/* GhostWhite */
+	cursor:		default;
+}
+
+#panels {
+        position:	relative;
+        top:		0;
+	left:		0;	
+	width:		100%;
+	height:		12cm;
+	background:	rgb(248,248,255)	/* GhostWhite */
+}
+
+div.panel {	
+        position:	absolute;
+        top:		0;
+	left:		0;
+	width:		100%;
+	height:		100%;
+	visibility:	hidden;
+	border-style:	solid;
+	border-width:	0 2px 1px 1px;
+	border-color:	rgb(190,190,190);		/* grey; */
+	overflow:	auto;
+	margin:		0;
+	padding:	0;
+}
+
+div.content {
+	margin:		5mm;
+}
+
+
+/* Listings */
+
+TABLE.Listing {
+      	border:			0;
+	width:			100%;
+	margin:			0;
+	padding:		0;
+}
+
+
+TR.Header {
+	 color:			black;
+	 background:		gray;
+}
+
+TD TH {
+	font-family: 		sans-serif;
+}
+
+

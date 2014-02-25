@@ -1,0 +1,9 @@
+<result base-url = "http://khato/~mooshak/cgi-bin/content" >
+<request source="/~mooshak/cgi-bin/content//proto_service/A" message="Available collections in mooshak" />
+<response message="1 collection found in mooshak">
+<resources>
+<resource idCol = "/proto_service/">Service Prototype</resource>
+</resources>
+</response>
+</result>
+

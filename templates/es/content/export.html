@@ -1,0 +1,63 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Exportar Carpeta $type</title>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<center>
+
+<H2>Exportar Carpeta $type: <code>$dir</code></H2>
+<form
+    method="post"
+    enctype="multipart/form-data"
+    target="_self"
+    action="$Conf(controller)?exporting+$dir">
+
+
+
+
+
+<table cellspacing="15">
+<tr><td>
+<div align="left">
+    Fichero/archivo en formato $format <br>
+<input type="checkbox" name="dtd" value="1" checked>
+    Incluir DTD en la descripci&oacute;n XML<br>
+<input type="checkbox" name="archive" value="1" checked>
+    Crear archivo con un &uacute;nico fichero XML
+</td><td>
+
+   <input type='submit' value='Exportar'><p>
+
+   <input type='button' value='Cancelar' onClick="window.close();">
+</td>
+</table>
+
+
+<p>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Nota:</b> Este comando crea un archivo que contiene:
+   <ul>
+   <li>un fichero XML que describe la estructura y contenido de esta carpeta</li>
+   <li>todos los ficheros incluidos en la carpeta</li>
+   </ul>
+   <p>
+   <b>Ayudas:</b>
+   <ul>
+   <li> Puedes editar el contenido del archivo e <a
+   href="$Conf(controller)?import+$dir">importar de nuevo a esta carpeta</a></li>
+   <li> Usa el DTD para pre-validar la descripci&oacute;n XML. Aunque la carpeta est&eacute; vac&iacute;a,
+   el DTD reflejar&aacute; su estructura global</li>
+
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../styles/quiz.xsl"?>
+<quiz>
+     <header>
+          <designation>Exame de Interfaces Gráficas</designation>
+          <duration>0:04</duration>
+          <student>zp</student>
+          <type>empty</type>
+
+          <value>0</value>
+     </header>
+     <quizGroup title="JavaScript" xml:id="_268047" value="0">
+          <quizQuestion xml:id="_268060" value="0">
+               <ask>Em JavaScript as variáveis não necessitam de ser declaradas, passando a existir assim que são inicializadas. Por omissão,  o âmbito dessas variáveis é global a todo o programa. Para restringir o âmbito duma variável apenas à função em que foi inicializada esta deve ser previamente declarada com a palavra-chave</ask>
+               <quizChoice xml:id="_268063"><code>variable</code></quizChoice>
+               <quizChoice xml:id="_268062"><code>local</code></quizChoice>
+
+               <quizChoice xml:id="_268061"><code>var</code></quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268056" value="0">
+               <ask>Em JavaScript, para enumerar na variável <code>c</code> todos os nomes de campos do objecto <code>o</code> duma qualquer classe, é usado a seguinte instrução de controlo de fluxo de execução</ask>
+               <quizChoice xml:id="_268059"><code>for(String c: o)</code></quizChoice>
+
+               <quizChoice xml:id="_268057"><code>for(c in o)</code></quizChoice>
+               <quizChoice xml:id="_268058"><code>for(var c=o.length();c > 0;c--)</code></quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268052" value="0">
+               <ask>Em JavaScript o nome <code>this</code> refere-se </ask>
+               <quizChoice xml:id="_268055">ao formulário que contem o código que está a ser avaliado</quizChoice>
+
+               <quizChoice xml:id="_268054">ao documento HTML que contem o código que está a ser avaliado</quizChoice>
+               <quizChoice xml:id="_268053">ao objecto em que reside o código que está a ser avaliado</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268048" value="0">
+               <ask>Uma das formas de provocar a avaliação de código JavaScript (JS) embebido numa formatação é colocá-lo como valor de determinados atributos de elementos HTML. Esse código JS é avaliado quando</ask>
+               <quizChoice xml:id="_268051">é carregado um novo documento</quizChoice>
+               <quizChoice xml:id="_268050">é efectuada a formatação do documento</quizChoice>
+
+               <quizChoice xml:id="_268049">certos eventos ocorrem no elemento</quizChoice>
+          </quizQuestion>
+     </quizGroup>
+     <quizGroup title="TK" xml:id="_268073" value="0">
+          <quizQuestion xml:id="_268265" value="0">
+               <ask>O efeito de relevo nos objectos gráficos da Tk é obtido</ask>
+               <quizChoice xml:id="_268268">colocando 8 pequenos objectos à volta do objecto, cada um com um padrão (bitmap) diferente</quizChoice>
+
+               <quizChoice xml:id="_268266">preenchendo os bordos do objecto com tons diferentes da cor de fundo do centro do objecto</quizChoice>
+               <quizChoice xml:id="_268267">desenhando o objecto gráfico sobre uma imagem colorida (pixmap) e tri-dimensional</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268257" value="0">
+               <ask>Alguns comandos de posicionamento da Tk assumem que os objectos não se sobrepõem. Se numa interface Tk quiser forçar a sobreposição de objectos terá de ser usado como comando de posicionamento o</ask>
+               <quizChoice xml:id="_268260"><code>pack</code></quizChoice>
+               <quizChoice xml:id="_268258"><code>place</code></quizChoice>
+
+               <quizChoice xml:id="_268259"><code>grid</code></quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268249" value="0">
+               <ask>O identificador dum objecto Tk é um nome-caminho</ask>
+               <quizChoice xml:id="_268252">iniciado e terminado pelo caracter ponto (.)</quizChoice>
+               <quizChoice xml:id="_268251">separado e terminado pelo caracter ponto (.)</quizChoice>
+               <quizChoice xml:id="_268250">iniciado e separado pelo caracter ponto (.)</quizChoice>
+
+          </quizQuestion>
+          <quizQuestion xml:id="_268253" value="0">
+               <ask>A disposição de objectos gráficos na Tk é realizada por comandos que usam  estratégias diferentes. Por exemplo, a estratégia do comando <code>pack</code> é dispor os objectos gráficos descendentes dum contentor (<code>frame</code>)</ask>
+               <quizChoice xml:id="_268256">em alternativa, mostrando apenas um dos objectos</quizChoice>
+               <quizChoice xml:id="_268255">em grelha, organizados em linhas e colunas</quizChoice>
+
+               <quizChoice xml:id="_268254">em fluxo, na vertical ou na horizontal</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268261" value="0">
+               <ask>O comando <code>bind</code> da Tk permite associar a execução de linhas de comando à ocorrência de diferentes tipos de eventos num objecto gráfico. Um exemplo dum evento suportado é</ask>
+               <quizChoice xml:id="_268263">possibilidade de leitura dum ficheiro</quizChoice>
+               <quizChoice xml:id="_268264"><i>login</i> ou <i>logout</i> do utilizador</quizChoice>
+
+               <quizChoice xml:id="_268262">movimento do rato</quizChoice>
+          </quizQuestion>
+     </quizGroup>
+     <quizGroup title="TCL" xml:id="_268064" value="0">
+          <quizQuestion xml:id="_268069" value="0">
+               <ask>Numa linha de comandos Tcl, os parêntesis rectos (&#91;, &#93;) delimitam</ask>
+               <quizChoice xml:id="_268070">uma sub-linha de comandos</quizChoice>
+
+               <quizChoice xml:id="_268071">um argumento em que é inibida a substituição</quizChoice>
+               <quizChoice xml:id="_268072">uma sequência de caracteres de comentário</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268065" value="0">
+               <ask>A substituição de variáveis em linhas de comandos TCL pode ser inibida usando chavetas. A inibição da substituição ocorre apenas se</ask>
+               <quizChoice xml:id="_268067">as chavetas não contiverem outras chavetas</quizChoice>
+               <quizChoice xml:id="_268068">incidir sobre toda a linha de comandos</quizChoice>
+
+               <quizChoice xml:id="_268066">as chavetas delimitarem um argumento da linha de comandos</quizChoice>
+          </quizQuestion>
+     </quizGroup>
+     <quizGroup title="HTML" xml:id="_268034" value="0">
+          <quizQuestion xml:id="_268043" value="0">
+               <ask>O seguinte elemento do HTML
+<u>não</u> tem nenhum argumento 
+cujo valor seja um URL</ask>
+
+               <quizChoice xml:id="_268044"><code>TABLE</code></quizChoice>
+               <quizChoice xml:id="_268046"><code>FORM</code></quizChoice>
+               <quizChoice xml:id="_268045"><code>LINK</code></quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268035" value="0">
+               <ask>Numa formatação HTML, a sequência contígua de caracteres delimitada por parêntesis angulares (os sinais de menor e maior) designa-se por</ask>
+               <quizChoice xml:id="_268036">contentor</quizChoice>
+
+               <quizChoice xml:id="_268037">elemento</quizChoice>
+               <quizChoice xml:id="_268038">anotação</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268039" value="0">
+               <ask>Em HTML, o atributo <code>CELLSPACING</code> dum elemento <code>TABLE</code> permite controlar
+a separação entre </ask>
+
+               <quizChoice xml:id="_268040">células contíguas</quizChoice>
+               <quizChoice xml:id="_268042">cabeçalhos e a primeira linha ou coluna</quizChoice>
+               <quizChoice xml:id="_268041">conteúdo da célula e o seu bordo</quizChoice>
+          </quizQuestion>
+     </quizGroup>
+     <quizGroup title="Cascading Style Sheets" xml:id="_268008" value="0">
+          <quizQuestion xml:id="_268009" value="0">
+
+               <ask>As regras do <i>Cascading Style Sheet</i> (CSS) permitem controlar os valores</ask>
+               <quizChoice xml:id="_268011">objectos gráficos dos formulários do HTML</quizChoice>
+               <quizChoice xml:id="_268012">atributos de elementos do HTML</quizChoice>
+               <quizChoice xml:id="_268010">propriedades gráficas associadas aos elementos do HTML</quizChoice>
+          </quizQuestion>
+
+          <quizQuestion xml:id="_268013" value="0">
+               <ask>As regras do <i>Cascading Style Sheet</i> (CSS) são constituídas por selectores e por declarações. Um selector <u>não</u> pode ser o nome de um</ask>
+               <quizChoice xml:id="_268014">atributo dum elemento do HTML</quizChoice>
+               <quizChoice xml:id="_268016">classe de elementos do HTML</quizChoice>
+
+               <quizChoice xml:id="_268015">identificador dum elemento do HTML</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268017" value="0">
+               <ask>As <u>propriedades de caixa</u> das regras das <i>Cascading Style Sheet</i> (CSS) permitem, entre outras, especificar o espaçamento entre o </ask>
+               <quizChoice xml:id="_268020">elemento e o canto esquerdo do ecrã</quizChoice>
+
+               <quizChoice xml:id="_268019">as letras do conteúdo do elemento</quizChoice>
+               <quizChoice xml:id="_268018">o bordo e o conteúdo do elemento</quizChoice>
+          </quizQuestion>
+     </quizGroup>
+     <quizGroup title="Human Computer Interaction" xml:id="_268021" value="0">
+          <quizQuestion xml:id="_268022" value="0">
+               <ask>Um dos 2 princípios genéricos do <i>Human Computer Interaction</i> (HCI) é o da visibilidade. Ou outro princípio genérico do HCI é o da </ask>
+
+               <quizChoice xml:id="_268023">capacidade</quizChoice>
+               <quizChoice xml:id="_268024">simplicidade</quizChoice>
+               <quizChoice xml:id="_268025">acessibilidade</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268026" value="0">
+               <ask>Uma interface gráfica apresenta ao utilizador informação de <i>debugging</i> que faz apenas sentido para o programador que desenvolveu a aplicação. Esta interface gráfica está a violar um princípio do HCI da</ask>
+
+               <quizChoice xml:id="_268028">directividade</quizChoice>
+               <quizChoice xml:id="_268029">capacidade</quizChoice>
+               <quizChoice xml:id="_268027">simplicidade</quizChoice>
+          </quizQuestion>
+          <quizQuestion xml:id="_268030" value="0">
+               <ask>Uma regra habitualmente seguida no desenho de interfaces gráficas especifica que a barra de menus deve conter</ask>
+               <quizChoice xml:id="_268031">todos os comandos da interface</quizChoice>
+
+               <quizChoice xml:id="_268033">os comandos básicos da interface</quizChoice>
+               <quizChoice xml:id="_268032">os principais comandos da interface</quizChoice>
+          </quizQuestion>
+     </quizGroup>
+</quiz>
+

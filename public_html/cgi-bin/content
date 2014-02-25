@@ -1,0 +1,14 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+cd ../..
+
+lappend auto_path packages
+
+source .config
+
+service::process
+

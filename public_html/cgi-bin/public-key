@@ -1,0 +1,29 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+cd ../..
+
+lappend auto_path .
+lappend auto_path packages
+
+source .config
+
+package require ssh
+package require utils
+
+cgi::start {
+
+
+    if { ! [ ssh::with_key ] } { ssh::create_key }
+
+    if { [ ssh::with_key ] } {
+	puts -nonewline [ file::read_in [ ssh::fx_key pub ] ]
+    } else {
+	puts "public key not found"
+    }
+
+
+} text/plain\n

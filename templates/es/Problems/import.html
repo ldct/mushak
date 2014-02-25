@@ -1,0 +1,41 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Importar Archivo de Problemas</title>
+    <link
+        rel ="stylesheet"
+        href    ="../../styles/$Conf(style).css"
+        type    ="text/css">
+    <script>
+</head>
+<body>
+<center>
+
+<H2>Importar Archivo de Problemas</H2>
+<form
+    method="post"
+    enctype="multipart/form-data"
+    target="_self"
+    action="$Conf(controller)?message+$dir+importing">
+
+   File <input type="file" name="file">
+
+   <input type='submit' value='Importar'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Nota:</b> El fichero debe ser un archivo (tgz, tar o zip) con todos los problemas.
+   Cada problema debe estar en su propio directorio, pero <b><u>no</u></b> meterlos dentro
+   de otro subdirectorio común que los incluya a todos.
+   Mooshak intenta averiguar qu&eacute; ficheros son programas, descripciones, im&aacute;genes,
+   y datos de entrada y salida. Puedes usar subdirectorios para cada problema siguiendo
+   la estructura de Mooshak (tests, im&aacute;genes, etc.) aunque no es obligatorio.
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

@@ -1,0 +1,43 @@
+activate.html		X
+analyze.html		X
+answer.html		X
+ask.html		X
+*balloons.html
+check.html
+check_lists.html
+confirm.html
+connections.html
+content.html
+control.html
+deliver_balloon.html
+deliver.html
+edit.html
+evolution.html
+faq.html
+form.html
+help.html
+*historical.html
+import.html
+import_problems.html
+judge.html
+logo.html
+navigate.html
+people.html
+prepare.html
+present.html
+*printouts.html
+*questions.html
+ranking.html
+register.html
+report_error.html
+request.html
+runner.html
+show.html
+split.html		X
+start.html
+statistics.html
+submission.html
+team.html
+view.html
+warn.html
+white.html		X

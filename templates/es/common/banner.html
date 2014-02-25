@@ -1,0 +1,55 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <meta
+    http-equiv="refresh"
+    content ="60; URL=$Conf(controller)?banner">
+   <link
+    rel ="stylesheet"
+    href="../../styles/$Conf(style).css"
+    type="text/css">
+   <script language="Javascript">
+   <!--
+    parent.document.title = "$Conf(contest) - $Conf(profile) - Mooshak"
+   -->
+   </script>
+   <style>
+    td, th {
+        margin: 5px;
+        padding: 5px;
+        word-spacing: -0.5px;
+        line-height: 10px;
+    }
+   </style>
+</head>
+<body>
+<table id="Banner" cellspacing="1" cellpadding="0" border="0">
+
+    <tr>
+        <th align="left" width="40%">&nbsp;
+            <img src="../../icons/mooshak-16.png"><font size="-2" color="Pink">shak</font>
+            <font size="-2" color="pink">$VERSION</font>
+        </th>
+        <td align="center"  width="30%">
+            <font size="-2"><code>$nusers $_users</code></font>
+            <font size="-2" ><a target="_blank"
+            href="../execute?clone">[clonar]</a></font>
+
+        </td>
+        <td align="right"  width="30%">
+            <font size="-1"><code>$now</code>&nbsp;</font>
+        </td>
+    </tr>
+    <tr>
+        <th colspan="2">
+                <font size="-1">$name</font>
+        </th>
+        <td  align="center">
+
+                <font size="-1">$remaining</font>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+

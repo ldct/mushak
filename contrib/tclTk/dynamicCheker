@@ -1,0 +1,62 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+#
+#						zp@ncc.up.pt   2006
+#						
+#-
+
+lappend auto_path  [ file dirname [ info script ] ]
+
+package require cgi
+package require saferTk
+package require match
+
+set TamanhoProgramaMinimo 100
+set SubstitutionFile checker_widget_mapping.tcl
+
+proc check {attempt_file solution_file test_file} {
+    global SubstitutionFile
+  
+    set classe 0
+    set obs ""
+
+    set resolve	resolve	;# interpretador contendo a resolução
+    set exemplo	exemplo ;# interpretador contendo a solução
+
+    set attempt  [ html::parse [ string tolower [ read_in $attempt_file  ] ] ]
+    set solution [ html::parse [ string tolower [ read_in $solution_file ] ] ]
+
+    set fd [ open $SubstitutionFile r ]
+    set sub [ read $fd ]
+    catch { close $fd }
+
+    # verifica a funcionalidade do programa
+    
+    set result [ match::verifica $exemplo $resolve $tests sub ]
+    
+    set nerros 0
+    set classe	100
+    
+    # se nao e uma  lista de erros e melhor dar um geito ...
+    if { $result != "" && ! [ regexp \{ $result ] } { 
+	set result [ list $result ] 
+    }
+    
+    foreach erro $result {		
+	
+	switch -regexp -- $erro {
+	    "^Erro num comando invocado pelo interface" {
+		incr classe -40
+	    }
+	    default	{ incr classe -10	}
+	}
+	append obs $erro\n
+	if { [ incr nerros ] > 3 } {
+	    break
+	}
+    }
+
+}

@@ -1,0 +1,56 @@
+<!part ext="head">
+<html>
+    <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link
+            rel ="stylesheet"
+            href    ="../../styles/$Conf(style).css"
+            type    ="text/css">
+    </head      >
+    <body>
+
+        <h2>Listas de comprobaci&oacute;n</h2>
+
+        <ul>
+<!/part ext="head">
+
+<!part ext="check_out">
+            <li>?</li>
+<!/part ext="check_out">
+
+
+
+<!part ext="check_head">
+            <li>
+                <a href="$Conf(controller)?check+$clist">$text</a>
+                <ol>
+<!/part ext="check_head">
+
+
+<!part ext="report">
+                    <li>
+                       <$style>
+                        <a href=
+                "$Conf(controller)?check+$clist+$report">
+                        <font color="$color">
+                            $report
+                        </font>
+                        </a>
+                      </$style>
+                    </li>
+<!/part ext="report">
+
+
+<!part ext="check_foot">
+                </ol>
+            </li>
+<!/part ext="check_foot">
+
+
+
+<!part ext="foot">
+        </ul>
+    </body>
+</html>
+<!/part ext="foot">
+

@@ -1,0 +1,47 @@
+
+<h3>Printing command</h3>
+
+<p align="justify">In some contests it is reasonable to allow the
+teams to print their programs so that they can debug their programs
+offline. Mooshak allows you to define a printing command in which you
+specify the printer that should be used for the contest. To this do
+the following:
+
+<p align="justify">Inside the folder for the contest you are setting
+up, open the <tt>Printouts</tt> folder and then define the
+<tt>Command</tt> attribute with the printing command line that should
+be used by the system when contestants try to print program listings.
+
+<p align="justify">
+The command line must include a reference to the file to be printed
+using the variable <b><code>$Programa</code></b>. Other avaliable variables
+may be usefull if you want to print a cover page. The following table
+lists all the available variables.
+
+<p>
+<center>
+<table border="1" cellspacing="1" cellpadding="10">
+<tr>
+	<td><b><code>$Equipa</code></b></td>
+	<td>Name of the <b>team</b> requesting the printout</td></tr>
+</tr>
+<tr>
+        <td><b><code>$Problema</code></b></td>
+	<td>Reference of the <b>problem</b> being solved</td>
+</tr>
+        <td><b><code>$Programa</code></b></td>
+	<td>File containing the <b>program</b> to be printed</td>
+</tr>
+        <td><b><code>$Tempo</code></b></td>
+	<td><b>Time</b> counted from the start of the contest</td>
+</tr>
+</table>
+</center>
+<p>
+
+The distribution includes a printing command that produces a cover
+page. To use this command relace the command line with 
+<pre>
+/home/mooshak/bin/imprime.pl $Equipa $Problema $Programa $Tempo
+</pre>
+<hr>

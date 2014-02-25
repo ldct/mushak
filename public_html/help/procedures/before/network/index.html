@@ -1,0 +1,72 @@
+
+<h3>Networking Mooshak</h3>
+
+<div align="justify">
+An important feature of Mooshak is the replication of data between
+servers in different machines, or in the same machine running under
+different users. Using this feature it is possible to create a network
+of servers, which can be useful for different purposes such as
+<ul>
+<li> multi-site contests </li>
+<li> simultaneous public contests </li>
+<li> load balancing </li>
+<li> data backup </li>
+</ul>
+
+<p>
+Data is replicated using a script based on <code>RSYNC</code>,
+invoked automatically every minute, and operating over
+<code>SSH</code> to provide an encrypted channel using public-key
+encryption.
+
+
+<p>
+To create a network of Mooshak servers you must configure each node,
+specifying where data will be replicated, and from where it can be
+received. In particular you have to perform the following tasks:
+<p>
+<ol>
+<li><b>Generate you own keys</b> using the appropriated button on the
+<code>network<code> directory.
+
+<li><b>Create <code>Server</code> directories</b> for each of the nodes
+connecting you server. You must specify and <B>User</b> and
+<B>Address</b>. If the other server's base URL is not
+<code>http://<i>Address</i>/~<i>User</i></code> then you must supply the
+alternative <b>URL</b> so that it can be reached in order to ask it
+for its public key. This process is done automatically when you check
+the <B>Send</b> field. You you want to receive data from that server
+you should check the <b>Receive</b> field.
+
+<li><b>Check the connection</B>, if you are sending data to the other
+server, by pressing the <B>Test</b> button in this directory.
+
+<li><b>Check the network</b>, after having configured all servers. Go
+up to the <code>network</code> directory and check local and global
+connections. Local connections gives you a list of servers to which
+you are sending data to and another list of those server you are
+receiving data from. Global connections propagates this query to all
+other servers (that in turn propagate it to other servers, if
+necessary) and produces a table with all the gathered data. Both table
+entries refer to servers. Each cell shows if the row server is sending
+to the column server. A symbol is written the current state of the connection:
+
+<blockquote>
+<b><code>[-]</code> </b>: both sending and receiving</br>
+<b><code>[-[</code> </b>: sending but not receiving</br>
+<b><code>-]]</code> </b>: receiving but not sending</br>
+<b><code>-][</code> </b>: neither receiving nor sending</br>
+</blockquote>
+
+Fully connected servers (<code>[-]</code>) are shown in green
+background unless they are the same server, in which case the
+background is yellow (you probably do not want a server to replicate
+to itself). All fully disconnected (<code>-][</code>) servers are
+shown with a gray background (you probably do not want to have them
+connected). Those half connected servers (<code>[-[</code> or
+<code>-]]</code>) are shown in red background because they are probably
+misconfigured.
+
+</ul>
+
+</div>

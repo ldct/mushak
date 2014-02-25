@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml-stylesheet type="text/xsl" href="../styles/exam.xsl"?>
+<exam>
+	<student>
+		<name>$name</name>
+		<id>$id</id>
+	</student>
+
+	<problem>
+		<description>
+		$description
+		</description>
+		<resolution/>
+		<feedback/>
+	</problem>	
+
+</exam>

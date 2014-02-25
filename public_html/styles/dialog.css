@@ -1,0 +1,47 @@
+/*
+
+ Mooshak: managing programming contests on the web		April 2001
+ 
+			Zé Paulo Leal 		
+			zp@ncc.up.pt
+
+-----------------------------------------------------------------------------
+ file: dialog.css
+
+ Stylesheet for Mooshak dialog windows
+
+
+*/
+
+BODY {
+	color:			black;
+	background-color:	#CCCCFF;
+	padding:		20px;
+}
+
+TD.Note {
+	background-color:	white;
+	padding:		20px;
+}
+
+
+TABLE.Listing {
+      	border:			0;
+	width:			100%;
+	margin:			0;
+	padding:		0;
+}
+
+
+TR.Header {
+	 color:			black;
+	 background:		gray;
+}
+
+TD TH {
+	font-family: 		sans-serif;
+}
+
+INPUT.Button	{
+	width:		100px;
+}

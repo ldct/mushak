@@ -1,0 +1,65 @@
+
+
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<center>
+<form 
+	method="post" 
+	enctype="multipart/form-data" 
+	target="top" 
+	action="$Conf(controller)?warned">
+ 
+	<table 
+		cellpadding="5" 
+		cellspacing="0" 
+		width="100%" 
+		border="0">
+	<tr>
+        	<th id="Base" align="left" colspan="2">
+                Comment to problem $problems
+		&nbsp;&nbsp;&nbsp;&nbsp;
+	        </th>
+		<td id="Base" align="right" >
+	</tr>
+	<tr>
+        	<td id="Base" align="center">
+	                <b>Subject:</b> 
+			<input	type	="text" 
+				name	="subject" 
+				size	="70" 
+				maxlength="70">
+		</td>
+	        <th id="Base" colspan="2">
+                	<input 
+				class	="Button" 
+				type	="submit" 
+				name	="asked" 
+				value	="Submit">
+			<br>
+		</th>
+	</tr>
+	<tr>
+        	<td id="Base" align="center">
+        	        <textarea 
+				name="answer" 
+				cols="80" 
+				rows="5"></textarea>
+	        </td>
+		<th id="Base" colspan="2">
+                	<input 
+				class	="Button" 
+				type	="reset" 
+				value	="Reset">
+			<br>
+        	</th>
+	</tr>
+</table>
+</form
+</center>
+</body>
+</html>
+

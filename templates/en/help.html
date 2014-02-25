@@ -1,0 +1,214 @@
+<!part ext="layout">
+
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Mooshak's Help</title>
+<link rel="stylesheet" href="../../styles/help.css" type="text/css">
+
+   <link REL="icon" HREF="../../icons/mooshak-16.png" TYPE="image/png">
+   <link REL="SHORTCUT ICON" HREF="../../icons/mooshak-16.png">
+
+<script>
+defaultStatus="Mooshak's help";
+</script>
+
+</head>
+<body>
+
+<table width="100%" cellspacing="0" cellpadding="10">
+<tr>
+	$menu_layout
+	$page_layout
+</tr>
+</table>
+
+</body>
+</html>
+
+<!part ext="bar">
+
+<form>
+
+<table celpadding="0" cellspacing="2" id="Base"><tr>
+<td><input type="button" value="&lt;|" onclick="window.open('$Conf(controller)?help+$prev','_self')" title="Previous page"></td>
+<td><input type="button" value="|&gt;" onclick="window.open('$Conf(controller)?help+$next','_self')" title="Next page"></td>
+<td width="20">&nbsp;</td>
+<td><input type="button" value="$tab_text" onclick="window.open('$Conf(controller)?help+$curr+$tab_command','_self')" title="Hide/show navigation tab"></td>
+<td><input type="button" value="$fold_text" 
+onclick="window.open('$Conf(controller)?help+$curr+$fold_command','_self')" title="Expand/collapse tree"></td>
+<td><input type="button" value=" + " 
+onclick="window.open('$Conf(controller)?help+$curr+enlarge','_self')" title="Enlarge font"></td>
+<td><input type="button" value=" - " 
+onclick="window.open('$Conf(controller)?help+$curr+reduce','_self')" title="Reduce font"></td>
+
+</tr></table>
+
+<center><h3><img src="../../icons/mooshak-16.png"><font size="0" color="Pink">shak's Help</font>&nbsp;</h3>
+
+
+
+
+</form>
+
+<!part ext="menu_collapsed">
+<td valign="top">
+$bar
+</td>
+
+</tr><tr>
+
+<!part ext="menu_head">
+<td id="BaseForte" width="300" height="400" valign="top">
+
+$bar
+<form method="post" action="$Conf(controller)">
+<input type="hidden" name="command" value="help"> 
+<input name="words" value="$Conf(words)"> 
+<input value="Search" type="submit">
+</form>
+</center>
+<font size=-1>
+
+<!part ext="menu_cab">
+<ol>
+<!part ext="menu_off">
+<li><i><font color="gray">$n</font></i>
+<!part ext="menu_dir">
+<li><b><a href="$uri">$n</a></b>
+<!part ext="menu_file">
+<li><i><a href="$uri">$n</a></i>
+<!part ext="menu_sel">
+<b><li><a href="$uri">$n</a></li></b>
+<!part ext="menu_rod">
+</ol>
+<!part ext="menu_foot">
+
+</font>
+</td>
+
+<!part ext="page_head">
+<td 		valign="top"> 
+
+<!part ext="page_foot">
+
+</td>
+<!part ext="search_head">
+<td 		valign="top"> 
+
+<h2>Searching <code>$Conf(words)</code></h2>
+
+<ol>
+<!part ext="search_found">
+<li><a href="$Conf(controller)?help+$file">$title</a> $count</li>
+<!part ext="search_foot">
+</ol>
+
+<p>
+$n pages found
+
+</td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

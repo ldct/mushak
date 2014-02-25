@@ -1,0 +1,43 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Import Remote Problem </title>
+	<link 
+		rel	="stylesheet" 
+		href	="../../styles/$Conf(style).css" 
+		type	="text/css">
+</head>
+<body>
+<center>
+
+<H2>Import Remote Problem</H2>
+<form 
+	method="post"
+	target="_self" 
+	action="$Conf(controller)?message+$dir+importing_remote">
+
+  URL: <input type="text" name="URL"> 
+
+   <input type='submit' value='Import'>
+
+</form>
+
+<table>
+  <tr><td class="Note">
+   <b>Note:</b> 
+   Enter URL from remote repository containing a problem in Mooshak's
+   format. Problems can be served by:
+   <ol>
+     <li> a Mooshak installation configured as service; </li>
+      <li> a problem format translation service; </li>
+     <li> an HTTP server.</li>
+
+   </ol>
+
+       The response content type must specify the compression format (e.g. ZIP).
+  </td>
+</tr>
+
+</center>
+</body>
+</html>

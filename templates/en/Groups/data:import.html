@@ -1,0 +1,73 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<title>Import teams CSV data file</title>
+<center>
+
+<H2>Import teams CSV data file</H2>
+<form 
+	method	="post" 
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?operation+importing+$dir">
+
+
+   Clear existing teams 
+   <input type='checkbox' name="reset" value="1" checked>
+
+   File <input type="file" name="file"> 
+
+   <input type='submit' value='Import'>
+
+
+
+</form>
+
+<table>
+<tr><td class="Note">
+
+
+<p>Import a Comma-Separated Values (CSV) file with teams data. The file
+content must have 1 record per line and columns separated by commas,
+semi-colons or tabs. Separators are automatically detected.</p>
+
+<p> An optional header line may assign a names to columns. The
+type of each column is automatically inferred from the headers, if
+  possible. Available types are the following.</p> 
+
+<ul>
+   <li> <b>id</b> - of participant (may be generated on import, if omitted)
+   <li> <b>first_name</b> - of participant
+   <li> <b>last_name</b> - of participant
+   <li> <b>name</b> - of participant (concatenation of the previous, if omitted)
+   <li> <b>email</b> of participant
+   <li> <b>gender</b> - of participant ("Male"/"M" or "Female"/"F")
+   <li> <b>role</b> - of participant ("Coach" or "Contestant")
+   <li> <b>team</b> - identification (<b>mandatory</b>)
+   <li> <b>password</b> in clear text for team authentication
+   <li> <b>group</b> - of team (University, Country, etc)
+   <li> <b>flag</b> - of group
+   <li> <b>color</b> - of group
+   <li> <b>acronym</b> - of group (generated from name, if omitted)
+   <li> <b>country</b> - of team (unused)
+   <li> <b>status</b> - of participant (unused)
+</ul>
+
+<p>If an header line is not available, or if types cannot be inferred
+from headers, then you must assign a type to each column. </p>
+
+<p>Even if a  type for every column is automatically inferred you should always
+  double check them and make the appropriate changes, if needed.  </p>
+
+
+</td>
+</tr>
+</table>
+
+</center>
+</body>
+</html>
+

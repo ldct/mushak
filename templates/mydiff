@@ -1,0 +1,4 @@
+
+en=$1
+es=es/`basename $en`
+diff -q -s $en $es

@@ -1,0 +1,75 @@
+/*
+
+ Mooshak: managing programming contests on the web		April 2001
+ 
+			Zé Paulo Leal 		
+			zp@ncc.up.pt
+
+-----------------------------------------------------------------------------
+ file: help.css
+
+ Stylesheet for Mooshak help pages
+
+
+*/
+
+BODY {
+	background-color:	#FFFFCC;
+	background-image:	url(../icons/Fundo.gif);
+
+	font-family: 		"Helvetica, sans-serif";
+}
+
+#Found {
+	display: inline;
+	color: green;
+	clear:	none;
+	font-size: Large;
+}
+
+#Error {
+	color: red;
+	font-size: Large;
+	font-family: 		"Courier, sans-serif";	
+}
+
+
+TD TH {
+	font-family: 		"Helvetica, sans-serif";
+}
+
+#Titulo {
+	background-color:	#999999;
+}
+
+#Dados {
+	background-color:	#FFCCCC;
+	background-color:	#CC9999;
+}
+
+#Juri {
+	background-color:	#99FFFF;
+	background-color:	#9999CC;
+}
+
+#Controlo {
+	background-color:	#99CC99;
+}
+
+#Base {
+	background-color:	#CCFFFF;
+	background-color:	#CCCCFF;
+	background-image:	url(../icons/Base.gif);
+	font-family: 		"Helvetica, sans-serif";
+}
+
+#BaseForte {
+	background-color:	#CCCCFF;
+	background-color:	#AAAAFF;
+	background-image:	url(../icons/BaseForte.gif);
+}
+
+#Botao {
+	width:	100px;
+}
+

@@ -1,0 +1,40 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+#
+#
+#	Generates an XML file with a Mooshak group
+#
+#					José Paulo Leal
+#					zp@dcc.fc.up.pt
+# Usage:
+#           gera_outros >  group.xml
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+
+
+
+set first 	 1
+set last 	99
+set group 	Outros
+set password 	aluno
+
+array set template {
+    group_start {<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Group 
+	xmlns="http://www.ncc.up.pt/mooshak/" 
+	xmlns:ct="http://www.ncc.up.pt/mooshak/clear_text_password">
+    	Designation="%s" Acronym="%s"}
+    team  {  <Team xml:id="%s" Name="%s" ct:Password="%s" Profile="team"/>}
+    group_end {</Group>}
+}
+
+puts [ format $template(group_start) $group $group ]
+for { set n $first } { $n <= $last } { incr n } {
+
+    set team [ format T%02d $n ]
+    set name [ format "Aluno %2s" $n ]
+    puts [ format $template(team) $team $name $password ]
+}
+puts [ format $template(group_end) $name $name ]

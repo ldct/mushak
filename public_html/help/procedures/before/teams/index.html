@@ -1,0 +1,88 @@
+
+<h3>Adding groups and teams</h3>
+
+
+<p align="justify">Teams are usually created inside groups. Groups can
+be viewd as an Institution or a Country, and all teams inside a group
+share the same group-attributes (group nickname, display-colour, and
+country flag).
+
+<p align="justify">Inside the folder for the contest you are setting
+up, open the <tt>Groups</tt> folder and then to create groups and
+teams you can either do it <a href="#stepbystep">step by step</a> or
+else by <a href="#importing">importing data from a file</a>.<p>
+
+<hr>
+
+<a name="stepbystep"></a><b>Step by step:</b>
+
+
+<ol>
+<li><p align="justify"><b>Add new group</b> give a name to a new folder
+for the group under which some teams will be created.<p>
+
+<li><p align="justify"><b>Define attributes for the group:</b> open
+the group folder and define its attributes. Note that, designation
+stands for full group name as will appear in the certificates (usually
+University names), nickname is an abbreviation of the group name that
+will be prefixed to the team name displayed in the submissions list
+and classification interfaces. You can also define a display colour
+and country flag that all teams inside this group will share.
+
+<li><p align="justify"><b>Add new team</b> the last attribute within a
+group definition allows one to give a name to a new folder to hold a
+team data.<p>
+
+<li><p align="justify"><b>Define attributes for a team:</b> open the
+team folder and define its attributes. You can define the name for the
+team, the keyword that the team must use to access the system during
+the contest (this keyword can be automatically generated with button
+<tt>Create Keyword</tt>), email for the team (relevant for online
+contests), and state whether the team qualifies for the official
+contest.
+
+<li><p align="justify"><b>Add a team member</b> the last attribute within a
+team definition allows one to give a name to a new folder to hold a
+team-member data.<p>
+
+<li><p align="justify"><b>Define attributes for a team-member:</b>
+open the team-member folder and define its attributes. You can define
+the name of the team-member, specify whether he his a contestant or a
+coach, specify its sex (relevant for certificates), specify date he
+was born and last specify his email-address.
+
+</ol>
+
+<p align="justify">You have to repeat 
+<ul>
+<li>steps 5 and 6 to create all members within a team;
+<li>steps 3 and 4 to create all teams within a group (and then steps 5 and 6);
+<li>steps 1 and 2 to create all different groups there will be in the contest (and then repeat steps 3 till 6 as necessary).
+</ul>
+
+<p align="justify">This process is cumbersome if you are adding too
+many groups and teams. In such case, we advice that you use the
+following alternative.
+
+<a name="importing"></a><p align="justify"><b>Importing data from a file:</b>
+
+<p align="justify">Mooshak allows data describing groups and teams to be imported from a text file. In order to it, open the <tt>Groups</tt> folder and then press the button <tt>Import</tt> and give the file name.
+
+<p align="justify">The file being imported must be a text file with
+fields separated by tabs and must obbey the format supported by the
+ICPC central database, that is:
+
+<pre>
+	GlobalId LocalId Role Name Institution Team 
+</pre>
+
+<p align="justify">Last, Mooshak also allows you export into a text
+file the data describing the participating teams. This feature may be
+of interest in case you need to do further processing on that data,
+namely produce labels for team-envelopes or produce a team-list for
+registration purposes.
+
+<p align="justify">In case you need to reuse the same team-data from a
+previous contest you can either export it into a file and import the
+file into the new contest, or else make use of folder copy/past
+facility provided by Mooshak.

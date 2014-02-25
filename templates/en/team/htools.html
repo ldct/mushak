@@ -1,0 +1,404 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	title="Mooshak in color"
+	type="text/css">
+
+   <script language="JavaScript" type="text/javascript"><!--
+
+Submitting=false;
+function submission(form) { Submitting=true; }
+
+// set hidden variable "command" with my name
+function name2command(obj) {
+  obj.form.command.value=obj.name;
+} 
+
+// select problem from appropriated object
+function selected_problem(label) {
+    var value;
+    
+    if(document.problems.problem.options != undefined)
+	value=select_problem_from_list(label);
+    else if(document.problems.problem.length != undefined)
+	value=select_problem_from_radio(label);
+    else if(label && document.problems.problem.title != undefined)
+	value=document.problems.problem.title;    
+    else if(document.problems.problem.value != undefined)
+	value=document.problems.problem.value;    
+    else
+    	value=undefined;
+	
+    return value;
+}   
+
+// return selected problem from an array of radio buttons
+function select_problem_from_radio(label) {
+    
+    with(document.problems.problem) {
+    	if(length==0) {
+	    // with a single radio button JS 
+	    // doesn't create an array to reflect it
+	    if(checked)
+	    	if(label)
+			return title;
+		else
+			return value;     
+	} else {
+ 	   with(document)
+              for(var i=0; i < problems.length; i++)
+	        if(problems[i].name == "problem" && problems[i].checked)
+	          if(label)
+		      return problems[i].title;
+                  else
+		      return problems[i].value;
+        }
+    }
+    return undefined;
+}
+
+// return selected problem from a selection list
+function select_problem_from_list(label) {
+    with(document.problems.problem) {
+
+	for(var i=0; i < options.length; i++)
+	    if(options[i].selected)
+		if(label)
+			return options[i].text;
+		else
+			return options[i].value;
+    }
+    return undefined;
+}
+
+
+function check_problem(form) {    
+
+  if(selected_problem(false) == undefined) {
+        alert('Choose a problem');
+	return false;
+    } else {
+        return true;
+    }     
+}
+
+function copy_problem(button) {        
+    with(button.form.problem) {
+       if((value=selected_problem(false)) == undefined) {
+          value="";
+       }	          
+    }
+}
+
+function check_program(form) {    
+
+    // check only program submissions
+
+    if((form.problem.value=selected_problem(false)) == undefined) {
+        alert('Choose a problem');
+	return false;
+    }          
+
+    if(Submitting) {
+        Submitting=false;
+
+        if(form.program.value=="") {
+		alert('Program not specified');
+		return false;
+	} else if(invalidExtension(form.program.value)) {
+	        alert(  'Program with invalid extension\n'+
+		      'use only '+validExtensions() );
+		return false;
+        } else {
+	       var msg='Submitting to problem '+selected_problem(true);
+	       msg += '\nConfirm?';
+	       return confirm(msg);
+        }
+    } else { // Printing
+        if(form.program.value=="") {
+		alert('File to print not specified');
+		return false;    
+        } else {
+       	       return confirm('Confirm printout?');
+	}
+    }    
+}
+
+$languages
+
+function invalidExtension(fx) {
+    var p; 
+    for(var ext in Language) {
+	if((p=fx.lastIndexOf("."+ext))==-1)
+	    continue;
+	if(p+ext.length+1==fx.length) {
+	    return false;
+	}
+    }
+    return true;
+}
+
+function validExtensions() {    
+    var valid="";
+    for(var ext in Language) {
+    	if(valid != "") 
+		valid += " , ";
+        valid += "."+ext;
+    }	
+    return valid;
+}
+
+//--></script>
+</head>
+<body>
+
+<form 
+	method	="post" 
+	name	="problems"
+	target	="answer" 
+	onSubmit="return check_problem(this);"
+	action	="$Conf(controller)">
+	<input 
+		type		="hidden" 
+		name		="page" 
+		value		="0">
+	<input 
+		type		="hidden" 
+		name		="command" 
+		value		="empty">
+	<table 
+		width		="100%" 
+		border		="0" 
+		cellpadding	="2" 
+		cellspacing	="0">
+
+		<tr>
+			<th 
+				bgcolor	="777777" 
+				rowspan	="4" 
+				width="2%">&nbsp;</th>
+			<th 
+				id	="BaseForte" 
+				rowspan	="4" 
+							width="20%">
+			<font color="white">
+				<h2><font color="pink">$designation</font></h2>
+				<h4>$team_name<font></h4>
+
+				<p align="right">
+					<img src="../../icons/mooshak-16.png">
+					<font size="-1"
+					color="Pink">shak $VERSION</font>
+					&nbsp;
+				</p>
+						</font>
+			</th>
+			<th width="2%">&nbsp;</th>
+			<th id="Title"> Problem	</th>
+			<td id="Base" width="2%">&nbsp;</th>
+			<td id="Base"> $problems </td>
+			<th id="Base" width="2%">&nbsp;</th>
+			<th id="Base"  width="10%">
+		  		<font size="-1">
+					<input 
+						class	="Button"
+						type	="submit"	
+						name	="view"	
+						onClick	="name2command(this);"
+						value	="$view" >
+				 </font>
+			</th>
+			<th id="Base"  width="10%">
+				<font size="-1">
+					 <input 
+						class	="Button"
+						type	="submit"
+						name	="ask"
+						$asking
+						onClick	="name2command(this);"
+						value	="$ask">
+				</font>
+			</th>
+
+		</tr>
+</form>
+
+<form 
+	method	="post" 
+	name	="programs"
+	enctype	="multipart/form-data" 
+	onSubmit="return check_program(this);"
+	target	="answer" 
+	action	="$Conf(controller)?">
+	<input 
+		type		="hidden" 
+		name		="command" 
+		value		="empty">
+	<input 
+		type		="hidden" 
+		name		="problem" 
+		value		="">
+		<tr>
+			<th width="2%">&nbsp;</th>
+			<th id="Title"> Program </th>
+			<td id="Base" width="2%">&nbsp;</th>
+			<td id="Base"> 
+				<input 
+					type	="file" 
+					name	="program"> 
+			</td>
+			<th id="Base" width="2%">&nbsp;</th>
+			<th id="Base" width="10%">
+				  <font size="-1">
+					  <input 
+						class	="Button"
+						type	="submit"	
+						name	="analyze"	
+						value	="$submit"
+						onClick ="
+						  name2command(this);
+						  submission(this.form);">
+				  </font>
+			</th>
+			<th id="Base"  width="10%">
+				  <font size="-1">
+					  <input 
+						class	="Button"
+						type	="submit"
+						name	="print"
+						onClick ="name2command(this);"
+						$printing
+						value	="$print">
+
+				  </font>
+			</th>
+		</tr>
+</form>
+
+<!-- select listings -->
+<form 
+	method	="post" 
+	name	="listings"
+	target	="answer" 
+	action	="$Conf(controller)?">
+	<input 
+		type		="hidden" 
+		name		="command" 
+		value		="listing">
+	<input 
+		type		="hidden" 
+		name		="problem" 
+		value		="">
+	<input 	type		="hidden" 
+		name		="page"
+		value		="0">
+	<input type		="hidden"
+		name		="all_problems"
+		value		="true">
+	<input type		="hidden"
+		name		="all_teams"
+		value		="true">
+		<tr>
+
+			<th width="2%">&nbsp;</th>
+			<th id="Title"> Listing	</th>
+			<td id="Base" width="2%">&nbsp;</th>
+			<td id="Base" colspan="4">
+					<input   checked
+						type	="radio" 
+						name	="type"
+						value	="submissions"
+					 	onClick ="
+							copy_problem(this); 
+							this.form.submit();">
+					Submissions
+
+					<input 
+						type	="radio"
+						name	="type"
+						value	="ranking" 
+						onClick ="
+							copy_problem(this); 
+							this.form.submit();">
+					Ranking	
+
+					<input 
+						type	="radio"
+						name	="type"
+						value	="questions"
+						onClick ="
+							copy_problem(this); 
+							this.form.submit();">
+					Questions
+
+					<input 
+						type	="radio"
+						name	="type"
+						value	="printouts"
+						onClick ="
+							copy_problem(this);
+							this.form.submit();">
+					Printouts
+			</td>
+	
+
+		</tr>
+<!-- Control listings  -->
+		<tr>
+
+			<th width="2%">&nbsp;</th>
+			<th id="Title"> 
+
+					<a 
+						href="$Conf(controller)?guest" 
+						target="_blanc">
+						<font size="-1">more...</font>
+					</a>
+
+			</th>
+			<td id="Base" width="2%">&nbsp;</th>
+			<td id="Base">
+	
+				Update every $time minutes
+				&nbsp; with $lines lines
+
+			</td>
+			<th id="Base" width="2%">&nbsp;</th>
+
+			<th 
+				id="Base" 
+				rowspan="1"> 
+
+				<input 
+					class	="Button"
+					type	="button"	
+					value	="$help" 
+					onClick	="window.open('$Conf(controller)?faq','work');">
+
+			</th>
+			<th 
+				id="Base" 
+				rowspan="1"> 
+
+				<input 
+					class	="Button"
+					type	="button"	
+					value	="$logout" 
+					onClick	="window.open('$Conf(controller)?logout','_top');">
+
+			</th>
+
+
+		</tr>
+
+
+	</table>
+
+</form>
+
+</body>
+</html>
+

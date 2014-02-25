@@ -1,0 +1,173 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec wish "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+#
+#						zp@ncc.up.pt   2006
+#						
+#-
+
+lappend auto_path  [ file dirname [ info script ] ]
+
+package require saferTk
+package require match
+
+set TamanhoProgramaMinimo 	100
+set MaxErros			4
+
+proc read_in {fx} {
+
+    set fd [ open $fx ]
+    set data [ read $fd ]
+    catch { close $fd }
+    return $data
+}
+
+
+
+proc validate {attempt_file solution_file tests_file} {
+    global TamanhoProgramaMinimo MaxErros
+
+    set classe 0
+    set obs ""
+    set status 11 	;# Requires Reevaluation
+    set channel stderr
+
+    set resolve	resolve	;# interpretador contendo a resolução
+    set exemplo	exemplo ;# interpretador contendo a solução
+    
+    set attempt  [ read_in $attempt_file  	] 
+    set solution [ read_in $solution_file 	]
+    set tests	 [ read_in $tests_file		] 
+    
+    ::saferTk::avalia $exemplo $solution -100 +100
+    ::saferTk::ajusta $exemplo -100 +100
+    
+    if { [ string length [string trim $attempt] ] < $TamanhoProgramaMinimo } {
+	set obs "Programa excessivamente simples "
+	append obs "(menos de $TamanhoProgramaMinimo bytes)"
+	set status 9	;#Invalid Submission
+    } elseif { [ catch { 
+	set output [ ::saferTk::avalia $resolve $attempt -100 -100 ] 
+	::saferTk::ajusta $resolve -100 +100
+    } erros ] } {
+	set classe 0
+	append obs "Erro: $erros \n"
+	set status 8	;#Compile Time Error
+	# já nem tenta fazer mais nada
+    } else {
+	# actualiza o programa
+	catch { interp eval $resolve [ list update idletasks ] } erros
+	append obs $erros\n
+	::saferTk::ajusta resolve -100 -100
+	
+	# compara os interfaces do exemplo e da resolução 
+	# (retorna substituições)
+	## ::interface::exemplifica    
+	
+	
+	if { [ set erros [ match::unifica $exemplo $resolve sub ] ] != "" } {
+	    set nerros 0
+	    set classe 60	    
+	    foreach erro $erros {
+		if { [ incr nerros ] > $MaxErros } {
+		    set restantes [ expr [ llength $erros ] - $MaxErros ]
+		    append obs "... (omitidos restantes $restantes erros)"
+		    break
+		}
+		switch -regexp -- $erro {
+		    "^Deveriam existir"		{ incr classe -30  }
+		    "^Na posição do objecto"	{ incr classe -10  }
+		    "^Opcção"			{ incr classe -5  }
+		}		
+		append obs $erro\n
+	    }
+	    
+	    set status 2	;#Wrong Answer
+	} else {
+	    # verifica a funcionalidade do programa
+	    
+	    match::verifica $exemplo $resolve $tests sub
+
+	    set erros {}
+	    if { [ info exists saferTk::Buffer(stderr) ] } {
+		set erros [ split $saferTk::Buffer(stderr) \n ]
+	    }
+	    set nerros 0
+	    set classe	100	  
+	    set status  0	;#Accepted  
+	    foreach erro $erros {				
+		set erro [ string trim $erro ]
+		if { $erro == "" } continue
+		if { [ incr nerros ] > $MaxErros } {
+		    set restantes [ expr [ llength $erros ] - $MaxErros ]
+		    append obs "... (omitidos restantes $restantes erros)"
+		    break
+		}
+		switch -regexp -- $erro {
+		    "^Erro num comando invocado pelo interface" {
+			if { $status < 7 } {
+			    set status  7	;#Runtime Error
+			}
+			incr classe -40
+		    }
+		    default	{ 
+			incr classe -10	
+			if { $status < 2 } {
+			    set status  2	;#Wrong Answer
+			}
+		    }
+		}
+		append obs $erro\n
+	    }
+	    
+	    if { $classe == 100 } {	
+		set estado Concluido
+		set obs "Exercício resolvido\n"
+		set channel stdout
+	    }
+	}
+    }
+    if { $classe < 0 } { set classe 0 }
+
+    #
+    # Enviar resultados da avaliacao
+    #
+    set output $obs\n
+    foreach canal { stdout } { ;# stderr
+	if [ info exists saferTk::Buffer($canal) ] {
+		 append output $saferTk::Buffer($canal)
+	}
+	append output \n
+    }
+
+    # retirar caracteres nulos que baralham as transsmissões
+    regsub -all \0 $output {} output
+    
+
+    puts "Mooshak_Mark: $classe"
+    puts ""       
+    puts -nonewline $channel $output
+    flush $channel
+    exit $status
+
+}
+
+switch [ llength $argv ] {
+    3 {
+	eval validate $argv
+    }
+    default {
+	puts stderr "usage: validate <attempt> <solution> <tests>"
+    }
+}
+
+
+destroy .
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+#!/bin/sh
+# the next line restarts using tclsh \
+PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
+
+#-*-Mode: TCL; iso-accents-mode: t;-*-	
+
+cd ../..
+
+set errors "\n"
+if { [ catch { source .config } message ] } {
+    append errors $message\n
+}
+
+exec bash -c "umask u=rxw o=rx g=rx"
+exec bash -c "umask 0022"
+
+puts "Content-type: text/HTML\n"
+
+    puts "<html>"
+    puts "<head><title>Mooshak server info: [ exec hostname ]</title></head>"
+    puts "<body>"
+    puts "<h2>Mooshak server info: [ exec hostname ]</h2>"
+    puts "<pre><hr>"
+
+    foreach {info comm} {User whoami Host hostname Domain domainname} {
+	if { [ catch { set output [ exec $comm ] } message ] } {
+	    set output ""
+	    append errors $message\n
+	}
+	puts [ format {%-20s: %s} $info $output ]
+    }
+    puts "<hr>"
+    foreach var [ lsort { DIR_BASE URL_BASE REL_BASE VERSION} ] {
+	if { [ info exists $var ] } {
+	    set value [ set $var ]
+	} else {
+	    set value ""
+	    append errors "var $var not found\n"
+	}
+	puts [ format {%-20s: %s} $var $value ]
+    }
+
+    puts "<font color='red'>$errors</font>"
+    puts "<hr>"
+
+    foreach var [ lsort [ array names env ] ] {
+	puts [ format {%-20s: %s} $var $env($var) ]
+    }
+    puts "<hr>"
+    puts [ format {%-20s: %s} UMASK [ exec bash -c "umask -S" ] ]
+    puts [ format {%-20s: %s} "TCL Version" [ info tclversion ] ]
+    puts [ format {%-20s: %s} "Patch level" [ info patchlevel ] ]
+    puts "</pre>"
+    puts "</body>"
+    puts "</html>"
+
+
+

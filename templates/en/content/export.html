@@ -1,0 +1,63 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Export $type Folder</title>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<center>
+
+<H2>Export $type Folder: <code>$dir</code></H2>
+<form 
+	method="post"
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?exporting+$dir">
+
+
+	
+
+
+<table cellspacing="15">
+<tr><td>
+<div align="left">
+	File/archive in $format format <br>
+<input type="checkbox" name="dtd" value="1"> 
+	Include DTD in XML description<br>
+<input type="checkbox" name="archive" value="1" checked> 
+	Create archive for a single XML file
+</td><td>
+
+   <input type='submit' value='Export'><p>
+
+   <input type='button' value='Cancel' onClick="window.close();">
+</td>
+</table>
+
+
+<p>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Note:</b> This command exports a file/archive containing:
+   <ul>
+   <li>an XML file describing this folder structure and content</li>
+   <li>all files included in this folder</li>
+   </ul>
+   <p>
+   <b>Hints:</b>
+   <ul>
+   <li> You can edit the content of this content and <a
+   href="$Conf(controller)?import+$dir">import it back to this folder</a></li>
+   <li> Use the DTD to pre-validate the XML description. Even if the
+   folder is empty the DTD will reflect it complete structure</li>
+   
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

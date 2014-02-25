@@ -1,0 +1,55 @@
+
+
+<html>
+<head>
+<title>Mooshak's Help: Security</title>
+</head>
+
+<h3>Security</h3>
+
+<p align="justify">One initial security issue is related with the
+system support for different types of users with different access
+permissions. This is handled by ensuring user authentication and then
+associate types of users with different interface views of the system.
+
+<p align="justify">The compilation and the execution of programs are
+the two most insecure points of a contest management system. Provided
+it fits in a single file, a team can submit virtually any program in
+one of the contest languages, including a bogus or malicious program
+capable of jeopardizing the system and ruin the contest. For that
+reason Mooshak compiles and executes programs in a secure environment,
+with the privileges of an insecure user and with several limits. Most
+of these limits are independent of problems, with the exception of
+execution timeout that is adjusted to each problem. The timeout for
+each problem is determined before the contest and it is the maximum
+time taken by the judges solutions, with all test cases, rounded up
+for the next integer (in seconds). The timeout for compilation is 60
+seconds. The other resource limits enforced are listed in the
+following table with their default values in bytes (except for the
+number of child-processes).<p>
+
+<table align="center" border=1>
+<tr>
+<th>Maximum limits</th> <th>Value</th>
+</tr>
+<tr>
+<td>Process data segment</td> <td>2 MB</td>
+</tr>
+<tr>
+<td>Process stack segment</td> <td>1 MB</td>
+</tr>
+<tr>
+<td>Process RSS</td> <td>4 MB</td>
+</tr>
+<tr>
+<td>Output</td> <td>100 KB</td>
+</tr>
+<tr>
+<td>Source code</td> <td>100 KB</td>
+</tr>
+<tr>
+<td>Child processes</td> <td>0 KB</td>
+</tr>
+</table>
+
+</html>

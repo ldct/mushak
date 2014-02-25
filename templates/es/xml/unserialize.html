@@ -1,0 +1,47 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Importar Datos</title>
+   <link
+    rel="stylesheet"
+    href="../../styles/$Conf(style).css"
+    type="text/css">
+</head>
+<body>
+<center>
+
+<H2>Importando datos de <code>$dir</code></H2>
+<form
+    method="post"
+    enctype="multipart/form-data"
+    target="_self"
+    action="$Conf(controller)?unserialize+$dir">
+
+   Archivo <input type="file" name="file">
+
+   <input type='submit' value='Importar'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Nota:</b> El fichero puede ser:
+   <ol>
+      <li>Un fichero XML con datos de Mooshak
+      (similar al exportado para directorios sin ficheros)</li>
+      <li>Un archivo (tgz, tar o zip) con todos los archivos
+      m&aacute;s un fichero XML con una lista de empaquetado (similar al exportado para
+      directorios con ficheros)
+     <br>
+     <div align="right">
+     <font color="red">El segundo caso no est&aacute; implementado a&uacute;n</font>
+     </div>
+     </li>
+   </ol>
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

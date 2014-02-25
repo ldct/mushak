@@ -1,0 +1,334 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>FAQ do Mooshak</title>
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	title="Mooshak in color"
+	type="text/css">
+
+</head>
+<body>
+<h2 center>Questões Colocadas Frequentemente</h2>
+<dl>
+	<dt><b>Que posso fazer com este ambiente</b><dt>   
+	<dd>
+	Este ambiente permite-lhe visualizar o conjunto de pronlemas,
+	submeter soluções aos problemas, colocar perguntas ao júri,
+	ver todas as submissões com os resultados da avaliação, bem
+	como o estado actual da classificação do concurso.
+	</dd>
+<p>
+
+	<dt><b>Como deve o programa ler os dados de entrada?
+	Como devem ser escritos os resultados do programa?</b>
+	<dd>
+	Os dados de entrada são passados ao  <i>standard input</i> do
+	processo e os resultados devem ser escritos no <i>standard
+	output</i>. 
+	</dd>
+
+<p>
+
+
+	<dt><b>
+	Tentei submeter o programa e obtive a mensagem "Programa com
+	extensão inválida"!</b></dt>
+	<dd>
+	Tem de submeter o código fonte do seu programa. Uma submissão
+	é aceite para avaliação apenas se a extensão do ficheiro
+	corresponder a uma das linguagens aceites para o concurso.
+	</dd>
+<p>
+
+	<dt><b>Que linguagens e compiladores estão presentemente disponíveis?</b></dt>
+	<dd>
+	Para este concurso o analisador aceita as seguintes linguagens
+	e usa os seguintes compiladores:
+	<p>
+	<center>
+	<table border="1"  cellpadding="10">
+	<tr>
+		<th>Linguagem</th>
+		<th>Compilador</th>
+		<th>Versão</th>
+		<th>Linha de comando</th>
+		<th>Extensão</th>
+	</tr>
+
+$languages
+	</table>
+	</center>
+	</dd>
+<p>
+
+
+	<dt><b>Qual é o significado das mensagens de avaliação?</b></dt>
+	<dd>As mensagens de avaliação são as seguintes:<br>
+<p>
+<table border=1 cellpadding="10">
+<tr>
+<td> <b>Accepted</b>:</td>
+<td>O seu programa passou todos os testes com sucesso;</td>
+</tr>
+<tr>
+<td><b>Compile Time Error</b>:</td>
+<td>
+o sistema não conseguiu compilar o seu programa com sucesso; o
+compilador retornou um erro ou aviso (<i>warning</i>);
+</td>
+</tr>
+<tr>
+<td><b>Runtime Error</b>:</td>
+<td>
+o seu programa abortou, isto é, terminou prematuramente devido a um
+erro de execução;</td>
+</tr>
+<tr>
+<td><b>Time Limit Exceeded</b>:</td>
+<td>
+o seu programa não terminou dentro do do tempo limite de execução;</td>
+</tr>
+<tr>
+<td><b>Wrong Answer</b>:</td>
+<td>
+o seu programa correu um ou mais casos de teste sem erros de execução
+mas produziu um resultado que não era o esperado ;</td>
+</tr>
+<tr>
+<td><b>Presentation Error</b>:</td>
+<td>
+o resultado parece correcto mas não está apresentado no formato
+pedido; dado que nem sempre é fácil distinguir esta mensagem da de
+<i>wrong answer</i>, só é enviada em casos óbvios; </td>
+</tr>
+<tr>
+<td><b>Invalid Submission</b>:</td>
+<td>
+a sua submissão não está conforme as extensões esperadas; ou tentou
+submeter sem usar a interface web;</td>
+</tr>
+<tr>
+<td><b>Output Limit Exceeded</b>:</td>
+<td> 
+o seu programa gera um resultado demasiado longo para este problema;
+os limites dependem dos casos de teste, mas são geralmente baixos (o
+limite é cerca de 100KB);</td>
+</tr>
+<tr>
+<td><b>Program Size Exceeded</b>:</td>
+<td>
+o seu programa é demasiado longo e não sera considerado (limite é
+cerca de 100KB);</td> 
+</tr>
+<tr>
+<td><b>Requires Reevaluation</b>:</td>
+<td> 
+Por alguma razão o seu programa tera de ser re-avaliado;</td>
+</tr>
+<tr>
+<td><b>Invalid Function</b>:</td>
+<td> 
+O seu programa viola uma regra do concurso como chamar uma biblioteca
+não standard; também pode terminar com <code>exit(1)</code> ou mesmo
+<code>return 1</code>, uma uma instrução semelhante que indique um
+erro de execução. </td>
+</tr>
+       </table>
+       </dd>
+<p>        
+
+	<dt><b>
+
+Há alguns limites verificados pelo sistema de avaliação?</b></dt>
+	<dd>	
+	Há vários limites que, se ultrapassados, o(a) poderão penalizar:
+<center>
+	<p>
+		<table border="1" cellpadding="10">
+$params		
+		</table>
+<b> * </b>) Depende também do problema
+</center>
+
+
+	</dd>
+<p>
+
+	<dt><b>Quando pressiono o botão de submissão não acontece nada!</b></dt>
+	<dd>Deve verificar a  política de <i>cache</I> do seu
+	navegador (<i>browser</i>). As páginas deveriam ser produzidas
+	de cada vez que alguma actualização é detectada. Se as páginas
+	não forem pedidas ao servidor nunca são actualizadas no seu
+	navegador. No om the server, they will not be updated in your
+	browser. In <i>Mozilla</i> e no <i>Netscape</i> verifique no
+	menu "Edit" | "Preferences." | "Advanced" | "Cache"  e escolha
+	"Every time (I view the page)".</dd>
+<p>
+	<dt><b>O formato da interface tem uma aparência estranha</b></dt>
+	<dd>
+	Tente escolher um tipo de letra menor  ("Edit" | "Preferences." |
+	"Appearance"  "Fonts" ). 
+
+	Alternativamente, tente remover barras de navegação ou
+	pessoais  no se navegador (menu "View"). </dd>
+<p>
+	<dt><b>Pressionei o botão "Submeter" e obtive a mensagem
+	"Program não especificado".</b></dt>
+	<dd>Tem de seleccionar um ficheiro com o código
+	fonte. Pressione "Browse..." para abrir um diálogo de selecção
+	de ficheiro ou escreva o nome caminho na caixa à esquerda deste
+	botão.
+	</dd>
+<p>
+	<dt><b>
+	Como posso colocar uma pergunta sobre a especificação do problema?</b></dt>
+	<dd>
+	Pressione o botão "Perguntar" no canto superior direito
+	Aparecerá um formulário onde poderá escrever s sua
+	questão. Antes de pressionar o botão "Perguntar" deve
+	verificar se seleccionou o problema correcto.</dd>
+
+</dl>
+</body>
+</html>
+
+<!part ext="ling">
+<tr>
+	<th>$name</th>
+	<td>$compiler</td>
+	<td align="right">$version</td>
+	<td><code>$compile</code></td>
+	<td align="right"><code>.$extension</code></td>
+</tr>
+<!part ext="param">
+<tr>
+	<th>$text</th>
+	<td align="right">$value</td>
+</tr>
+
+
+<!part ext="MaxCore">
+Core size
+<!part ext="MaxData">
+Data of execute
+<!part ext="MaxOutput">
+Execution output
+<!part ext="MaxStack">
+Stack of execute
+<!part ext="MaxRSS">
+Resident set size
+<!part ext="MaxProg">
+Program code
+<!part ext="RealTimeout">
+Real time timeout
+<!part ext="CompTimeout">
+Compilation timeout
+<!part ext="ExecTimeout">
+Execution timeout *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

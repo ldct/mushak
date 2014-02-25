@@ -1,0 +1,87 @@
+
+
+<!-- header of report -->
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Seleccionando tipo de concurso</title>
+    <link
+        rel ="stylesheet"
+        href    ="../../styles/$Conf(style)"
+        type    ="text/css">
+
+    <style>
+    td { font-size: small; }
+    </style>
+</head>
+<body>
+
+    <h2>Seleccionando tipo de concurso</h2>
+
+
+<p>
+Usa este formulario para establecer el <b>tipo</b> de tu concurso. Varios campos de
+diferentes carpetas se modificar&aacute;n de forma autom&aacute;tica de acuerdo con
+la siguiente tabla. Elige uno de los tipos usando los botones de radio
+de la tabla y pulsa Enviar.</b>
+
+
+    <form method="POST" action="$Conf(controller)?message+$self+set_type">
+    <table class="Listing" cellpadding="1" cellspacing="0" width="80%">
+
+    <tr class="Header">
+        <th rowspan="2">Carpeta</th>
+        <th rowspan="2">Campo</th>
+        <th colspan="$span">Tipos</th>
+    </tr>
+    <tr class="Header">
+</!part ext="head">
+
+
+<!part ext="type">
+        <td><font color="white"><b>
+            <input  type="radio"
+                name="type"
+                value="$type" $checked>
+            $type</b></font>
+        </td>
+</!part ext="type">
+
+
+<!part ext="mid">
+    </tr>
+</!part ext="mid">
+
+
+<!part ext="attr_head">
+                    <tr bgcolor="$color">
+                        <td><code>$dir</code></td>
+                        <td>$name</td>
+</!part ext="attr_head">
+
+
+<!part ext="attr_value">
+                        <td><code>$value</code></td>
+</!part ext="attr_value">
+
+<!part ext="attr_foot">
+                    </tr>
+</!part ext="attr_foot">
+
+
+<!part ext="foot">
+
+    </table>
+<p>
+<table width="100%">
+<tr>
+    <th>    <input class="Button" type="submit" value="Enviar"> </th>
+    <th>    <input class="Button" type="reset" value="Borrar">   </th>
+</tr>
+</table>
+    </form>
+</body>
+</html>
+</!part ext="foot">
+

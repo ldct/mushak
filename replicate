@@ -1,0 +1,112 @@
+#!/bin/sh
+#
+# Mooshak: managing  programming contests on the web		Abril 2001
+# 
+#			Zé Paulo Leal 		
+#			zp@dcc.fc.up.pt
+#
+# Lock file control by:
+#                       Robert R. Enderlein
+#			mooshak@hc2.ch
+#-----------------------------------------------------------------------------
+# file: replicate
+# 
+#-----------------------------------------------------------------
+# Replicates data among Mooshak's server (excluding binaries)
+
+RSYNC=/usr/bin/rsync
+SSH=/usr/bin/ssh
+HOST=localhost
+USER=mooshak
+DATA=data/contests
+FLAGS=
+# Remove lockfile if last ./replicate started more than $MAXAGE seconds ago
+MAXAGE=$((15*60))
+# Also kill the slow process when that happens
+KILLPROCESS=true
+
+#-----------------------------------------------------------------
+
+HOST=$1
+if [ "$2" != "" ] 
+then
+	USER=$2
+fi
+
+# We use one lockfile per HOST/USER combination
+# Remove special characters from host and user
+CLEANHOST=$(echo "$HOST" | tr -c -d "a-zA-Z")
+CLEANUSER=$(echo "$USER" | tr -c -d "a-zA-Z")
+LOCKFILE="replicate-$CLEANHOST-$CLEANUSER.lock"
+
+
+# We set up a lock file to prevent that the replicate command runs the
+# same command several times.
+# We set up a trap to remove the lockfile in case the current script exits
+# from http://www.davidpashley.com/articles/writing-robust-shell-scripts.html
+if ( set -o noclobber; echo "$$" > "$LOCKFILE" ) 2> /dev/null;
+then
+	trap 'rm -f "$LOCKFILE"; exit $?' INT TERM EXIT
+
+	# Critical section
+
+	for dir in $DATA
+	do
+	   par=`dirname $dir`
+	   #echo replicating $dir to $par in $USER@$HOST
+		
+	   # replicates data excluding binaries
+	   $RSYNC					\
+		--rsh 		$SSH			\
+		--recursive				\
+		--links					\
+		--quiet					\
+		--update				\
+		--force					\
+		--times					\
+							\
+		--exclude	'a.out'			\
+		--exclude	'prog'			\
+		--exclude	'*.o'			\
+		--exclude	'*.class'		\
+							\
+		$FLAGS					\
+							\
+		$dir					\
+		$USER@$HOST:$par			\
+		# end of rsync command line
+	done
+	# End critical section
+	
+	rm -f "$LOCKFILE"
+	trap - INT TERM EXIT
+else
+	echo "Failed to acquire lockfile: '$LOCKFILE'"
+	pid=$(cat "$LOCKFILE")
+	echo -n "held by process $pid and"
+
+	# Print how old the lock file is
+	# from http://stackoverflow.com/questions/1819187/test-a-file-date-with-bash
+	modsecs=$(date --utc --reference="$LOCKFILE" +%s)
+	nowsecs=$(date --utc +%s)
+	delta=$(($nowsecs-$modsecs))
+	echo " created $delta seconds ago."
+
+	# If the process hasn't finished running since $MAXAGE,
+	# we delete the lockfile
+	if [ "$delta" -gt "$MAXAGE" ]; then
+
+		rm -f "$LOCKFILE"
+		echo -n "Removed lockfile $LOCKFILE"
+		
+		# If furthermore $KILLPROCESS is set, then the slow
+		# process is killed.
+		if $KILLPROCESS; then
+			kill -9 $pid
+			echo " and killed process $pid."
+		else
+			echo "."
+		fi
+	fi
+fi
+

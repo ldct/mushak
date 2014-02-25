@@ -1,0 +1,310 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Mooshak's FAQ</title>
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	title="Mooshak in color"
+	type="text/css">
+
+</head>
+<body>
+<h2 center>Frequently Asked Questions</h2>
+<dl>
+	<dt><b>What can I do within this environment?</b><dt>   
+	<dd>This environment allows you to visualize the 
+	problem set, submit solutions for the problems, ask
+	questions to the jury,  see all submissions with evaluation
+	results, and the current contest ranking.</dd>
+<p>
+
+	<dt><b>How should the program read its input data? How
+	should the results of a program be written?</b><dt>
+	<dd>
+	Input data is passed to the process <i>standard input</i> and
+	results must be written to the <i>standard output</i>.
+	</dd>
+
+<p>
+
+
+	<dt><b>I tried to submit a solution and got the message
+	"Program with an invalid extension"!</b></dt>
+	<dd>You have to submit the source code for your program. A
+	submission gets accepted for evaluation only if it has a file 
+        extension corresponding to the one of the accepted languages 
+        for the contest. 
+	</dd>
+<p>
+
+	<dt><b>What languages and compilers are currently available?</b></dt>
+	<dd>
+	For this contest the analyzer accepts the following
+	languages and uses the following compilers:
+	<p>
+	<center>
+	<table border="1"  cellpadding="10">
+	<tr>
+		<th>Language</th>
+		<th>Compiler</th>
+		<th>Version</th>
+		<th>Command line</th>
+		<th>Extension</th>
+	</tr>
+
+$languages
+	</table>
+	</center>
+	</dd>
+<p>
+
+
+	<dt><b>What's the meaning of the evaluation messages?</b></dt>
+	<dd>The evaluation messages are as follows:<br>
+<p>
+<table border=1 cellpadding="10">
+<tr>
+<td> <b>Accepted</b>:</td>
+<td>your program passed all tests and is accepted as correct;</td>
+</tr>
+<tr>
+<td><b>Compile Time Error</b>:</td>
+<td>the system was not able to successfully
+   compile your program; the compiler returned an error or warning;
+</td>
+</tr>
+<tr>
+<td><b>Runtime Error</b>:</td>
+<td>your program "crashed", i. e. it exited prematurely due to a
+run-time error;</td>
+</tr>
+<tr>
+<td><b>Time Limit Exceeded</b>:</td>
+<td>your program did not finish within the  given amount of time;</td>
+</tr>
+<tr>
+<td><b>Wrong Answer</b>:</td>
+<td>your program run through one or more test cases
+   without a run-time error but the output did not match the expected
+   output;</td>
+</tr>
+<tr>
+<td><b>Presentation Error</b>:</td>
+<td>the output seems to be correct but it is  not presented in the
+required format. Since it is not always easy 
+   to distinguish this message from the wrong answer message, it is
+   only sent in obvious cases; </td>
+</tr>
+<tr>
+<td><b>Invalid Submission</b>:</td>
+<td> your submission does not comply with expected extensions; or attempt to submit without following the interface; </td>
+</tr>
+<tr>
+<td><b>Output Limit Exceeded</b>:</td>
+<td> your program generates an output too long for this problem; the limits are dependent on the test cases, but are usually low (limit is around 100KB); </td>
+</tr>
+<tr>
+<td><b>Program Size Exceeded</b>:</td>
+<td> your program is too long and will not be considered (limit is around 100KB); </td>
+</tr>
+<tr>
+<td><b>Requires Reevaluation</b>:</td>
+<td> for some reason your program has to be re-evaluated; </td>
+</tr>
+<tr>
+<td><b>Invalid Function</b>:</td>
+<td> your program violates a contest rule
+   like calling non-standard libraries; it may be terminating
+   with <code>exit(1)</code> or even <code>return 1</code>, or a similar 
+   construct indicating an error in execute.
+</td>
+</tr>
+       </table>
+       </dd>
+<p>        
+
+	<dt><b>There are any limits enforced by the judging system?</b></dt>
+	<dd>	
+	There are several limits that if reached will penalize you:
+<center>
+	<p>
+		<table border="1" cellpadding="10">
+$params		
+		</table>
+<b> * </b>) Depends also on the problem
+</center>
+
+
+	</dd>
+<p>
+
+	<dt><b>When I press the submit button nothing happens!</b></dt>
+	<dd>You must check the cache policy being used by your
+	browser. Pages should be retrieved from the server every time
+	some update to the page is detected. If the pages are never
+	requested from the server, they will not be updated in your
+	browser. In <i>Mozilla</i> and <i>Netscape</i> check the
+	"Edit" | "Preferences." | "Advanced" | "Cache" menu and
+	choose "Every time (I view the page)".</dd>
+<p>
+	<dt><b>The format of the interface has an odd appearance</b></dt>
+	<dd>Try choosing a smaller font ("Edit" | "Preferences." |
+	"Appearance"  "Fonts" ). Alternatively, try to remove the
+	navigation and personal bars in the browser (menu "View"). </dd>
+<p>
+	<dt><b>I pressed the "Submit" button and got the message
+	"Unspecified Program".</b></dt>
+	<dd>You must select the file with the source program. Press 
+        "Browse...." to open a file selection box or write the
+	path-name for the file in the box to the left of the this button.
+	</dd>
+<p>
+	<dt><b>How can I ask a question regarding a problem specification?</b></dt>
+	<dd>Press the "Ask" button in the upper right corner. A form
+	will appear where you may write your question and send it to
+	the jury of the contest. Before pressing the "Ask" button you 
+        should check whether you are selecting the right problem.</dd>
+
+</dl>
+</body>
+</html>
+
+<!part ext="ling">
+<tr>
+	<th>$name</th>
+	<td>$compiler</td>
+	<td align="right">$version</td>
+	<td><code>$compile</code></td>
+	<td align="right"><code>.$extension</code></td>
+</tr>
+<!part ext="param">
+<tr>
+	<th>$text</th>
+	<td align="right">$value</td>
+</tr>
+
+
+<!part ext="MaxCore">
+Core size
+<!part ext="MaxData">
+Data of execute
+<!part ext="MaxOutput">
+Execution output
+<!part ext="MaxStack">
+Stack of execute
+<!part ext="MaxRSS">
+Resident set size
+<!part ext="MaxProg">
+Program code
+<!part ext="RealTimeout">
+Real time timeout
+<!part ext="CompTimeout">
+Compilation timeout
+<!part ext="ExecTimeout">
+Execution timeout *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+set        Fatal {}
+set      Warning {}
+set         args {}
+set        input in-6.txt
+set       output out-6.txt
+set      context {}
+set       Points {}
+set     Feedback lol
+set         Show yes

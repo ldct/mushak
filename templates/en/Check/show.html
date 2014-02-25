@@ -1,0 +1,91 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link 
+	rel="stylesheet"
+	href="../../styles/$Conf(style).css"
+	type="text/css">
+  <title>Mooshak: Check list: $Name</title>
+<script>
+function validate(f) {
+  var k=f.k.value;
+  var i;
+
+  for(i=0; i<k; i++) {
+      if(! f["c"+i].checked && f["t"+i].value == "")	{
+	  alert("Did not fill test "+i);
+	  return false;
+      }	   
+  }
+
+  return true;
+}
+</script>
+</head>
+<body>
+
+	<h2><a href="$Conf(controller)?check">Check lists</a>: $Name</h2>
+	<form 
+		method	="post" 
+		action	="$Conf(controller)?check+$check_list" 
+		onSubmit="return validate(this);">
+			<table border="1">
+				<tr>
+					<th>#</th>
+					<th>Action</th>
+					<th>Effect</th>
+					<th>OK</th>
+					<th>Problem</th>
+				</tr>
+<!/part ext="head">
+
+
+
+<!part ext="title">
+				<tr><th colspan="5">$action</th>
+<!/part ext="title">
+
+
+<!part ext="line">
+				<tr>
+					<td>$k</td>
+					<td>$action</td>
+					<td>$effect</td>
+					<td>
+						<input	type	="checkbox"
+							name	="c$k"  
+							onClick	=
+						"this.form.t$k.value='';">
+					</td>
+					<td>
+						<input 
+							name	="t$k" 
+							onBlur	=
+				"this.form.c$k.checked=(this.value=='');">
+					</td>
+				</tr>
+<!/part ext="line">
+
+<!part ext="foot"> 
+						<input 
+							type	="hidden" 
+							name	="k"
+							value	="$k">
+			</table>
+			<p>
+						<input
+							type	="submit"
+							name	="data"
+							value	="Record">
+
+						<input
+							type	="reset"
+							value	="Reset">
+
+	</form>
+
+</body>
+</html>
+<!/part ext="foot"> 
+

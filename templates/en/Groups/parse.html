@@ -1,0 +1,90 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<title>Parsing teams data file</title>
+<center>
+
+
+<form 
+	method	="post" 
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?operation+importing+$dir">
+
+<H2>Parsing  teams data file  <input type="submit" name="operation" value="import"></H2>
+
+
+   <input type="hidden" name="data" value="$data">
+
+
+<!--
+  <table frame="box" rules="all" cellspacing="5" cellpading="5" width="50%">
+    <tr><th>Column</th><th>Default</th></tr>
+    <script>
+
+      var defaults = { 
+          name: "Participant name" , 
+          role: "Contestant",
+          team: "Team name",
+          group: "Group Name",
+          password: "",
+      };
+    for(var column in defaults) {
+        document.write("<tr><td>"+column+"</td><td>");
+        document.write("<input name='"+column+"' ");
+	document.writeln("value='"+defaults[column]+"'></td></tr>");
+      }
+    </script>
+    </table>
+   <p></p>
+-->
+     
+     Separator $sep_selector
+     Use header <input type="checkbox" name="ommit" value="1" 
+		  $ommit_checked
+		  onchange="this.form.submit();">
+
+     Genearate ID <input type="checkbox" name="generate" value="1" 
+		  $generate_checked
+		  onchange="this.form.submit();">
+
+
+   <p></p>
+
+   <div style="overflow: auto; width: 95%; height:70%">
+   <table frame="box" rules="all" cellspacing="5" cellpading="5" width="90%">
+     
+<!part ext="line_head">
+<tr>
+
+<!part ext="column_id">
+<th>ID</th>
+
+<!part ext="column_head">
+<th>$head  $selector</th>
+
+<!part ext="line_cell">
+<td>$cell</td>
+
+<!part ext="line_foot">
+</tr>
+
+<!part ext="foot">
+   </table>
+   </div>
+
+</form>
+
+
+
+
+
+
+</center>
+</body>
+</html>
+

@@ -1,0 +1,9 @@
+set        Fatal {}
+set      Warning {}
+set  Designation ServiceRequesters
+set      Acronym ServiceRequesters
+set        Color Black
+set         Flag 00
+set         Team 127.0.0.1
+set Authentication Basic
+set        Basic {}

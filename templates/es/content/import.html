@@ -1,0 +1,45 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Importar Carpeta $type</title>
+   <link rel="stylesheet" href="../../styles/$Conf(style).css" type="text/css">
+</head>
+<body>
+<center>
+
+<H2>Importar Carpeta $type: <code>$dir</code></H2>
+
+<form
+    method="post"
+    enctype="multipart/form-data"
+    target="_self"
+    action="$Conf(controller)?importing+$dir">
+
+   Archivo <input type="file" name="file">
+
+   <input type='submit' value='Importar'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Nota:</b> Puedes importar:
+   <ul>
+   <li>un fichero XML con toda la informaci&oacute;n de este directorio</li>
+   <li>un archivo que contenga la descripci&oacute;n XML y los ficheros del directorio</li>
+   </ul>
+
+Formatos v&aacute;lidos para el archivo son <code>zip</code>, <code>tar</code>, <code>tgz</code>, <code>tbz2</code>.
+
+<p/>
+
+<b>Ayuda</b> Si no est&aacute;s seguro sobre el formato, empieza
+<a href="$Conf(controller)?export+$dir">exportando este directorio</a> y editando su contenido (descripci&oacute;n XML y ficheros).
+
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

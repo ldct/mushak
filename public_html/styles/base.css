@@ -1,0 +1,189 @@
+/*
+
+ Mooshak: managing programming contests on the web		April 2001
+ 
+			José Paulo Leal 		
+			zp@ncc.up.pt
+
+-----------------------------------------------------------------------------
+ file: base.css
+
+ Stylesheet for basic Mooshak windows
+
+ Validated in 2003/07/18 using http://jigsaw.w3.org/css-validator/validator
+
+*/
+
+BODY {
+	margin-top:		2mm; 
+	margin-bottom:		0mm;
+	color:			black;
+	background-color:	#FFFFCC;
+/*	background-image:	url(../../icons/Fundo.gif); */
+
+	font-family: 		sans-serif;
+}
+
+/* Listings */
+
+TABLE.Listing {
+      	border:			0;
+	width:			100%;
+	margin:			0;
+	padding:		0;
+}
+
+
+TR.Header {
+	 color:			black;
+	 background:		gray;
+}
+
+TD TH {
+	font-family: 		sans-serif;
+}
+
+INPUT.Button	{
+	width:		100px;
+}
+
+TABLE.Button {
+	width:		100px;
+	border:		2px;	
+	border-style:	inset;
+	background:	#CCCCCC;
+	color:		#FFFFFF;
+}
+
+/* Formatting SELECT as menus */
+
+DIV.Menubar {
+	background:	#BB9999; 
+	width: 		95%; 
+	padding: 	2pt; 
+	margin: 	2pt;
+}
+
+SELECT.Menu {
+	color:		black; 
+	font-weight:	normal; 
+	font-size:	100%; 
+	background:	#BB9999;
+	padding:	3px;
+	margin:		0;
+	border-style:	dotted;
+	border-color:	#BB9999;
+	border:		0;
+}
+
+OPTION.Button {
+	color:		black;
+	background:	#BB9999;
+	font-weight:	normal; 
+	font-size:	100%;
+}
+
+OPTION.ItemOn {
+	font-weight:	normal; 
+	font-size:	100%; 
+}
+
+OPTION.ItemOff {
+	color:		gray;
+	font-weight:	normal; 
+	font-size:	100%; 
+}
+
+#Top {
+	position:		absolute;
+	top:			0px;
+	left:			10px;
+	right:			10px;
+	width:			95%;
+}
+
+#Middle {
+	position:		absolute;
+	top:			0px;
+	left:			10px;
+	right:			10px;
+	width:			95%;
+	height:			100%;
+}
+
+
+#Bottom {
+	position:		absolute;
+	left:			10px;
+	right:			10px;
+	bottom:			0px;
+	width:			95%;
+	height:			100%;
+}
+
+
+#Title {
+	color:			black;
+	background-color:	#999999;
+}
+
+#Data {
+	color:			black;
+	background-color:	#FFCCCC;
+	background-color:	#CC9999;
+}
+
+#Judge {
+	color:			black;
+	background-color:	#99FFFF;
+	background-color:	#9999CC;
+}
+
+#Control {
+	color:			black;
+	background-color:	#99CC99;
+}
+
+#Base {
+	color:			black;
+	background-color:	#CCFFFF;
+	background-color:	#CCCCFF;
+/*	background-image:	url(../../icons/Base.gif); */
+	font-family: 		Helvetica, sans-serif;
+}
+
+#BaseForte, #Banner  {
+	color:			black;
+	background-color:	#CCCCFF;
+	background-color:	#AAAAFF;
+/*	background-image:	url(../../icons/BaseForte.gif); */
+}
+
+#Banner {
+	width:			100%;
+	padding:		0pt;
+	margin:			0pt;
+	border:			0pt;
+}
+
+#Button {
+	width:	100px;
+}
+
+div.Text {
+	white-space:	pre;
+
+}
+
+A.Clickable {
+	text-decoration: underline; 
+        cursor: pointer;
+}
+
+SELECT.Header {
+	 color:			black;
+	 background:		gray;
+	 font-weight:		bold;
+}
+
+SELECT.Normal { }

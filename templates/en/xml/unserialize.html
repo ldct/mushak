@@ -1,0 +1,46 @@
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <title>Data Import</title>
+   <link 
+	rel="stylesheet" 
+	href="../../styles/$Conf(style).css"
+	type="text/css">
+</head>
+<body>
+<center>
+
+<H2>Importing data to <code>$dir</code></H2>
+<form 
+	method="post"
+	enctype="multipart/form-data" 
+	target="_self" 
+	action="$Conf(controller)?unserialize+$dir">
+
+   File <input type="file" name="file"> 
+
+   <input type='submit' value='Import'>
+
+</form>
+
+<table>
+<tr><td class="Note">
+   <b>Note:</b> The file must be either:
+   <ol>
+      <li>An XML file with Mooshak data 
+      (similar to those exported from directories without files)</li>
+      <li>An archive (tgz tar or zip) with all files an XML packing list
+         (similar to those exported from directories with files)
+	 <br>
+	 <div align="right">
+	 <font color="red">Second case not implemented yet</font>
+	 </div>
+	 </li>
+   </ol>
+</td>
+</tr>
+
+</center>
+</body>
+</html>
+

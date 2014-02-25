@@ -1,0 +1,125 @@
+<!part ext="head">
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link
+    rel ="stylesheet"
+    href    ="../../styles/$Conf(style).css"
+    type    ="text/css">
+</head>
+<body onload="window.open('$Conf(controller)?command=listing&type=$listing','top');">
+<center>
+    <form
+        method  ="post"
+        enctype ="multipart/form-data"
+        action  ="$Conf(controller)?sms+questions+$question+answering+$n">
+
+        <table cellpadding="5" cellspacing="0" width="100%" border="0">
+
+                <input
+                    type    ="hidden"
+                    name    ="Team"
+                    value="$Team">
+                <input
+                    type="hidden"
+                    name="Problem"
+                    value="$problem_name">
+
+
+            <tr>
+                <td
+                    id  ="Base"
+                    align   ="left"
+                    colspan ="2">
+
+                        <b>Q$n</b>
+                        &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <b>Equipo</b>: $team
+                        &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <b>Problema</b>: $problem_name
+                        &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <b>Asunto</b>:
+                        <input
+                            type    ="text"
+                            name    ="Subject"
+                            value   ="$Subject"
+                            size    ="30"
+                            maxsize ="60">
+
+
+                        <br>
+                        <b>Estado</b>: $state
+                </td>
+                <td
+                    id="Base"
+                    align="right">
+                    <a
+                        target="_blanc"
+                        href="../help?interfaces/judge/answer">
+                        <img
+                            border  ="0"
+                            src ="../../icons/unknown.png">
+                    </a>
+                </td>
+
+            </tr>
+            <tr>
+                <td
+                    id  ="Base"
+                    align   ="center">
+                    <textarea
+                        name="Question"
+                        cols="55"
+                        rows="2">$Question</textarea>
+                </td>
+                <th     id  ="Base"
+                    colspan ="2">
+                    <input  class   ="Button"
+                        type    ="submit"
+                        name    ="asked"
+                        value   ="Enviar">
+                </th>
+            </tr>
+            <tr>
+                <td id  ="Base"
+                    align   ="center">
+<!/part ext="head">
+
+
+<!part ext="normal">
+                    <textarea
+                        name="Answer"
+                        cols="55"
+                        rows="3">$Answer</textarea>
+<!/part ext="normal">
+
+<!part ext="already">
+                    <pre>$menu</pre>
+<!/part ext="alread">
+
+
+<!part ext="none">
+                    &nbsp;
+<!/part ext="none">
+
+<!part ext="foot">
+
+                </td>
+
+                <th id="Base"
+                    colspan="2">
+                    <input  class   ="Button"
+                        type    ="reset"
+                        value   ="Borrar">
+                </th>
+            </tr>
+
+
+
+    </table>
+</form
+</center>
+</body>
+</html>
+<!/part ext="foot">
+
