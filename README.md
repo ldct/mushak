@@ -1,4 +1,0 @@
-bessie
-======
-
-Fork of Mooshak
