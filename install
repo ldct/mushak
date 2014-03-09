@@ -2,13 +2,13 @@
 # the next line restarts using tclsh \
 PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
 
-#-*-Mode: TCL; iso-accents-mode: t;-*-	
+#-*-Mode: TCL; iso-accents-mode: t;-*-  
 
 #
-# Mooshak: managing programming contests on the web		April 2001
+# Mooshak: managing programming contests on the web     April 2001
 # 
-#			José Paulo Leal 		
-#			zp@ncc.up.pt
+#           José Paulo Leal         
+#           zp@ncc.up.pt
 #
 #-----------------------------------------------------------------------------
 # file: install
@@ -16,16 +16,16 @@ PATH=$PATH:/usr/local/bin:/usr/contrib/bin  ; exec tclsh "$0" "$@"
 ## Installation procedure
 ##
 
-set User	mooshak
-set Dir		""
-set Host	""
-set Tarball	mooshak_*.tgz
-set Data	data.tgz
-set Source	source.tgz
-set Conf	.config
-set Version	version.txt
-set Tmp		/tmp
-set CVS_Home	:pserver:anonymous@cvs.ncc.up.pt:/home/cvsroot
+set User    mooshak
+set Dir     ""
+set Host    ""
+set Tarball mooshak_*.tgz
+set Data    data.tgz
+set Source  source.tgz
+set Conf    .config
+set Version version.txt
+set Tmp     /tmp
+set CVS_Home    :pserver:anonymous@cvs.ncc.up.pt:/home/cvsroot
 set Apache_V    0
 set Distro      ""
 set IgnoreMissingCommands 0
@@ -63,7 +63,7 @@ proc check_software {} {
     check_commands
 
     puts stderr \
-	"Prerequisites Ok. Installing Mooshak on $Distro, Apache $Apache_V"
+    "Prerequisites Ok. Installing Mooshak on $Distro, Apache $Apache_V"
 }
 
 # checks user for update
@@ -74,26 +74,26 @@ proc check_user {} {
     check_software
 
     if [ nouser $User ]  {
-	puts stderr "User $User doesn't exists"
-	puts stderr "	use the flag --install to create it"
-	exit
+    puts stderr "User $User doesn't exists"
+    puts stderr "   use the flag --install to create it"
+    exit
     }
 
 
     if { [ catch { set home [ glob ~$User ] } ] } {
-	puts stderr "Home directory for $User doest exist"
-	exit
+    puts stderr "Home directory for $User doest exist"
+    exit
     }
 
     set here [ pwd ]
     cd $home
     foreach fx {.config data data/trash} {
-	if { ! [ file readable $fx ] } {
-	    puts stderr "Cannot read  $home/$fx"
-	    puts stderr "	consider a full installation using --install"
-	    cd $here
-	    exit 1
-	}
+    if { ! [ file readable $fx ] } {
+        puts stderr "Cannot read  $home/$fx"
+        puts stderr "   consider a full installation using --install"
+        cd $here
+        exit 1
+    }
     }
     cd $here
 
@@ -102,8 +102,8 @@ proc check_user {} {
 # check is there is an updated tcl interpreter
 proc check_tcl_version {} {
     if { [ info tclversion ] < 8.3 } {
-	puts stderr "invalid tcl version; should be >= 8.3)"
-	exit 1
+    puts stderr "invalid tcl version; should be >= 8.3)"
+    exit 1
     }    
 }
 
@@ -112,22 +112,22 @@ proc check_apache_version {} {
     global Apache_V
 
     if { 
-	    [ catch { set output [ exec httpd2  -v ] } ] &&
-	    [ catch { set output [ exec httpd   -v ] } ] &&
-	    [ catch { set output [ exec apache  -v ] } ] &&
-	    [ catch { set output [ exec apache2 -v ] } ]
+        [ catch { set output [ exec httpd2  -v ] } ] &&
+        [ catch { set output [ exec httpd   -v ] } ] &&
+        [ catch { set output [ exec apache  -v ] } ] &&
+        [ catch { set output [ exec apache2 -v ] } ]
     } {
-	puts stderr "HTTP server not not found"
-	exit 1
+    puts stderr "HTTP server not not found"
+    exit 1
     }
     if { [ regexp {Apache.*/(\d+\.\d+)} $output - version ] } {
-	if { $version < 1.2 } {
-	    puts stderr "Apache version should be 1.2 or greater"
-	    exit 1
-	}
+    if { $version < 1.2 } {
+        puts stderr "Apache version should be 1.2 or greater"
+        exit 1
+    }
     } else {
-	puts stderr "HTTP doesn't look like Apache"
-	exit 1
+    puts stderr "HTTP doesn't look like Apache"
+    exit 1
     }
     
     set Apache_V $version
@@ -140,39 +140,39 @@ proc check_apache_modules {} {
     set restart_apache 0
 
     if { ! [ file executable [ which lsof ] ] } {
-	puts stderr "Command lsof not found"
-	puts stderr "Cannot check if Apache has these modules installed:"
-	puts stderr $RequiredApacheModules
-	return
+    puts stderr "Command lsof not found"
+    puts stderr "Cannot check if Apache has these modules installed:"
+    puts stderr $RequiredApacheModules
+    return
     }
 
     foreach module $RequiredApacheModules {
-	set missing($module) 1
+    set missing($module) 1
     }
     set modules [ join $RequiredApacheModules "|" ]
     set fd [ open "| lsof" ]
     while { [ gets $fd line ] > -1 } {
-	if { [ regexp [ format "mod_(%s).so" $modules ] $line ] } {	    
-	    foreach module $RequiredApacheModules {
-		if { [ regexp [ format "mod_%s.so" $module ] $line ] } {	    
-		    set missing($module) 0
-		    break
-		}
-	    }
-	}
+    if { [ regexp [ format "mod_(%s).so" $modules ] $line ] } {     
+        foreach module $RequiredApacheModules {
+        if { [ regexp [ format "mod_%s.so" $module ] $line ] } {        
+            set missing($module) 0
+            break
+        }
+        }
+    }
     }
     catch { close $fd  }
 
     foreach module $RequiredApacheModules {
-	if $missing($module) {
-	    puts stderr "Missing Apache module: $module"
-	    puts stderr "\tto install it in Mandiva:\t\turpmi apache-mod_$module"
-	    set restart_apache 1
-	}
-	
+    if $missing($module) {
+        puts stderr "Missing Apache module: $module"
+        puts stderr "\tto install it in Mandiva:\t\turpmi apache-mod_$module"
+        set restart_apache 1
+    }
+    
     }
     if $restart_apache {
-	exit 1
+    exit 1
     }
 }
 
@@ -184,43 +184,43 @@ proc check_commands {} {
     global IgnoreMissingCommands
 
     foreach command $RequiredCommands {
-	set original $command
-	if { ! [ file exists $command ] } {
-	    puts stderr "Command not found: $command"
-	    if $IgnoreMissingCommands continue else {
-		puts -nonewline stderr "(use option --ignore-missing-commands"
-		puts stderr " to install Mooshak anyway)"
-		exit 1
-	    }
-	}
+    set original $command
+    if { ! [ file exists $command ] } {
+        puts stderr "Command not found: $command"
+        if $IgnoreMissingCommands continue else {
+        puts -nonewline stderr "(use option --ignore-missing-commands"
+        puts stderr " to install Mooshak anyway)"
+        exit 1
+        }
+    }
 
-	# deference links
-	while { [ string equal [ file type $command ] link ] } {
-	    set link [ file readlink $command ]
-	    if [ regexp ^/ $link ] {
-		# absolute link
-		set command $link
-	    } else {
-		# relative link
-		set command [ file dirname $command ]/$link
-	    }
-	}
+    # deference links
+    while { [ string equal [ file type $command ] link ] } {
+        set link [ file readlink $command ]
+        if [ regexp ^/ $link ] {
+        # absolute link
+        set command $link
+        } else {
+        # relative link
+        set command [ file dirname $command ]/$link
+        }
+    }
 
-	if { ! [ string equal [ file type $command] file ] } {
-	    puts stderr "Not a file: $command"
-	    if { ! [ string equal $command $original ] } {
-		puts stderr "linked by $original"
-	    }
-	    exit 1	    
-	}
-	if { ! [ file executable $command ] } {
-	    puts stderr "Not an executable file: $command"
-	    if { ! [ string equal $command $original ] } {
-		puts stderr "Command $command linked by $original" 
+    if { ! [ string equal [ file type $command] file ] } {
+        puts stderr "Not a file: $command"
+        if { ! [ string equal $command $original ] } {
+        puts stderr "linked by $original"
+        }
+        exit 1      
+    }
+    if { ! [ file executable $command ] } {
+        puts stderr "Not an executable file: $command"
+        if { ! [ string equal $command $original ] } {
+        puts stderr "Command $command linked by $original" 
 
-	    }
-	    exit 1
-	}
+        }
+        exit 1
+    }
 
     }
     
@@ -236,39 +236,54 @@ proc copy { {update 0 } } {
 
     set here [ pwd ]
     cd $base 
-    foreach arq_name {Data Source} {
-		set arq [ set $arq_name ]
-		set options "xzf"
-		if { $update && [ string equal $arq_name Data ] } {
-			set extra_options "--keep-newer-files"
-		} else {
-			set extra_options ""
-		}
-		    
-		if [ file readable $here/$arq ] { 
-		    if { [catch {
-			eval exec tar $options $here/$arq $extra_options
-		    } msg] } {
-			set subs 0
-			foreach pattern { 
-			    "tar: Current .*' is newer or same age"
-			    "tar: Error exit delayed from previous errors"
-			    "tar: .*: Cannot open: File exists" 
-			    "tar: Skipping to next header" } {
-			    incr subs  [ regsub -all $pattern $msg {} msg ]
-			}
-			if { [ string trim $msg ] != "" } {
-			    puts stderr "error unpacking  $arq: $msg "
-			}
-			if $subs { 
-			    puts stderr  "some existing data files were not replaced" 
-			}
-		    } else {
-			puts stdout "$arq copied"
-		    }
-		} else {
-		    puts stderr "cannot read $arq"
-		}
+
+    exec cp -r $here/bin .
+    exec cp -r $here/contrib .
+    exec cp -r $here/lib . 
+    exec cp -r $here/network .
+    exec cp -r $here/packages . 
+    exec cp -r $here/public_html .  
+    exec cp -r $here/replicate .
+    exec cp -r $here/templates . 
+    exec cp -r $here/version.txt .
+
+    exec cp -r $here/data .
+
+    cd $here
+
+    foreach arq_name {} {
+        set arq [ set $arq_name ]
+        set options "xzf"
+        if { $update && [ string equal $arq_name Data ] } {
+            set extra_options "--keep-newer-files"
+        } else {
+            set extra_options ""
+        }
+            
+        if [ file readable $here/$arq ] { 
+            if { [catch {
+            eval exec tar $options $here/$arq $extra_options
+            } msg] } {
+            set subs 0
+            foreach pattern { 
+                "tar: Current .*' is newer or same age"
+                "tar: Error exit delayed from previous errors"
+                "tar: .*: Cannot open: File exists" 
+                "tar: Skipping to next header" } {
+                incr subs  [ regsub -all $pattern $msg {} msg ]
+            }
+            if { [ string trim $msg ] != "" } {
+                puts stderr "error unpacking  $arq: $msg "
+            }
+            if $subs { 
+                puts stderr  "some existing data files were not replaced" 
+            }
+            } else {
+            puts stdout "$arq copied"
+            }
+        } else {
+            puts stderr "cannot read $arq"
+        }
     }
     cd $here
 }
@@ -284,44 +299,44 @@ proc prepare {} {
     global User 
     global Dir
 
-    if [ nouser $User ] {	
-	if { $Dir == "" } {
-	    exec useradd -c "Mooshak user" $User
-	} else {
-	    exec useradd -c "Mooshak user" -d $Dir $User
-	}
-	unlock_user
+    if [ nouser $User ] {   
+    if { $Dir == "" } {
+        exec useradd -c "Mooshak user" $User
     } else {
-	puts stderr "User $User exists already:"		
-	puts stderr "	specify a diferent user with	--user"
-	puts stderr "	remove $User first using	--uninstall"
-	puts stderr "	or just update code using 	--update"
-	
-	exit 
+        exec useradd -c "Mooshak user" -d $Dir $User
+    }
+    unlock_user
+    } else {
+    puts stderr "User $User exists already:"        
+    puts stderr "   specify a diferent user with    --user"
+    puts stderr "   remove $User first using    --uninstall"
+    puts stderr "   or just update code using   --update"
+    
+    exit 
     }
     
     if [ catch { glob ~$User } msg ] {
-	# useradd did not create home dir or user already created without it
-	# puts stderr "useradd did not create home dir: $msg"
-	puts stderr "home dir created"
-	set home [ exec sh -c "echo ~$User" ]
-	file mkdir $home
-	}       
+    # useradd did not create home dir or user already created without it
+    # puts stderr "useradd did not create home dir: $msg"
+    puts stderr "home dir created"
+    set home [ exec sh -c "echo ~$User" ]
+    file mkdir $home
+    }       
 }
 
 # unlock user account by generating a random password
 proc unlock_user {} {
     global User 
 
-    # exec passwd -u -f $User 			;# force unlock of account     
+    # exec passwd -u -f $User           ;# force unlock of account     
     #
     # Avoid this! it just leaves account without passowrd
     # Anyone in the same machine would su to this account without password
     # Generating a random password instead; root can later change it.
 
-    set fd [ open "| passwd --stdin $User" w ]	;# change password 
-    puts $fd [ expr rand() ]			;# generate random password
-    catch { close $fd }				
+    set fd [ open "| passwd --stdin $User" w ]  ;# change password 
+    puts $fd [ expr rand() ]            ;# generate random password
+    catch { close $fd }             
 }
 
 # create the Mooshak dir a config file
@@ -331,14 +346,14 @@ proc config_dir {} {
 
     set home [ get_home ]
     file attributes $home -permissions 711        
-    set server	[ get_server $home/$Conf ]       
+    set server  [ get_server $home/$Conf ]       
 
     if { [ file readable $home/$Conf ] } {
-	source $home/$Conf
+    source $home/$Conf
     } else {    
-	set DIR_BASE $home
-	set URL_BASE http://$server/~$User
-	set REL_BASE /~$User
+    set DIR_BASE $home
+    set URL_BASE http://$server/~$User
+    set REL_BASE /~$User
     }
     set VERSION [ get_version $home/$Conf ]
     
@@ -366,20 +381,20 @@ proc get_server {{file ""}} {
 
 
     if { $Host != "" } { 
-	set server $Host 
+    set server $Host 
     } else {
-	foreach var {hostname dnsdomainname } {
-	    if [ catch { set $var [ exec $var ] } ] {
-		set $var localhost.localdomain
-		puts stderr "$var not found: check $file"
-		puts stderr "	or set --hostname <hostname>"
-	    }
-	}
-	if [ regexp {\w(\.\w)+} $hostname ] {
-	    set server $hostname
-	} else {
-	    set server $hostname.$dnsdomainname
-	}
+    foreach var {hostname dnsdomainname } {
+        if [ catch { set $var [ exec $var ] } ] {
+        set $var localhost.localdomain
+        puts stderr "$var not found: check $file"
+        puts stderr "   or set --hostname <hostname>"
+        }
+    }
+    if [ regexp {\w(\.\w)+} $hostname ] {
+        set server $hostname
+    } else {
+        set server $hostname.$dnsdomainname
+    }
     }
     regsub -all {\.?\(none\)} $server {} server
     return $server
@@ -403,12 +418,12 @@ proc show-cvs {} {
 proc change_dirnames {before after dir} {
 
     if [ regexp [ format {/%s$} $before ] $dir ] {
-	set new [ file dirname $dir ]/$after
-	file rename -force -- $dir $new
+    set new [ file dirname $dir ]/$after
+    file rename -force -- $dir $new
      } else {
-	 foreach sub [ glob -nocomplain -type d $dir/* ] {
-	     change_dirnames $before $after $sub
-	 }
+     foreach sub [ glob -nocomplain -type d $dir/* ] {
+         change_dirnames $before $after $sub
+     }
      }
 }
 
@@ -420,15 +435,15 @@ proc get_version {{file ""}} {
 
     set version ?
     if [ catch {
-	set fd [ open "$home/$Version" r ]
-	gets $fd version
-	close $fd 
-	if { ! [ regexp {[\.0-9]+} $version ] } { 
-	    error "invalid version number: $version " 
-	}
+    set fd [ open "$home/$Version" r ]
+    gets $fd version
+    close $fd 
+    if { ! [ regexp {[\.0-9]+} $version ] } { 
+        error "invalid version number: $version " 
+    }
     } msg ] {
-	puts stderr "Cannot determine version :$msg"
-	puts stderr "	check $file"
+    puts stderr "Cannot determine version :$msg"
+    puts stderr "   check $file"
     }
     
     return $version
@@ -444,22 +459,22 @@ proc configure {} {
     flush stdout
     set here [ pwd ]
     if { [ catch {
-	cd [ glob ~$User ]
-	file mkdir clipboard
-	exec chmod 755 .
-	exec chown -R $User.[ group ] .
-	exec find . -exec chmod g=,o= \{\} \;
-	exec find . -type d -exec chmod ugo+x \{\} \;
-	exec chmod go+rx .
-	exec find contrib -type f -exec chmod go+rx \{\} \;
-	exec find public_html -type d -exec chmod go+rx \{\} \;
-	exec find public_html -type f -exec chmod go+r \{\} \;
-	exec find public_html/cgi-bin -type f -exec chmod a+x \{\} \;
-	cd bin
-	exec make clean
-	exec make
+    cd [ glob ~$User ]
+    file mkdir clipboard
+    exec chmod 755 .
+    exec chown -R $User.[ group ] .
+    exec find . -exec chmod g=,o= \{\} \;
+    exec find . -type d -exec chmod ugo+x \{\} \;
+    exec chmod go+rx .
+    exec find contrib -type f -exec chmod go+rx \{\} \;
+    exec find public_html -type d -exec chmod go+rx \{\} \;
+    exec find public_html -type f -exec chmod go+r \{\} \;
+    exec find public_html/cgi-bin -type f -exec chmod a+x \{\} \;
+    cd bin
+    exec make clean
+    exec make
     } msg ] } { 
-	puts stderr $msg 
+    puts stderr $msg 
     }
     puts "done"
 
@@ -480,40 +495,40 @@ proc check_suexec {} {
 
     foreach host [ list [ get_server ] localhost 127.0.0.1 ] {
 
-	puts -nonewline "connecting to host $host ... "
-	if [ catch { set fd [ socket $host 80 ] } msg ] {
-	    puts $msg
-	    continue
-	}
-	puts "connected!"	
+    puts -nonewline "connecting to host $host ... "
+    if [ catch { set fd [ socket $host 80 ] } msg ] {
+        puts $msg
+        continue
+    }
+    puts "connected!"   
 
-	puts $fd "GET /~${User}/cgi-bin/info HTTP/1.0\n"
-	flush $fd
-	set data [ read $fd ]
-	close $fd
-	
-	if { [ regexp {User\s+:\s+([\w-]+)\s+} $data - user ] } {
-	    
-	    if { ! [ string equal $user $User ] } {
-		puts stderr "Mooshak running as user $user (should be $User)"
-		puts stderr "Probably the suexec module is not installed"
-	
-		if { [dfriend ] } {
-		    puts stderr "You may try to execute "
-		    puts stderr "\n\t install --config-suexec\n"
-		    puts stderr "to activate the suexec apache module"
-		    puts stderr "Check the README file - Suexec Exception"
-		}
-					    
-		exit 1
-	    }
-	    
-	} else {
-	    puts stderr "could not find user name in the output of 'info'"
-	    exit 1
-	}
-	puts  "Mooshak installation seems OK"
-	return 
+    puts $fd "GET /~${User}/cgi-bin/info HTTP/1.0\n"
+    flush $fd
+    set data [ read $fd ]
+    close $fd
+    
+    if { [ regexp {User\s+:\s+([\w-]+)\s+} $data - user ] } {
+        
+        if { ! [ string equal $user $User ] } {
+        puts stderr "Mooshak running as user $user (should be $User)"
+        puts stderr "Probably the suexec module is not installed"
+    
+        if { [dfriend ] } {
+            puts stderr "You may try to execute "
+            puts stderr "\n\t install --config-suexec\n"
+            puts stderr "to activate the suexec apache module"
+            puts stderr "Check the README file - Suexec Exception"
+        }
+                        
+        exit 1
+        }
+        
+    } else {
+        puts stderr "could not find user name in the output of 'info'"
+        exit 1
+    }
+    puts  "Mooshak installation seems OK"
+    return 
     }
     puts stderr "could not connect to Mooshak's server"
     exit 1
@@ -529,29 +544,29 @@ proc config_apache {} {
     
     set here [ pwd ]
     if [ catch { set templates [ exec find ~$User -name *.template ] } ] {
-	    # trying to be more specific to avoid processing other files
-	    set templates [ glob -nocomplain \
-		$home/public_html/cgi-bin/*/*.template \
-		$home/public_html/*/*.template  ]
+        # trying to be more specific to avoid processing other files
+        set templates [ glob -nocomplain \
+        $home/public_html/cgi-bin/*/*.template \
+        $home/public_html/*/*.template  ]
     }
 
     foreach fx $templates {
 
-	set dir  [ file dirname $fx ]
-	set name [ file rootname [ file tail $fx ] ]
+    set dir  [ file dirname $fx ]
+    set name [ file rootname [ file tail $fx ] ]
 
-	set fd [ open $fx r ] 
-	set data ""
-	while { [ gets $fd line ] > -1 } {
-	    append data $line\n
-	}
-	catch { close $fd }
+    set fd [ open $fx r ] 
+    set data ""
+    while { [ gets $fd line ] > -1 } {
+        append data $line\n
+    }
+    catch { close $fd }
 
-	set fd [ open $dir/.$name w ]
-	set data [ namespace eval config [ list subst -nocommands $data ] ]
-	puts -nonewline $fd $data
-	catch { close $fd }
-	file attributes $dir/.$name  -permissions u=rw
+    set fd [ open $dir/.$name w ]
+    set data [ namespace eval config [ list subst -nocommands $data ] ]
+    puts -nonewline $fd $data
+    catch { close $fd }
+    file attributes $dir/.$name  -permissions u=rw
     }
 
 }
@@ -562,13 +577,13 @@ proc read_arg {name var_ {type ""}} {
     upvar $var_ var
 
     if { [ set var [ lindex $argv 1 ] ] == "" } {
-	puts stderr "no $name defined"
-	exit 1
+    puts stderr "no $name defined"
+    exit 1
     } elseif { ! [ regexp $type $var ] } {
-	puts stderr "invalid $name $var"
-	exit 1
+    puts stderr "invalid $name $var"
+    exit 1
     } else {
-	set argv [ lrange $argv 2 end ]
+    set argv [ lrange $argv 2 end ]
     }
 }
 
@@ -584,9 +599,9 @@ proc dfriend {} {
     global Distro
 
     if { [string equal $Distro "ubuntu"]   || 
-	 [string equal $Distro "debian"]   ||
-	 [string equal $Distro "kubuntu"]  ||
-	 [string equal $Distro "edubuntu"] } { return 1 }
+     [string equal $Distro "debian"]   ||
+     [string equal $Distro "kubuntu"]  ||
+     [string equal $Distro "edubuntu"] } { return 1 }
     return 0
 }
 
@@ -608,60 +623,60 @@ proc enable_suexec {} {
     check_distro
          
     if { [dfriend] } {
-	if { $Apache_V < 2 } {
+    if { $Apache_V < 2 } {
 
-	   set output [ exec apache -V ]
-	   if { [regexp {SUEXEC} $output] } {
-		
-		if { [ catch { exec apache-modconf apache enable suexec } m1 ] ||
-		     [ catch { exec apachectl restart } m2 ]
-		   } then {
-			puts "There might have been errors enabling suexec"
-			puts "Apache's Output: \n\t $m1 \n\t $m2"
-		   } else {
-			puts "Suexec Enabled"
-		   }
-		   
-		   check_suexec
-	 	       
-	   } else { puts stderr "Apache not compiled with suexec - module not found" }		       
-	} else {
-	    
-	    set output [ exec apache2 -V ]
-	    if { [regexp {SUEXEC} $output] } {
-
-		if { [ catch { exec a2enmod suexec } m1 ] ||
-		     [ catch { exec apache2ctl restart } m2 ]
-		   } then {
-			puts "There might have been errors enabling suexec"
-			puts "Apache's Output: \n\t $m1 \n\t $m2"
-		   } else {
-			puts "Suexec Enabled"
-		   }
-		    
-		   check_suexec
-		    
-	    } else { puts stderr "Apache not compiled with suexec - module not found" }	    
-	}
+       set output [ exec apache -V ]
+       if { [regexp {SUEXEC} $output] } {
+        
+        if { [ catch { exec apache-modconf apache enable suexec } m1 ] ||
+             [ catch { exec apachectl restart } m2 ]
+           } then {
+            puts "There might have been errors enabling suexec"
+            puts "Apache's Output: \n\t $m1 \n\t $m2"
+           } else {
+            puts "Suexec Enabled"
+           }
+           
+           check_suexec
+               
+       } else { puts stderr "Apache not compiled with suexec - module not found" }             
     } else {
-	puts -nonewline stderr "The --config-suexec option is valid only for"
-	puts stderr " Debian related distributions"
+        
+        set output [ exec apache2 -V ]
+        if { [regexp {SUEXEC} $output] } {
+
+        if { [ catch { exec a2enmod suexec } m1 ] ||
+             [ catch { exec apache2ctl restart } m2 ]
+           } then {
+            puts "There might have been errors enabling suexec"
+            puts "Apache's Output: \n\t $m1 \n\t $m2"
+           } else {
+            puts "Suexec Enabled"
+           }
+            
+           check_suexec
+            
+        } else { puts stderr "Apache not compiled with suexec - module not found" }     
+    }
+    } else {
+    puts -nonewline stderr "The --config-suexec option is valid only for"
+    puts stderr " Debian related distributions"
     }
 }
 
 proc help {} {
 
     puts stderr {usage: install [ -u|--user <user> ]
-		[ --source <source> ] 
-		[ --directory <directory> ]
-		[ --hostname <hostname> ]
-		[ --data <data> ]
-		[ --hide-cvs | --show-cvs ]
-		[ --ignore-missing-commands ]
-		[ --install | --uninstall | --update | --config-suexec ]
+        [ --source <source> ] 
+        [ --directory <directory> ]
+        [ --hostname <hostname> ]
+        [ --data <data> ]
+        [ --hide-cvs | --show-cvs ]
+        [ --ignore-missing-commands ]
+        [ --install | --uninstall | --update | --config-suexec ]
     }
 }
-    	
+        
 # proccess command line argument and execute action
 proc process {} {
     global argv
@@ -672,33 +687,33 @@ proc process {} {
 
     set action install
     while { $argv != "" } {
-	switch -- [ lindex $argv 0 ] {
-	    -u - --user		{ read_arg user User {^[a-z][-a-z0-9]+$} }
-	    
-	    --directory		{ read_arg directory Dir  {^[-/_A-Za-z0-9]+$} }
+    switch -- [ lindex $argv 0 ] {
+        -u - --user     { read_arg user User {^[a-z][-a-z0-9]+$} }
+        
+        --directory     { read_arg directory Dir  {^[-/_A-Za-z0-9]+$} }
 
-	    --hostname		{ read_arg hostname Host  {^[\.A-Za-z0-9]+$} }
+        --hostname      { read_arg hostname Host  {^[\.A-Za-z0-9]+$} }
 
-	    --source		{ read_arg source Source {^[/\._A-Za-z0-9]+$} }
-	    
-	    --data		{ read_arg data Data {^[/\._A-Za-z0-9]+$} x}
+        --source        { read_arg source Source {^[/\._A-Za-z0-9]+$} }
+        
+        --data      { read_arg data Data {^[/\._A-Za-z0-9]+$} x}
 
-	    --update 		{ set action update 	; shift }
-	    
-	    --uninstall 	{ set action uninstall	; shift }
-	    
-	    --install		{ set action install	; shift	}
+        --update        { set action update     ; shift }
+        
+        --uninstall     { set action uninstall  ; shift }
+        
+        --install       { set action install    ; shift }
 
-	    --hide-cvs		{ set action hide-cvs	; shift	}
+        --hide-cvs      { set action hide-cvs   ; shift }
 
-	    --show-cvs		{ set action show-cvs	; shift	}
-	    	   
-	    --config-suexec     { set action  enable_suexec ; shift }
+        --show-cvs      { set action show-cvs   ; shift }
+               
+        --config-suexec     { set action  enable_suexec ; shift }
 
-	    --ignore-missing-commands { set IgnoreMissingCommands 1 ; shift }
-	    		    
-	    --help - default 	{ set action help ; shift }	    
-	}
+        --ignore-missing-commands { set IgnoreMissingCommands 1 ; shift }
+                    
+        --help - default    { set action help ; shift }     
+    }
     }
 
     $action
@@ -706,7 +721,7 @@ proc process {} {
 
 # installation procedure
 proc install {} { 
-	check_software ; prepare ; copy ; config_dir ; configure ; check_suexec 
+    check_software ; prepare ; copy ; config_dir ; configure ; check_suexec 
 }
 
 # update procedure: don't prepare the user and just copy Source directory
@@ -719,8 +734,8 @@ proc uninstall {} {
     global User Tmp
 
     if { [ catch { set home [ get_home ] } ] } {
-	puts stderr "User $User doesn't exist"
-	exit
+    puts stderr "User $User doesn't exist"
+    exit
     }
 
     set backup $Tmp/mooshak-$User.tgz
