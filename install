@@ -237,38 +237,38 @@ proc copy { {update 0 } } {
     set here [ pwd ]
     cd $base 
     foreach arq_name {Data Source} {
-	set arq [ set $arq_name ]
-	set options "xzf"
-	if { $update && [ string equal $arq_name Data ] } {
-		set extra_options "--keep-newer-files"
-	} else {
-		set extra_options ""
-	}
-	    
-	if [ file readable $here/$arq ] { 
-	    if { [catch {
-		eval exec tar $options $here/$arq $extra_options
-	    } msg] } {
-		set subs 0
-		foreach pattern { 
-		    "tar: Current .*' is newer or same age"
-		    "tar: Error exit delayed from previous errors"
-		    "tar: .*: Cannot open: File exists" 
-		    "tar: Skipping to next header" } {
-		    incr subs  [ regsub -all $pattern $msg {} msg ]
+		set arq [ set $arq_name ]
+		set options "xzf"
+		if { $update && [ string equal $arq_name Data ] } {
+			set extra_options "--keep-newer-files"
+		} else {
+			set extra_options ""
 		}
-		if { [ string trim $msg ] != "" } {
-		    puts stderr "error unpacking  $arq: $msg "
+		    
+		if [ file readable $here/$arq ] { 
+		    if { [catch {
+			eval exec tar $options $here/$arq $extra_options
+		    } msg] } {
+			set subs 0
+			foreach pattern { 
+			    "tar: Current .*' is newer or same age"
+			    "tar: Error exit delayed from previous errors"
+			    "tar: .*: Cannot open: File exists" 
+			    "tar: Skipping to next header" } {
+			    incr subs  [ regsub -all $pattern $msg {} msg ]
+			}
+			if { [ string trim $msg ] != "" } {
+			    puts stderr "error unpacking  $arq: $msg "
+			}
+			if $subs { 
+			    puts stderr  "some existing data files were not replaced" 
+			}
+		    } else {
+			puts stdout "$arq copied"
+		    }
+		} else {
+		    puts stderr "cannot read $arq"
 		}
-		if $subs { 
-		    puts stderr  "some existing data files were not replaced" 
-		}
-	    } else {
-		puts stdout "$arq copied"
-	    }
-	} else {
-	    puts stderr "cannot read $arq"
-	}
     }
     cd $here
 }
@@ -705,7 +705,9 @@ proc process {} {
 }
 
 # installation procedure
-proc install {} { check_software ; prepare ; copy ; config_dir ; configure ; check_suexec }
+proc install {} { 
+	check_software ; prepare ; copy ; config_dir ; configure ; check_suexec 
+}
 
 # update procedure: don't prepare the user and just copy Source directory
 # replaced "copy Source" just by "copy" which defaults to copying everything
