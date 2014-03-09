@@ -95,17 +95,19 @@ Some problems you may run into when trying to install Mooshak
 
 
 * I get a server error after accessing Mooshak's initial page
+* I see source code after accessing Mooshak's initial page
 
 This probably means that your Apache configuration does not support a
 /cgi-bin/ directory for users. To allow programs to be executed in
 this directory you should include these lines in the Apache
-configuration file e restart the server. 
+configuration file and restart the server. 
 
 <Directory /home/*/public_html/cgi-bin>
-     Options +ExecCGI -Includes -Indexes
-     SetHandler cgi-script
+    Options +ExecCGI -Includes -Indexes
+    SetHandler cgi-script
+    Order allow,deny
+    Allow from all
 </Directory>
-
 
 * When I use the save command in the admin's screen I get an error message
 
