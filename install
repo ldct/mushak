@@ -237,6 +237,7 @@ proc copy { {update 0 } } {
     set here [ pwd ]
     cd $base 
 
+    puts stdout "copying source..."
     exec cp -r $here/bin .
     exec cp -r $here/contrib .
     exec cp -r $here/lib . 
@@ -247,8 +248,10 @@ proc copy { {update 0 } } {
     exec cp -r $here/templates . 
     exec cp -r $here/version.txt .
 
-    exec cp -r $here/data .
-
+    if {!$update} {
+        puts stdout "copying data..."
+        exec cp -r $here/data .
+    }
     cd $here
 
     foreach arq_name {} {
@@ -285,7 +288,6 @@ proc copy { {update 0 } } {
             puts stderr "cannot read $arq"
         }
     }
-    cd $here
 }
 
 # uname is not defined in /etc/passwd ?
