@@ -13,4 +13,3 @@ lappend auto_path packages
 source .config
 
 execute::command_line
-

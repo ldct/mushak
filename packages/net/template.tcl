@@ -1,8 +1,8 @@
 #
-# Mooshak: managing programming contests on the web		April 2001
+# Mooshak: managing programming contests on the web             April 2001
 # 
-#			Zï¿½ Paulo Leal 		
-#			zp@ncc.up.pt
+#                       Zï¿½ Paulo Leal                 
+#                       zp@ncc.up.pt
 #
 #-----------------------------------------------------------------------------
 # file: template.tcl
@@ -21,7 +21,7 @@
 ## &lt;/table&gt;
 
 
-#-*-Mode: TCL; iso-accents-mode: t;-*-	
+#-*-Mode: TCL; iso-accents-mode: t;-*-  
 
 package provide template 1.0
 
@@ -31,20 +31,20 @@ namespace eval template {
     set file [ info script ]
 
     variable HTML
-    variable NeedHTTPHeader 0		;# Need HTTP Content Type
-    variable Name			;# File name (without .html extension)
-    variable Channel	stdout		;# Chaneel where outputs are written
-    variable Formatting	""		;# Buffer with HTML formatting
-    variable Dir	templates	;# Dir with HTML templates    
+    variable NeedHTTPHeader 0           ;# Need HTTP Content Type
+    variable Name                       ;# File name (without .html extension)
+    variable Channel    stdout          ;# Chaneel where outputs are written
+    variable Formatting ""              ;# Buffer with HTML formatting
+    variable Dir        templates       ;# Dir with HTML templates    
 
-    global env				;# the process environment
+    global env                          ;# the process environment
 
    
-    namespace export load		;## Load file with HTML templated
-    namespace export write		;## Write formatting in channel
-    namespace export show		;## Show formatting in buffer
-    namespace export record		;## Record formatting in buffer
-    namespace export formatting		;## Format a given part
+    namespace export load               ;## Load file with HTML templated
+    namespace export write              ;## Write formatting in channel
+    namespace export show               ;## Show formatting in buffer
+    namespace export record             ;## Record formatting in buffer
+    namespace export formatting         ;## Format a given part
 }
 
 
@@ -55,59 +55,59 @@ proc template::load {{file {}}} {
     variable Dir
 
     if { $file == {} } { 
-	set call [ lindex [ info level -1 ] 0 ]
-	if { ! [ regexp {^(::)?(.*)::(.*)$} $call - - dir name ] } {
-	    report_error [ format "cannot figure out package of procedure\
-					<code>%s</code>
-		      (try defining a path in template::load)" $call ]
-	    return -1 ;# error
-	}
-	set ext ""
+        set call [ lindex [ info level -1 ] 0 ]
+        if { ! [ regexp {^(::)?(.*)::(.*)$} $call - - dir name ] } {
+            report_error [ format "cannot figure out package of procedure\
+                                        <code>%s</code>
+                      (try defining a path in template::load)" $call ]
+            return -1 ;# error
+        }
+        set ext ""
     } else {
-	set name [ file root [ file tail $file ] ]
-	set dir  [ file dir $file ]
-	set ext  [ file extension $file ] 
+        set name [ file root [ file tail $file ] ]
+        set dir  [ file dir $file ]
+        set ext  [ file extension $file ] 
     }
     set Name $name
 
     set fx [ translate $dir/$name $ext ] 
 
     if { [catch { set fd [ open $fx r ] } ] } {
-	report_error "'$fx' not found"
+        report_error "'$fx' not found"
         return -1 ;# error
     }
 
     if [ info exists HTML($name,) ] {
-	catch { unset HTML($name,) }
+        catch { unset HTML($name,) }
     }
 
     set lineno 0
     set part {}
     while { [ gets $fd line ] != -1} {
 
-	regsub -all {\"|\\|\{|\}|\[|\]} $line \\\\& line
+        regsub -all {\"|\\|\{|\}|\[|\]} $line \\\\& line
 
-	incr lineno
-        set line [ string trim $line ]	
+        incr lineno
+        set line [ string trim $line ]  
         switch -regexp -- $line {
-	    <!part.*> {
-		if { [ regexp -nocase {ext=\\"(.*)\\">(.*)} \
-			   $line all part pp] } {
-		    set HTML($name,$part) ""
-		    append HTML($name,$part) $pp
-		} else {
-		    report_error "$fx: lineno $line: missing ext in part"
-		    return -2 ;# report syntax error
-		}
-	    } <!/part.*> {
-		set HTML($name,$part) [ string trim $HTML($name,$part) \n ]
-		regsub -all {\\n} $HTML($name,$part) \n\n HTML($name,$part)
-		regsub -all {\\t} $HTML($name,$part) \t HTML($name,$part)
-		set part {}
-	    } default {
-		append HTML($name,$part) $line\n
-	    }
-	}
+            <!part.*> {
+                if { [ regexp -nocase {ext=\\"(.*)\\">(.*)} \
+                           $line all part pp] } {
+                    set HTML($name,$part) ""
+                    append HTML($name,$part) $pp
+                } else {
+                    report_error "$fx: lineno $line: missing ext in part"
+                    return -2 ;# report syntax error
+                }
+            } <!/part.*> {
+                set HTML($name,$part) [ string trim $HTML($name,$part) \n ]
+                regsub -all {\\n} $HTML($name,$part) \n\n HTML($name,$part)
+                regsub -all {\\t} $HTML($name,$part) \t HTML($name,$part)
+                set part {}
+            } default {
+                append HTML($name,$part) $line\n
+            }
+        }
     }
     close $fd
 
@@ -124,12 +124,12 @@ proc template::translate {name {hint_ext ""}} {
 
     regsub {^\./} $name {} name
     foreach lang [ translate::langs ] {
-	foreach ext $hint_ext {
-	    set path ${Dir}/${lang}/${name}${ext}
-	    if [ file readable $path ] {
-		return $path
-	    }
-	}
+        foreach ext $hint_ext {
+            set path ${Dir}/${lang}/${name}${ext}
+            if [ file readable $path ] {
+                return $path
+            }
+        }
     }
     execute::report_error "cannot find template" ${name}.$hint_ext
 }
@@ -172,17 +172,17 @@ proc template::formatting {{part {}} {name {}} {level 1}} {
     variable HTML
 
     if { $name == {} } { 
-	variable Name
-	set name $Name 
+        variable Name
+        set name $Name 
     }
 
    if { [ catch {
        # uplevel already replaced all relevant variables 
        uplevel $level { variable ::Session::Conf }
-       set output [ uplevel $level subst 			\
-			-nobackslashes -novariables -nocommands \
-			\"$HTML($name,$part)\" ]
-   } msg ] } {	
+       set output [ uplevel $level subst                        \
+                        -nobackslashes -novariables -nocommands \
+                        \"$HTML($name,$part)\" ]
+   } msg ] } {  
        process_error $name $part $msg [ incr level ]
    } else {
       return $output  
@@ -195,36 +195,36 @@ proc template::process_error {name part msg level} {
     variable NeedHTTPHeader
 
     if $NeedHTTPHeader {
-	puts "Content-type: text/HTML\n"
+        puts "Content-type: text/HTML\n"
     }
 
     switch -regexp -- $msg {
-	{no such variable} {
-	    regexp {"(.*)"} $msg name_var
-	    set msg "variable $name_var undefined"
-	    set vars {}
-	    foreach var [ uplevel $level info vars ] {
-		switch -regexp -- $var {
-		    ^tcl_ - 
-		    errorCode - 
-		    errorInfo -
-		    auto_ - 
-		    argv -
-		    argc -
-		    env {}
-		    default { lappend vars $var }
-		}
-	    }
-	    append msg "\navailable variables: [ join $vars ]"
-	}
-	{can't read \"HTML\(} {
-	    set msg "Undefined part. Missing line:"
-	    append msg "&lt;!part ext=\"$part\"&gt;"
-	    
-	}  default {
-	}
+        {no such variable} {
+            regexp {"(.*)"} $msg name_var
+            set msg "variable $name_var undefined"
+            set vars {}
+            foreach var [ uplevel $level info vars ] {
+                switch -regexp -- $var {
+                    ^tcl_ - 
+                    errorCode - 
+                    errorInfo -
+                    auto_ - 
+                    argv -
+                    argc -
+                    env {}
+                    default { lappend vars $var }
+                }
+            }
+            append msg "\navailable variables: [ join $vars ]"
+        }
+        {can't read \"HTML\(} {
+            set msg "Undefined part. Missing line:"
+            append msg "&lt;!part ext=\"$part\"&gt;"
+            
+        }  default {
+        }
     }    
-    report_error "'$name':'$part': $msg</PRE>"	
+    report_error "'$name':'$part': $msg</PRE>"  
 }
 
 

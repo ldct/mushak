@@ -1,8 +1,8 @@
 #
-# Mooshak: managing  programming contests on the web		April 2001
+# Mooshak: managing  programming contests on the web            April 2001
 # 
-#			Zé Paulo Leal 		
-#			zp@dcc.fc.up.pt
+#                       Zé Paulo Leal           
+#                       zp@dcc.fc.up.pt
 #
 #-----------------------------------------------------------------------------
 # file: execute.tcl
@@ -10,13 +10,13 @@
 ## Command line processing: 
 ## Responsible for authorization, inicialization, and MIME type classification 
 ## Authorization is based on the following profiles:
-##	<ul>
-##		<li>admin</li>
-##		<li>judge</li>
-##		<li>runner</li>
-##		<li>team</li>
-##		<li>guest</li>	
-##	</ul>
+##      <ul>
+##              <li>admin</li>
+##              <li>judge</li>
+##              <li>runner</li>
+##              <li>team</li>
+##              <li>guest</li>  
+##      </ul>
 ##
 ## TODO: make cript a loadable library
 ## TODO: replace ALL (not only in this file) calls to report_error by error
@@ -29,14 +29,14 @@ namespace eval execute {
 
     variable PROFILE_LOG profile_log
     
-    variable Unsafe		;## Usafe commands whose args are not protected
-    variable Init		;## Commands requiring initialization (cookies)
-    variable Mime		;## MIME types for request (except text/HTML)
-    variable ResponseMime {}	;## MIME used in this response
-    variable Headed	0	;## Was header already outputed?
+    variable Unsafe             ;## Usafe commands whose args are not protected
+    variable Init               ;## Commands requiring initialization (cookies)
+    variable Mime               ;## MIME types for request (except text/HTML)
+    variable ResponseMime {}    ;## MIME used in this response
+    variable Headed     0       ;## Was header already outputed?
     variable Audit_log audit_log;## Audit log filename
-    variable PackageOf 		;## Array with package of command
-    variable ServicePackageOf	;## Array with package of command for REST
+    variable PackageOf          ;## Array with package of command
+    variable ServicePackageOf   ;## Array with package of command for REST
     variable DebuggingMachines  ;## Name of machine used for debugging
 
     set DebuggingMachines { khato }
@@ -44,112 +44,112 @@ namespace eval execute {
     # switch off help due to problems with excess of cookies
 
     array set PackageOf {
-	admin		admin
-	analyze		team
-	answer		team
-	ask		team
-	asked		team
-	banner		common
-	check		common
-	clone		Session
-	code		team
-	config		Session
-	content		content
-	copy		clipboard
-	cut		clipboard
-	data		navigate
-	description	common
-	edit		content
-	empty		common
-	export		content
-	exporting	content
-	faq		team
-	feedback	team
-	file		admin
-	flag		guest
-	form		team
-	freeze		freezer
-	guest		common
-	grade		team
-	htools		team
-	help		help
-	image		common
-	import		content
-	importing	content
-	inspect		content
-	judge		common
-	listing		listing
-	login		Session
-	link		clipboard
-	logout		Session
-	message		admin
-	operation	admin
-	paste		clipboard
-	print		team
-	register	guest
-	remove		navigate
-	reset		content
-	report		common
-	runner		common
-	sms		common
-	target		clipboard
-	team		team
-	top		common
-	undo 		admin
-	unfreeze	freezer
-	view		team
-	vtools		common
-	redo 		admin
-	relogin		Session
-	split		common
-	warn		common
-	warned		common
+        admin           admin
+        analyze         team
+        answer          team
+        ask             team
+        asked           team
+        banner          common
+        check           common
+        clone           Session
+        code            team
+        config          Session
+        content         content
+        copy            clipboard
+        cut             clipboard
+        data            navigate
+        description     common
+        edit            content
+        empty           common
+        export          content
+        exporting       content
+        faq             team
+        feedback        team
+        file            admin
+        flag            guest
+        form            team
+        freeze          freezer
+        guest           common
+        grade           team
+        htools          team
+        help            help
+        image           common
+        import          content
+        importing       content
+        inspect         content
+        judge           common
+        listing         listing
+        login           Session
+        link            clipboard
+        logout          Session
+        message         admin
+        operation       admin
+        paste           clipboard
+        print           team
+        register        guest
+        remove          navigate
+        reset           content
+        report          common
+        runner          common
+        sms             common
+        target          clipboard
+        team            team
+        top             common
+        undo            admin
+        unfreeze        freezer
+        view            team
+        vtools          common
+        redo            admin
+        relogin         Session
+        split           common
+        warn            common
+        warned          common
     }
 
 
     ## MIME Types of non-HTML responses
     ## Requests with a void MIME type ({}) will set their types
     array set Mime {
-	team		{}
-	grade		{}
-	code		text/plain
-	flag		image/png
-	image		{}
-	report		{}
-	check		{}
-	content		{}
-	inspect 	{}
-	serialize 	text/plain
-	login		{}
-	file		{}
+        team            {}
+        grade           {}
+        code            text/plain
+        flag            image/png
+        image           {}
+        report          {}
+        check           {}
+        content         {}
+        inspect         {}
+        serialize       text/plain
+        login           {}
+        file            {}
     }
     
     ## These commands are unsafe: their arguments are not protected
     set Unsafe {
-	data
-	edit
-	file
-	content
-	import
-	importing
-	export
-	exporting
-	inspect	
-	message
-	operation
-	freeze
-	unfreeze
-	copy
-	cut
-	paste
-	link
-	target
-	undo
-	redo
-	reset
+        data
+        edit
+        file
+        content
+        import
+        importing
+        export
+        exporting
+        inspect 
+        message
+        operation
+        freeze
+        unfreeze
+        copy
+        cut
+        paste
+        link
+        target
+        undo
+        redo
+        reset
     }
 
-    namespace export process	;## Executes command line passed as an argument
+    namespace export process    ;## Executes command line passed as an argument
 }
 
 
@@ -164,65 +164,72 @@ proc execute::command_line {} {
 
     if { [ catch {
 
-	cgi::data    		    
-	cgi::read_cookies
+        cgi::data                   
+        cgi::read_cookies
 
-	parse_command_line command arguments	    
+        parse_command_line command arguments        
 
-	protect_fields $command
+        protect_fields $command
 
-	if [ has_session_hash ] {
+        if [ has_session_hash ] {
 
-	    Session::init 				\
-		[ cgi::cookie mooshak:session "" ]	\
-		[ cgi::cookie mooshak:authorization "" ]\
-		[ cgi::field  contest         "" ]	\
-		[ set user [ cgi::field  user "" ] ]	\
-		[ cgi::field  password        "" ]	\
-		$command
-	    	    
-	    translate::load
+            Session::init                               \
+                [ cgi::cookie mooshak:session "" ]      \
+                [ cgi::cookie mooshak:authorization "" ]\
+                [ cgi::field  contest         "" ]      \
+                [ set user [ cgi::field  user "" ] ]    \
+                [ cgi::field  password        "" ]      \
+                $command
+                    
+            translate::load
 
-	    # execute command as a CGI (generate last header line with MIME)
-	    if { [ info exists PackageOf($command) ] } {
-		package require $PackageOf($command)
+            # execute command as a CGI (generate last header line with MIME)
+            if { [ info exists PackageOf($command) ] } {
+                package require $PackageOf($command)
 
-		state::process_cookies $PackageOf($command) $command
+                state::process_cookies $PackageOf($command) $command
 
-		if [ Session::authorized $user ] {
-		    protect_arguments $command arguments
+                if [ Session::authorized $user ] {
+                    protect_arguments $command arguments
 
-		    header $command
-		    if [ catch {
-			eval ::$PackageOf($command)::$command $arguments
-		    } msg ] {
-			# this exception MUST be caught at this point
-			global errorInfo errorCode
-			error $msg $errorInfo $errorCode
-		    }
-		} else {
-		    
-		    header 
-		    Session::authenticate $command $arguments	    
-		}  
-	    } else {
-		# error messages are injected in HTML, a door for XSS attacks
-		set safe_command [ layout::protect_html $command ]
+                    header $command
+
+                    if [ catch {
+                        eval ::$PackageOf($command)::$command $arguments
+                        
+                        puts "XUANJI"
+                        puts $PackageOf($command)
+                        puts $command
+                        puts $arguments
+
+                    } msg ] {
+                        # this exception MUST be caught at this point
+                        global errorInfo errorCode
+                        error $msg $errorInfo $errorCode
+                    }
+                } else {
+                    
+                    header 
+                    Session::authenticate $command $arguments       
+                }  
+            } else {
+                # error messages are injected in HTML, a door for XSS attacks
+                set safe_command [ layout::protect_html $command ]
     
-		error  "invalid command <code>$safe_command</code> "
-	    }
-	    audit_log $arguments
-	    Session::close
-	} else {
-	    give_session_hash $command
-	    header
-	}
-    } msg ] } {	
-	header
-	report_error $msg
+                error  "invalid command <code>$safe_command</code> "
+            }
+            audit_log $arguments
+            Session::close
+        } else {
+            give_session_hash $command
+            header
+        }
+    } msg ] } { 
+        header
+        report_error $msg
     }
 
-    file::cleanup_tmp	
+    file::cleanup_tmp   
 }
 
 
@@ -232,32 +239,32 @@ proc execute::has_session_hash {} {
     
     set re [ format {%s/(\d+)((\?|\+|/).*)?$} [ file tail [ info script ] ] ]
     if [ regexp $re $env(REQUEST_URI) - session ] {
-	return 1
+        return 1
     } else {
-	# no session found
-	return 0
+        # no session found
+        return 0
     }
 }
 
 ## Give a session hash to the URL of current session
 proc execute::give_session_hash {command} {
-    global env 	    
+    global env      
 
     set re [ format {%s/(\d+)((\?|\+|/).*)?$} [ file tail [ info script ] ] ]
 
     if { 
-	! [ string equal $command clone ]	&&
-	[ info exists env(HTTP_REFERER) ]	&&
-	[ regexp $re $env(HTTP_REFERER) - hash ]
+        ! [ string equal $command clone ]       &&
+        [ info exists env(HTTP_REFERER) ]       &&
+        [ regexp $re $env(HTTP_REFERER) - hash ]
     } {
-	# previous request had a session (using it for backward compability)
-	# this copes with links in reports generated in previous versions
-	# (and with links in the admim interface that were not updated :-)
-	# provided that this is not the clone command being processed...
+        # previous request had a session (using it for backward compability)
+        # this copes with links in reports generated in previous versions
+        # (and with links in the admim interface that were not updated :-)
+        # provided that this is not the clone command being processed...
     } else {
-	# generating a new random hash 
-	regsub {\.} [ expr rand() ] {} hash
-	set hash [ string trimleft $hash 0 ]
+        # generating a new random hash 
+        regsub {\.} [ expr rand() ] {} hash
+        set hash [ string trimleft $hash 0 ]
     }
 
     set script [ file tail [ info script ] ]
@@ -286,16 +293,16 @@ proc execute::parse_command_line {command_ arguments_} {
 
     # split command line in command and arguments    
     if { $argv != "" } {
-	set command		[ lindex $argv 0 ]
-	set arguments	[ lrange $argv 1 end ]
+        set command             [ lindex $argv 0 ]
+        set arguments   [ lrange $argv 1 end ]
     } elseif { [ set command [ cgi::field command "" ] ] != "" } {
-	set arguments $argv
-	
+        set arguments $argv
+        
     } elseif { [ set arguments [ download_file ] ] != "" } {
-	set command file
+        set command file
     } else {
-	set command top
-	set arguments ""
+        set command top
+        set arguments ""
     }
 }
 
@@ -306,15 +313,15 @@ proc execute::parse_command_line {command_ arguments_} {
 proc execute::generator {command_line {mime text/xml}} {
     global ENCODING
 
-    if { [ catch { 	
-	set output [ uplevel $command_line  ]
+    if { [ catch {      
+        set output [ uplevel $command_line  ]
     } msg ] } {
-	header 
-	report_error $msg
+        header 
+        report_error $msg
     } else {
-	append mime [ format "; charset=%s" $ENCODING ]
-	puts [ format "Content-type: %s\n" $mime ]
-	puts $output
+        append mime [ format "; charset=%s" $ENCODING ]
+        puts [ format "Content-type: %s\n" $mime ]
+        puts $output
     }
 }
 
@@ -324,14 +331,14 @@ proc execute::download_file {} {
     global env
 
     if { [ info exists env(SCRIPT_NAME) ] &&
-	 [ info exists env(REQUEST_URI) ] &&
-	 [ regexp [ format {^%s/\d+/(.*)$} $env(SCRIPT_NAME) ] \
-	       $env(REQUEST_URI) - file ]
+         [ info exists env(REQUEST_URI) ] &&
+         [ regexp [ format {^%s/\d+/(.*)$} $env(SCRIPT_NAME) ] \
+               $env(REQUEST_URI) - file ]
      } {
-	return $file
+        return $file
     } else {
-	return {}
-    }	       
+        return {}
+    }          
 }
 
 
@@ -343,16 +350,16 @@ proc execute::audit_log {arguments} {
     flush stdout
 
     if { ! [ info exists Conf(user) ] } {
-	set Conf(user) {}
+        set Conf(user) {}
     }
     set session [ file tail $Conf(session) ]
 
     file::lock $Audit_log
     set fd [ open $Audit_log a ]
     puts $fd [ format {%-20s %-20s %-8s %-8s %-10s %s } \
-		   [clock format  [clock seconds] -format {%Y/%m/%d %H:%M:%S}]\
-		   $session $Conf(profile) $Conf(user) \
-		   $Conf(command) $arguments ]
+                   [clock format  [clock seconds] -format {%Y/%m/%d %H:%M:%S}]\
+                   $session $Conf(profile) $Conf(user) \
+                   $Conf(command) $arguments ]
 
     flush $fd  ;  close $fd
     file::unlock $Audit_log
@@ -370,19 +377,19 @@ proc execute::header {{command ""}} {
     if $Headed { return }
 
     if [ info exists Mime($command) ] {
-	set ResponseMime $Mime($command)
+        set ResponseMime $Mime($command)
     } else {
-	set ResponseMime text/HTML
+        set ResponseMime text/HTML
     }
 
     puts "Pragma: no-cache"
     puts "Expires: -1"
     if { $ResponseMime == {} } {
-	# command will take care of its own MIME type
+        # command will take care of its own MIME type
     } else {
-	append ResponseMime [ format "; charset=%s" $ENCODING ]
-	puts [ format "Content-type: %s\n" $ResponseMime ]
-	set Headed 1
+        append ResponseMime [ format "; charset=%s" $ENCODING ]
+        puts [ format "Content-type: %s\n" $ResponseMime ]
+        set Headed 1
     }
 }
 
@@ -399,9 +406,9 @@ proc execute::protect_fields {command} {
     variable DANGEROUS_RE
 
     if { [ lsearch $Unsafe $command ] == -1 } {     
-	foreach var [ array names Field ] {
-	    regsub -all $DANGEROUS_RE $Field($var) {} Field($var)
-	}    
+        foreach var [ array names Field ] {
+            regsub -all $DANGEROUS_RE $Field($var) {} Field($var)
+        }    
     }
 }
 
@@ -416,17 +423,17 @@ proc execute::protect_arguments {command arguments} {
 
     if { [ lsearch $Unsafe $command ] == -1 } {     
 
-	foreach arg $arguments {
-	    upvar $arg v
+        foreach arg $arguments {
+            upvar $arg v
 
-	    regsub -all $DANGEROUS_RE $v {} v
-	}
+            regsub -all $DANGEROUS_RE $v {} v
+        }
 
     } else {
-	if { ! [ string equal $Conf(profile) admin ] } {
-	    header
-	    report_error "Unsafe command, invalid profile" $Conf(profile)
-	}
+        if { ! [ string equal $Conf(profile) admin ] } {
+            header
+            report_error "Unsafe command, invalid profile" $Conf(profile)
+        }
     }
 }
 
@@ -459,14 +466,14 @@ proc execute::report_error {message {value ""} {mime ""}} {
     record_error [ format {%s: %s} $message $value ]
 
     if { $value != "" } {
-	set message [ format {%s: <code>%s</code>} $message $value ]
+        set message [ format {%s: <code>%s</code>} $message $value ]
     }
 
     
     if { [ lsearch $DebuggingMachines [ exec hostname ] ] > -1 } {
-	set show_alert true
+        set show_alert true
     } else {
-	set show_alert false
+        set show_alert false
     }
 
     regsub -all {<.*?>} $errorInfo {} clean_message
@@ -474,11 +481,11 @@ proc execute::report_error {message {value ""} {mime ""}} {
     regsub -all {\'} $clean_message {` } clean_message
 
     switch -regexp -- $ResponseMime {
-	text/HTML - 
-	text/html		{ set template report_error.html	}
-	text/xml		{ set template report_error.xml		}
-	text/plain - 
-	default			{ set template report_error.txt		}
+        text/HTML - 
+        text/html               { set template report_error.html        }
+        text/xml                { set template report_error.xml         }
+        text/plain - 
+        default                 { set template report_error.txt         }
     }
     template::load $template
     template::write
@@ -491,35 +498,35 @@ proc execute::record_error {message} {
     variable ::Session::Conf
 
     if { [ info exists Conf(user) ] && $Conf(user) != "" } {
-	set user $Conf(user)
+        set user $Conf(user)
     } else {
-	set user ?
+        set user ?
     }
 
     # possible log files 
     set paths data/error_log
     if [ contest::active 0 ] {
-	set	contest [ contest::active_path    ] 
-	lappend paths	[ list $contest/error_log ]
+        set     contest [ contest::active_path    ] 
+        lappend paths   [ list $contest/error_log ]
     } 
 
     # select an output stream to a log file (default: stdout)
     set fd stdout
     foreach path $paths {
-	if { 
-	    (   [file exists $path] && [file writable $path] ) ||
-	    ( ! [file exists $path] && [file writable [file dirname $path]] )
-	} {
-	    set fd [ open $path a ]
-	    break
-	} 
+        if { 
+            (   [file exists $path] && [file writable $path] ) ||
+            ( ! [file exists $path] && [file writable [file dirname $path]] )
+        } {
+            set fd [ open $path a ]
+            break
+        } 
     }
     
     set date [ clock format [ clock seconds ] -format {%Y/%m/%d %H:%M:%S} ]
     puts $fd "$date $user: $message"  
 
     if { ! [ string equal stdout $fd ] } {
-	catch { close $fd }	   
+        catch { close $fd }        
     }
 
 }
@@ -540,7 +547,7 @@ proc execute::debug args {
 
     puts stderr $args 
     foreach v {authorization user} {
-	if { $Conf($v) == "" } { puts stderr "missing $v" }
+        if { $Conf($v) == "" } { puts stderr "missing $v" }
     }
 }
 
